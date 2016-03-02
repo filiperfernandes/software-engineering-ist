@@ -1,0 +1,66 @@
+package pt.tecnico.mydrive.domain;
+
+class mydrive;
+
+class User {
+    String username;
+    String password;
+    String name;
+    String mask;
+    Link homeDir;
+}
+
+class SuperUser extends User;
+
+abstract class Entity {
+    Integer file_id;
+    String filename;
+    User owner;
+    Date lastModif;
+    String permissions;
+    Directory directoriopai;
+    Integer size;
+}
+
+
+class File extends Entity{
+    String data;
+}
+
+
+class Directory extends Entity{
+    HashMap<String,Entity> entitys;
+}
+
+class Link extends File{
+    String path;
+}
+
+class App extends File{
+    String appData;
+}
+
+relation UserContainsEntity{
+    User playsRole user;
+    Entity playsRole entity{
+    multiplicity 1;}
+}
+
+relation DirectoryContainsEntity{
+    Directory playsRole directory;
+    Entity playsRole entity
+    multiplicity 2..*;}
+}
+
+relation UserContainsLink{
+    User playsRole user;
+    Link playsRole link{
+    multiplicity 1;}
+}
+
+relation mydryveContainsUser{
+    mydrive playsRole mydrive;
+    User playsRole user{
+    multiplicity 1..*;}
+}
+
