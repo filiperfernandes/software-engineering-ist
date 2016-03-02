@@ -1,0 +1,45 @@
+package pt.ulisboa.tecnico.MYDRIVE;
+
+class User{
+	String _username;
+	String _password;
+	String _mask;
+}
+
+class SuperUser;
+
+class File{
+	String _name;
+	String _owner;
+	String _permissions;
+}
+
+class Directory{
+	String _name;
+
+}
+
+
+relation DirectoryContainsFile{
+	Directory playsRole directory;
+	File playsRole file{
+	multiplicity 2..*;
+	}
+}
+
+relation SuperUserIsUser{
+	SuperUser playsRole superUser{
+		multiplicity 1;
+	User playsRole superUser{
+	multiplicity 1;
+	}	
+	}
+}
+
+relation UserContainsDirectory{
+	Directory playsRole directory{multiplicity *;}
+	User playsRole user;
+
+}
+
+

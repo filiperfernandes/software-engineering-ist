@@ -1,0 +1,166 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>pt.ulisboa.tecnico.mydrive</groupId>
+  <artifactId>mydrive</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <name>mydrive</name>
+  <url>http://maven.apache.org</url>
+
+
+<developers>
+  <developer>
+    <id>ist177924</id>
+    <name>fmjgomes</name>
+    <email>fmjgomes@gmail.com</email>
+    <organization>es16al_99</organization>
+    <roles>
+      <role>Architect</role>
+      <role>Developer</role>
+      <role>Tester</role>
+      <role>Integrator</role>
+    </roles>
+    <properties>
+      <picUrl>https://fenix.tecnico.ulisboa.pt/user/photo/ist177924</picUrl>
+    </properties>
+  </developer>
+
+  <developer>
+    <id>ist178083</id>
+    <name>filiperfernandes</name>
+    <email>filipe.ramalhofernandes@gmail. com</email>
+    <organization>es16al_99</organization>
+    <roles>
+      <role>Architect</role>
+      <role>Developer</role>
+      <role>Tester</role>
+      <role>Integrator</role>
+    </roles>
+    <properties>
+      <picUrl>https://fenix.tecnico.ulisboa.pt/user/photo/ist178083</picUrl>
+    </properties>
+  </developer>
+
+  <developer>
+    <id>ist176436</id>
+    <name>pmbrs</name>
+    <email>pedro_manuelsilva@hotmail.com</email>
+    <organization>es16al_99</organization>
+    <roles>
+      <role>Architect</role>
+      <role>Developer</role>
+      <role>Tester</role>
+      <role>Integrator</role>
+    </roles>
+    <properties>
+      <picUrl>https://fenix.tecnico.ulisboa.pt/user/photo/ist176436</picUrl>
+    </properties>
+  </developer>
+  
+  <developer>
+    <id>ist178022</id>
+    <name>JBernardino</name>
+    <email>joao.trb@gmail.com</email>
+    <organization>es16al_99</organization>
+    <roles>
+      <role>Architect</role>
+      <role>Developer</role>
+      <role>Tester</role>
+      <role>Integrator</role>
+    </roles>
+    <properties>
+      <picUrl>https://fenix.tecnico.ulisboa.pt/user/photo/ist178022</picUrl>
+    </properties>
+  </developer>
+  
+  <developer>
+    <id>ist178001</id>
+    <name>vultas</name>
+    <email>joao_vultos@hotmail.com</email>
+    <organization>es16al_99</organization>
+    <roles>
+      <role>Architect</role>
+      <role>Developer</role>
+      <role>Tester</role>
+      <role>Integrator</role>
+    </roles>
+    <properties>
+      <picUrl>https://fenix.tecnico.ulisboa.pt/user/photo/ist178001</picUrl>
+    </properties>
+  </developer>
+
+  <developer>
+    <id>ist177994</id>
+    <name>RicardoAlm</name>
+    <email>Rikardo.alm@hotmail.com</email>
+    <organization>es16al_99</organization>
+    <roles>
+      <role>Architect</role>
+      <role>Developer</role>
+      <role>Tester</role>
+      <role>Integrator</role>
+    </roles>
+    <properties>
+      <picUrl>https://fenix.tecnico.ulisboa.pt/user/photo/ist177994</picUrl>
+    </properties>
+  </developer>
+
+</developers>
+
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+    
+      <build>
+
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+    
+    <plugin>
+    <artifactId>maven-site-plugin</artifactId>
+    <version>3.3</version>
+    <executions>
+      <execution>
+        <id>attach-descriptor</id>
+        <goals>
+          <goal>attach-descriptor</goal>
+        </goals>
+      </execution>
+    </executions>
+</plugin>
+
+  </plugins>
+
+</build>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-site-plugin</artifactId>
+  <version>3.3</version>
+</dependency>
+
+  </dependencies>
+
+
+</project>
