@@ -29,10 +29,10 @@ relation DirectoryContainsFile{
 
 relation SuperUserIsUser{
 	SuperUser playsRole superUser{
-		multiplicity 1;
+	multiplicity 1;}
 	User playsRole superUser{
 	multiplicity 1;
-	}	
+		
 	}
 }
 

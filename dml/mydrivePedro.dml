@@ -12,7 +12,7 @@ class User {
 
 class SuperUser extends User;
 
-abstract class File {
+class File {
     Integer id;
     String name;
     Date lastModif;
@@ -73,7 +73,7 @@ relation SuperUserContainsUser{
 	User playsRole user{
 	multiplicity 1;
 	}	
-	}
+	
 }
 
 relation UserContainsDirectory{
