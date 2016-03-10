@@ -39,6 +39,17 @@ class App extends PlainFile{
     String appData;
 }
 
+
+relation DomainRootHasPhoneBookApplication {
+  .pt.ist.fenixframework.DomainRoot playsRole root {
+    multiplicity 0..1;
+  }
+  MyDrive playsRole mydrive {
+    multiplicity 0..1;
+  }
+}
+
+
 relation UserOwnsFile{
     User playsRole user{
     multiplicity 1..*;}
