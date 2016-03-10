@@ -66,6 +66,7 @@ pt/ist/fenixframework/consistencyPredicates/PublicConsistencyPredicate_Base$1.cl
 pt/ist/fenixframework/adt/bplustree/BPlusTree_Base$1.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$DomainConsistencyPredicateDomainDependenceRecords.class
 pt/tecnico/MyDrive/domain/File_Base$DO_State.class
+pt/tecnico/MyDrive/domain/User_Base$6.class
 pt/ist/fenixframework/DomainMetaClass_Base$7.class
 pt/ist/fenixframework/consistencyPredicates/DomainConsistencyPredicate_Base$2.class
 pt/ist/fenixframework/ValueTypeSerializer.class
@@ -84,6 +85,7 @@ pt/tecnico/MyDrive/domain/App.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$DependedDomainMetaObjectsDependingDependenceRecords.class
 pt/ist/fenixframework/DomainBPlusTreeJVSTM_Base.class
 pt/ist/fenixframework/DomainRoot_Base.class
+pt/tecnico/MyDrive/domain/User_Base$5.class
 pt/tecnico/MyDrive/domain/User_Base$2.class
 pt/ist/fenixframework/DomainMetaObject_Base$5.class
 pt/tecnico/MyDrive/domain/Directory.class

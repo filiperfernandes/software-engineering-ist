@@ -3,13 +3,19 @@ package pt.tecnico.MyDrive;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Date;
 import java.io.File;
+
+
+import org.joda.time.DateTime;
+
 
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import org.joda.time.DateTime;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,6 +25,7 @@ import pt.ist.fenixframework.FenixFramework;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.User;
 import pt.tecnico.MyDrive.domain.SuperUser;
+import pt.tecnico.MyDrive.domain.Directory;
 
 
 public class MyDriveApplication {
@@ -38,9 +45,15 @@ public class MyDriveApplication {
 	public static void setup() {
 
 		MyDrive md = MyDrive.getInstance();
+		DateTime date = new DateTime();
+		Directory primary = new Directory(0, "root", "/", "/", date, "rwxdr-x-", 2, ". ..");
+		Directory rd = new Directory(0, "root", "/home/root", "/home/root", date, "rwxdr-x-", 2, ". .. ola");
+		
 		SuperUser su = new SuperUser();
+
+
 	}
-/*
+	/*
 	@Atomic
 	public static void xmlScan(File file) {
 		MyDrive md = MyDrive.getInstance();
