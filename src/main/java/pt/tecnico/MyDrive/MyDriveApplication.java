@@ -22,30 +22,43 @@ import pt.tecnico.MyDrive.domain.SuperUser;
 
 
 public class MyDriveApplication {
-    //static final Logger log = LogManager.getRootLogger();
+	//static final Logger log = LogManager.getRootLogger();
 
-    public static void main(String[] args) throws IOException {
-            System.out.println("*** Welcome to the MyDrive application! ***");
-        try {
-        	System.out.println("Hello");
-                setup();
+	public static void main(String[] args) throws IOException {
+		System.out.println("*** Welcome to the MyDrive application! ***");
+		try {
+			System.out.println("Hello");
+			setup();
 
-            } finally { FenixFramework.shutdown(); }
-        }
+		} finally { FenixFramework.shutdown(); }
+	}
 
 
-@Atomic
-public static void setup() {
-	
-	MyDrive md = MyDrive.getInstance();
-	SuperUser sp = new SuperUser("root", "***", "Super User", "rwxdr-x-", "/home/root");
+	@Atomic
+	public static void setup() {
 
-    System.out.println(sp);
-}}
+		MyDrive md = MyDrive.getInstance();
+		SuperUser sp = new SuperUser("root", "***", "Super User", "rwxdr-x-", "/home/root");
+
+		System.out.println(sp);
+	}
 /*
-@Atomic
-public static void print() {
-	
-	System.out.println(getUsername());
-    
-}}*/
+	@Atomic
+	public static void xmlScan(File file) {
+		MyDrive md = MyDrive.getInstance();
+		SAXBuilder builder = new SAXBuilder();
+		try {
+			Document document = (Document)builder.build(file);
+			md.xmlImport(document.getRootElement());
+		} catch (JDOMException | IOException e) {
+			e.printStackTrace();
+		}
+	}*/
+
+
+
+
+
+
+
+}
