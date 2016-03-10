@@ -52,32 +52,28 @@ relation DomainRootHasPhoneBookApplication {
 
 
 relation UserOwnsFile{
-    User playsRole user{
-    multiplicity *;}
+    User playsRole user;
     File playsRole file{
     multiplicity *;}
 }
 
 relation DirectoryContainsFile{
-    Directory playsRole directory{
-    multiplicity *;}
+    Directory playsRole directory;
     File playsRole file{
     multiplicity *;}
 }
 
 
 relation MyDriveContainsUser{
-    MyDrive playsRole mydrive{
-    multiplicity *;}
+    MyDrive playsRole mydrive;
     User playsRole user{
     multiplicity *;}
 }
 
 relation MyDriveContainsFile{
-    MyDrive playsRole mydrive{
-    multiplicity *;}
+    MyDrive playsRole mydrive;
     File playsRole file{
-    multiplicity 1;}
+    multiplicity *;}
 }
 
 

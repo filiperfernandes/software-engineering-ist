@@ -1,6 +1,5 @@
 pt/ist/fenixframework/DomainMetaClass_Base$3.class
 pt/ist/fenixframework/DomainMetaObject_Base$DO_State.class
-pt/tecnico/MyDrive/domain/File_Base$4.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$6.class
 pt/ist/fenixframework/adt/bplustree/BPlusTreeArray_Base$DO_State.class
 pt/ist/fenixframework/adt/bplustree/AbstractNodeArray_Base$NodeArrayHasParent.class
@@ -8,13 +7,13 @@ pt/ist/fenixframework/adt/bplustree/BPlusTree_Base$AdtBPlusTreeHasRootNode.class
 pt/ist/fenixframework/consistencyPredicates/DomainConsistencyPredicate_Base$3.class
 pt/ist/fenixframework/data/InstallationData_Base.class
 pt/ist/fenixframework/DomainBPlusTreeData_Base$DO_State.class
+pt/tecnico/MyDrive/domain/MyDrive_Base$5.class
 pt/ist/fenixframework/adt/bplustree/LeafNodeArray_Base$LeafNodeArrayHasSibling.class
 pt/ist/fenixframework/backend/CurrentBackEndId.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$3.class
 pt/tecnico/MyDrive/domain/Directory_Base$1.class
 pt/tecnico/MyDrive/domain/Link_Base$DO_State.class
 pt/ist/fenixframework/DomainMetaClass_Base$6.class
-pt/tecnico/MyDrive/domain/File_Base$7.class
 pt/tecnico/MyDrive/domain/MyDrive.class
 pt/tecnico/MyDrive/domain/PlainFile.class
 pt/ist/fenixframework/adt/bplustree/BPlusTreeArray_Base$BPlusTreeArrayHasRootNode.class
@@ -34,7 +33,6 @@ pt/ist/fenixframework/consistencyPredicates/DomainConsistencyPredicate_Base.clas
 pt/ist/fenixframework/adt/bplustree/BPlusTreeArray_Base.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$DependentDomainMetaObjectOwnDependenceRecords.class
 pt/ist/fenixframework/DomainBPlusTreeJVSTM_Base$DO_State.class
-pt/tecnico/MyDrive/domain/User_Base$4.class
 pt/tecnico/MyDrive/domain/File_Base.class
 pt/tecnico/MyDrive/domain/User_Base$UserOwnsFile.class
 pt/ist/fenixframework/adt/bplustree/AbstractNode_Base$AdtNodeHasParent.class
@@ -66,14 +64,12 @@ pt/ist/fenixframework/consistencyPredicates/PublicConsistencyPredicate_Base$1.cl
 pt/ist/fenixframework/adt/bplustree/BPlusTree_Base$1.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$DomainConsistencyPredicateDomainDependenceRecords.class
 pt/tecnico/MyDrive/domain/File_Base$DO_State.class
-pt/tecnico/MyDrive/domain/User_Base$6.class
 pt/ist/fenixframework/DomainMetaClass_Base$7.class
 pt/ist/fenixframework/consistencyPredicates/DomainConsistencyPredicate_Base$2.class
 pt/ist/fenixframework/ValueTypeSerializer.class
 pt/tecnico/MyDrive/domain/Link.class
 pt/ist/fenixframework/adt/bplustree/AbstractNodeArray_Base$1.class
 pt/ist/fenixframework/DomainMetaObject_Base$4.class
-pt/tecnico/MyDrive/domain/File_Base$6.class
 pt/ist/fenixframework/adt/bplustree/AbstractNodeArray_Base$DO_State.class
 pt/ist/fenixframework/consistencyPredicates/PublicConsistencyPredicate_Base$2.class
 pt/ist/fenixframework/DomainBPlusTreeData_Base.class
@@ -85,7 +81,6 @@ pt/tecnico/MyDrive/domain/App.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$DependedDomainMetaObjectsDependingDependenceRecords.class
 pt/ist/fenixframework/DomainBPlusTreeJVSTM_Base.class
 pt/ist/fenixframework/DomainRoot_Base.class
-pt/tecnico/MyDrive/domain/User_Base$5.class
 pt/tecnico/MyDrive/domain/User_Base$2.class
 pt/ist/fenixframework/DomainMetaObject_Base$5.class
 pt/tecnico/MyDrive/domain/Directory.class
@@ -103,7 +98,6 @@ pt/ist/fenixframework/data/InstallationData_Base$DomainRootHasInstallationData.c
 pt/tecnico/MyDrive/domain/MyDrive_Base$4.class
 pt/ist/fenixframework/consistencyPredicates/DomainConsistencyPredicate_Base$4.class
 pt/ist/fenixframework/DomainMetaObject_Base$2.class
-pt/tecnico/MyDrive/domain/File_Base$5.class
 pt/ist/fenixframework/DomainMetaObject_Base.class
 pt/ist/fenixframework/DomainMetaClass_Base$2.class
 pt/ist/fenixframework/consistencyPredicates/DomainConsistencyPredicate_Base$1.class

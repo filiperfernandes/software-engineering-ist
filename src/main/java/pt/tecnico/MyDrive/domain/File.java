@@ -13,6 +13,7 @@ public class File extends File_Base {
         setName(name);
         setPathToFile(pathToFile);
         setLastModif(lastModif);
+        setPermissions(permissions);
     }
     
 }
