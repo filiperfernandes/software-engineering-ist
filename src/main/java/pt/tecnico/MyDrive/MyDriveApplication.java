@@ -17,6 +17,7 @@ import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 
 import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.User;
 import pt.tecnico.MyDrive.domain.SuperUser;
 
 
@@ -41,4 +42,10 @@ public static void setup() {
 
     
 }}
-
+/*
+@Atomic
+public static void print() {
+	
+	System.out.println(getUsername());
+    
+}}*/
