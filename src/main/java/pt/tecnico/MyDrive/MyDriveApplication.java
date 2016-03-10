@@ -10,6 +10,8 @@ import pt.tecnico.MyDrive.domain.Directory;
 import pt.tecnico.MyDrive.domain.File;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.SuperUser;
+import pt.tecnico.MyDrive.domain.User;
+import pt.tecnico.MyDrive.domain.PlainFile;
 
 public class MyDriveApplication {
 	//static final Logger log = LogManager.getRootLogger();
@@ -26,7 +28,7 @@ public class MyDriveApplication {
 
 	@Atomic
 	public static void setup() {
-
+		
 		MyDrive md = MyDrive.getInstance();
 		DateTime date = new DateTime();
 		Directory primary = new Directory(0, "root", "/", "/", date, "rwxdr-x-", 2, ". ..");
@@ -35,7 +37,10 @@ public class MyDriveApplication {
 		File a = new File(1, "root", "/home/root", "/home/root", date, "rwxdr-x-");
 		SuperUser su = new SuperUser();
 
-
+		PlainFile pf = new PlainFile(3,"root", "test", "/home/root/test", date, "rwxdr-test", "Hello World!");
+		
+		User u = new User("filiperfernandes", "test", "Filipe Fernandes", "rwxdr-x-", "/home/Filipe");
+		
 	}
 	/*
 	@Atomic
