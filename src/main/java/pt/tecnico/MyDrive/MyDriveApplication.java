@@ -38,9 +38,7 @@ public class MyDriveApplication {
 	public static void setup() {
 
 		MyDrive md = MyDrive.getInstance();
-		SuperUser sp = new SuperUser("root", "***", "Super User", "rwxdr-x-", "/home/root");
-
-		System.out.println(sp);
+		SuperUser su = new SuperUser();
 	}
 /*
 	@Atomic
