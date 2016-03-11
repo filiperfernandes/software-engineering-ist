@@ -8,18 +8,24 @@ public class SuperUser extends SuperUser_Base {
         super();
         
         
+        MyDrive md = MyDrive.getInstance();
 		DateTime date = new DateTime();
-		/*MyDrive md = MyDrive.getInstance();
-        md.setCounter(1);
-        Integer counter = md.getCounter();*/
+		
+		Directory rootDir = new Directory(md.getCnt(),"/", date, "rwxdr-x-");
+		md.setRootdir(rootDir);
+		Directory home = new Directory(md.getCnt(), "home", date, "rwxdr-x-");
+		rootDir.addFile(home);
         
-       // Directory rootdir = new Directory(counter, "root", "/home/root", "/home/root", date, "rwxdr-x-", 2, ". ..");
+        Directory rd = new Directory(md.getCnt(), "root", date, "rwxdr-x-");
+        
+        home.addFile(rd);
         
         setUsername("root");
         setPassword("***");
         setName("Super User");
         setMask("rwxdr-x-");
-        setHomeDir("/home/root");
+        this.addFile(rd);
+        
     }
     
     

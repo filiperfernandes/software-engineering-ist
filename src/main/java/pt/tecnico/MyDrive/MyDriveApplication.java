@@ -38,25 +38,27 @@ public class MyDriveApplication {
 	public static void setup() {
 
 		MyDrive md = MyDrive.getInstance();
+		
+		//new SuperUser();
 
+		//createPlainFile("root", "/home/root/test", "/home/root", "rwxdr-test", "Hello World!");
+		//r.setDimension(r.getDimension()+1);
+		
+		//new User("Filipe", "test", "Filipe Fernandes");
+		
+	}
+	
+	/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
+	@Atomic
+		MyDrive md = MyDrive.getInstance();
 		DateTime date = new DateTime();
 		
-		File a = new File(md.getCnt(), "a", "/home/root", "/home/root", date, "rwxdr-x-");
-		
-
-		File b = new File(md.getCnt(), "b", "/home/root", "/home/root", date, "rwxdr-x-");
-
-		Directory x = new Directory(md.getCnt(), "x", "/home/root", "/home/root", date, "rwxdr-x-", 2, ". ..");
+		//new PlainFile(md.getCnt(), owner, name, pathToFile, date, "rwxdr-test", "Hello World!");
+		//Directory f = (Directory)md.getFileByPath(pathToFile);
 		
 		
-		SuperUser su = new SuperUser();
-		User u = new User("filiperfernandes", "test", "Filipe Fernandes", "rwxdr-x-", "/home/Filipe");
-
-		PlainFile pf = new PlainFile(md.getCnt(),"plainFile", "test", "/home/root/test", date, "rwxdr-test", "Hello World!");
-
-
-
-	}
+		
+	}*/
 
 	@Atomic
 	public static void test1() {
@@ -65,7 +67,6 @@ public class MyDriveApplication {
 
 		DateTime date = new DateTime();
 
-		File c = new File(md.getCnt(), "c", "/home/root", "/home/root", date, "rwxdr-x-");
 	}
 }
 /*
