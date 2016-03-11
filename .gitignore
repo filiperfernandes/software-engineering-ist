@@ -1,1 +1,6 @@
+*.class
 /target/
+.classpath
+.settings
+.project
+.*.swp
