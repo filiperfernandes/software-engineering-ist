@@ -46,11 +46,13 @@ public class MyDriveApplication {
 
 		File b = new File(md.getCnt(), "b", "/home/root", "/home/root", date, "rwxdr-x-");
 
-
+		Directory x = new Directory(md.getCnt(), "x", "/home/root", "/home/root", date, "rwxdr-x-", 2, ". ..");
+		
+		
 		SuperUser su = new SuperUser();
 		User u = new User("filiperfernandes", "test", "Filipe Fernandes", "rwxdr-x-", "/home/Filipe");
 
-		//PlainFile pf = new PlainFile(3,"root", "test", "/home/root/test", date, "rwxdr-test", "Hello World!");
+		PlainFile pf = new PlainFile(md.getCnt(),"plainFile", "test", "/home/root/test", date, "rwxdr-test", "Hello World!");
 
 
 
