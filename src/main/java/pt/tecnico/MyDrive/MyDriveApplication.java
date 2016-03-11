@@ -16,11 +16,19 @@ import pt.tecnico.MyDrive.domain.PlainFile;
 public class MyDriveApplication {
 	//static final Logger log = LogManager.getRootLogger();
 
+	
 	public static void main(String[] args) throws IOException {
 		System.out.println("*** Welcome to the MyDrive application! ***");
 		try {
+
 			System.out.println("Hello");
 			setup();
+			test1();
+			DateTime date = new DateTime();
+
+
+			//File c = new File(md.getCounter(), "c", "/home/root", "/home/root", date, "rwxdr-x-");
+			//md.setCounter(md.getCounter()+1);
 
 		} finally { FenixFramework.shutdown(); }
 	}
@@ -28,21 +36,37 @@ public class MyDriveApplication {
 
 	@Atomic
 	public static void setup() {
+
+		MyDrive md = MyDrive.getInstance();
+
+		DateTime date = new DateTime();
+		
+		File a = new File(md.getCnt(), "a", "/home/root", "/home/root", date, "rwxdr-x-");
+		
+
+		File b = new File(md.getCnt(), "b", "/home/root", "/home/root", date, "rwxdr-x-");
+
+
+		SuperUser su = new SuperUser();
+		User u = new User("filiperfernandes", "test", "Filipe Fernandes", "rwxdr-x-", "/home/Filipe");
+
+		//PlainFile pf = new PlainFile(3,"root", "test", "/home/root/test", date, "rwxdr-test", "Hello World!");
+
+
+
+	}
+
+	@Atomic
+	public static void test1() {
 		
 		MyDrive md = MyDrive.getInstance();
-		DateTime date = new DateTime();
-		Directory primary = new Directory(0, "root", "/", "/", date, "rwxdr-x-", 2, ". ..");
-		Directory rd = new Directory(1, "root", "/home/root", "/home/root", date, "rwxdr-x-", 2, ". .. ola");
-		
-		File a = new File(1, "root", "/home/root", "/home/root", date, "rwxdr-x-");
-		SuperUser su = new SuperUser();
 
-		PlainFile pf = new PlainFile(3,"root", "test", "/home/root/test", date, "rwxdr-test", "Hello World!");
-		
-		User u = new User("filiperfernandes", "test", "Filipe Fernandes", "rwxdr-x-", "/home/Filipe");
-		
+		DateTime date = new DateTime();
+
+		File c = new File(md.getCnt(), "c", "/home/root", "/home/root", date, "rwxdr-x-");
 	}
-	/*
+}
+/*
 	@Atomic
 	public static void xmlScan(File file) {
 		MyDrive md = MyDrive.getInstance();
@@ -56,9 +80,3 @@ public class MyDriveApplication {
 	}*/
 
 
-
-
-
-
-
-}

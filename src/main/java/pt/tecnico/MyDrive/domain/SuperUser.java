@@ -1,14 +1,26 @@
 package pt.tecnico.MyDrive.domain;
 
-public class SuperUser extends User {
+import org.joda.time.DateTime;
+
+public class SuperUser extends SuperUser_Base {
     
     public SuperUser() {
-        super("root", "***", "Super User", "rwxdr-x-", "/home/root");
-        /*setUsername("root");
+        super();
+        
+        
+		DateTime date = new DateTime();
+		/*MyDrive md = MyDrive.getInstance();
+        md.setCounter(1);
+        Integer counter = md.getCounter();*/
+        
+       // Directory rootdir = new Directory(counter, "root", "/home/root", "/home/root", date, "rwxdr-x-", 2, ". ..");
+        
+        setUsername("root");
         setPassword("***");
         setName("Super User");
         setMask("rwxdr-x-");
-        setHomeDir("/home/root");*/
+        setHomeDir("/home/root");
     }
+    
     
 }

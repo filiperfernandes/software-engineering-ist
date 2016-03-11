@@ -1,6 +1,5 @@
 package pt.tecnico.MyDrive.domain;
 
-import java.io.File;
 
 import org.jdom2.Element;
 import org.jdom2.Document;
@@ -11,17 +10,31 @@ import org.apache.logging.log4j.Logger;
 import pt.ist.fenixframework.FenixFramework;
 
 public class MyDrive extends MyDrive_Base {
-    
-    public MyDrive() {
-        super();
+/*
+	public MyDrive(Integer cnt) {
+		super();
+		setCounter(cnt);
+		
+		
+	}
+*/
+	public static MyDrive getInstance() {
+		MyDrive md = FenixFramework.getDomainRoot().getMydrive();
+		if (md != null){
+			return md;}
+
+		return new MyDrive();
+	}
+	
+    private MyDrive() {
+        setRoot(FenixFramework.getDomainRoot());
+        setCounter(0);
     }
     
-public static MyDrive getInstance() {
-        MyDrive md = FenixFramework.getDomainRoot().getMydrive();
-        if (md != null)
-		return md;
-	    
-        return new MyDrive();
-}
-    
+    public Integer getCnt(){
+    	Integer i = getCounter();
+    	setCounter(i+1);
+    	return i;
+    }
+		
 }
