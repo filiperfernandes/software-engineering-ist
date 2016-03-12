@@ -1,7 +1,7 @@
 package pt.tecnico.MyDrive;
 
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
@@ -10,12 +10,8 @@ import org.joda.time.DateTime;
 
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
-import pt.tecnico.MyDrive.domain.Directory;
 //import pt.tecnico.MyDrive.domain.File;
 import pt.tecnico.MyDrive.domain.MyDrive;
-import pt.tecnico.MyDrive.domain.SuperUser;
-import pt.tecnico.MyDrive.domain.User;
-import pt.tecnico.MyDrive.domain.PlainFile;
 
 public class MyDriveApplication {
 	//static final Logger log = LogManager.getRootLogger();
@@ -55,8 +51,7 @@ public class MyDriveApplication {
 
 	@Atomic
 	public static void xmlScan(File file) {
-		System.out.println("aaaa");
-		System.out.println("Aqui"+ file);
+
 		MyDrive md = MyDrive.getInstance();
 
 		SAXBuilder builder = new SAXBuilder();

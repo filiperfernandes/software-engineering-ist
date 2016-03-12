@@ -1,12 +1,8 @@
 package pt.tecnico.MyDrive.domain;
 
-import java.io.UnsupportedEncodingException;
-import java.security.Permissions;
-
 import org.jdom2.Element;
 import org.joda.time.DateTime;
 
-import pt.tecnico.MyDrive.domain.MyDrive;
 
 public class User extends User_Base {
 
@@ -46,14 +42,15 @@ public class User extends User_Base {
 	}
 
 	public void xmlImport(Element personElement) /*throws ImportDocumentException */{
-		DateTime date = new DateTime();
 
 		MyDrive md = MyDrive.getInstance();
 
 		// clear current phone book | current mydrive
-		for (User u: md.getUserSet())
+		for (User u: md.getUserSet()){
+			System.out.println("vai remover " + u);
 			md.removeUser(u);
-
+			System.out.println("removeu user "+ u);
+		}
 		// user.setUsername(username) nao deve interessar por agora
 
 		/*try {
@@ -75,7 +72,6 @@ public class User extends User_Base {
 
 		String name = personElement.getChildText("name");
 		
-		String mask = personElement.getChildText("mask");
 		
 		// String home = personElement.getChildText("home");nao deve ser preciso
 		
@@ -88,7 +84,7 @@ public class User extends User_Base {
 		
 		//System.out.println(user.getAttributeValue("password"));
 
-		User u1 = new User(username, password, name);
+		new User(username, password, name);
 		/*
 		for (Element contactElement: contacts.getChildren("contact"))
 			new Contact(this, contactElement);

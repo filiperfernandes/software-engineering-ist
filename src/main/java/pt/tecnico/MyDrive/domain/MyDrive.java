@@ -2,10 +2,6 @@ package pt.tecnico.MyDrive.domain;
 
 
 import org.jdom2.Element;
-import org.jdom2.Document;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import pt.ist.fenixframework.FenixFramework;
 
@@ -29,7 +25,7 @@ public class MyDrive extends MyDrive_Base {
 	private MyDrive() {
 		setRoot(FenixFramework.getDomainRoot());
 		setCounter(0);
-		SuperUser su = new SuperUser();
+		new SuperUser();
 	}
 
 	public Integer getCnt(){
@@ -47,32 +43,43 @@ public class MyDrive extends MyDrive_Base {
 		System.out.println("fodeu "+username);
 		return null;
 	}
-	
-	
+
+
 
 	public void xmlImport(Element element) {
 
 		MyDrive md = MyDrive.getInstance();
-
+		
+		//Import users
 		for (Element node: element.getChildren("user")) {
 			String username = node.getAttribute("username").getValue();
-			User user = getUserByUsername(username);// falta criar funcao getPersonByName(name)
+			User user = getUserByUsername(username);
 
 			if (user == null){ // Does not exist
 				user = new User(this, username);
 				System.out.println("adicionou "+user);
 			}
 
-			user.xmlImport(node);// deve ser isto os de baixo nao interessa
-			//user.setUsername(xmlImport(node));
-			//person.xmlImport(node); falta verificar aqui
+			user.xmlImport(node);
 		}
-	}
+
+		//Import directories
+		for (Element node: element.getChildren("dir")) {
+			String id = node.getAttribute("id").getValue();
+			Directory dir = (Directory) (md.getRootdir()).getFileByID(id);// falta criar funcao getPersonByName(name)
+
+			if (dir == null){ // Does not exist
+				dir = new Directory(this, id);
+			}
+
+			dir.xmlImport(node);// deve ser isto, os de baixo nao interessa
+
+		}
 
 
 
 
-}
+	}}
 
 /*
 	public File getFileByName(String name){
