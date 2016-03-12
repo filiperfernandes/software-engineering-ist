@@ -20,6 +20,7 @@ class File {
     String name;
     DateTime lastModif;
     String permissions;
+    String path;
 }
 
 
@@ -73,4 +74,6 @@ relation MyDriveContainsFile{
     multiplicity 2..*;}
     File playsRole file{
     multiplicity 1;}
+    
+
 }

@@ -1,28 +1,42 @@
 package pt.tecnico.MyDrive.domain;
 
 import java.lang.String;
+import org.joda.time.DateTime;
+
 
 public class User extends User_Base {
     private String username;
     
-    private String name;
+	protected User(){}
+	
+    public User(String username, String password, String name ) {
+        super();
+		MyDrive md = MyDrive.getInstance();
 
-    private String password;
+		setUsername(username);
+        setPassword(password);
+        setName(name);
+        setMask("rwxd----");
 
-    private String mask;
-
-
-   //HomeDir should probably be an object of the Dir type and not a String 
-    protected User (){}
-
-    public User(String username) {
-      setPassword(username);
-      setName(username);
-      setMask("rwxd----");
-      //setFilename("username");
+        Directory dir = new Directory(md.getCnt(),username, "rwxdr-x-");
+        this.addFile(dir);
+        
+        Directory home = (Directory) (md.getRootdir()).getFileByName("home");
+		home.addFile(dir);
+        
+        
     }
+    
+    
+    
+    
+    
+    
+    
+    
     public String ToString(){
-      return (username + " - " + name + " - " + mask);
+      return (username + " - " + getName() + " - " + getMask());
+
     }
 
 
