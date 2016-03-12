@@ -1,10 +1,10 @@
 package pt.tecnico.MyDrive.domain;
 
 public class SuperUser extends SuperUser_Base {
-    
+    //protected SuperUser (){}
+
     public SuperUser() {
         super();
-        setUsername("root");
         setPassword("***");
         setMask("rwxdr-x-");
     }

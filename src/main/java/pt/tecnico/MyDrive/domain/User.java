@@ -11,13 +11,13 @@ public class User extends User_Base {
 
     private String mask;
 
-    private Directory homeDir;
 
    //HomeDir should probably be an object of the Dir type and not a String 
+    protected User (){}
 
-    public User() {
-      setPassword("username");
-      setName("username");
+    public User(String username) {
+      setPassword(username);
+      setName(username);
       setMask("rwxd----");
       //setFilename("username");
     }
