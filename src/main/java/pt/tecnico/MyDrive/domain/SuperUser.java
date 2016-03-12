@@ -3,32 +3,34 @@ package pt.tecnico.MyDrive.domain;
 import org.joda.time.DateTime;
 
 public class SuperUser extends SuperUser_Base {
-    //protected SuperUser (){}
+	//protected SuperUser (){}
 
-    public SuperUser() {
-        super();
-   
-        MyDrive md = MyDrive.getInstance();
-		DateTime date = new DateTime();
-		
-		Directory rootDir = new Directory(md.getCnt(),"/", date, "rwxdr-x-");
+	public SuperUser() {
+		super();
+
+		MyDrive md = MyDrive.getInstance();
+
+		Directory rootDir = new Directory(md.getCnt(),"/", "rwxdr-x-");
 		md.setRootdir(rootDir);
-		Directory home = new Directory(md.getCnt(), "home", date, "rwxdr-x-");
+		Directory home = new Directory(md.getCnt(), "home", "rwxdr-x-");
 		rootDir.addFile(home);
-        
-        Directory rd = new Directory(md.getCnt(), "root", date, "rwxdr-x-");
-        
-        home.addFile(rd);
-        
-        setUsername("root");
-        setPassword("***");
-        setName("Super User");
-        setMask("rwxdr-x-");
-        this.addFile(rd);
-        
-    }
+
+		Directory home2 = (Directory) (md.getRootdir()).getFileByName("home");
+
+		Directory rd = new Directory(md.getCnt(), "root", "rwxdr-x-");
+		home.addFile(rd);
+
+		setUsername("root");
+		setPassword("***");
+		setName("Super User");
+		setMask("rwxdr-x-");
+		this.addFile(rd);
+		md.setCurrentdir(rd);
+		md.setCurrentuser(this);
+		md.addUser(this);
+	}
 
 
-    
-    
+
+
 }

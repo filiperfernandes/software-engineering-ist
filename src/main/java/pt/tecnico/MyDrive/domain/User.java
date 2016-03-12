@@ -11,7 +11,6 @@ public class User extends User_Base {
 	
     public User(String username, String password, String name ) {
         super();
-		DateTime date = new DateTime();
 		MyDrive md = MyDrive.getInstance();
 
 		setUsername(username);
@@ -19,8 +18,22 @@ public class User extends User_Base {
         setName(name);
         setMask("rwxd----");
 
-        //new Directory(md.getCnt(),username, "/home/"+ username, "/home", date, "rwxdr-x-");
+        Directory dir = new Directory(md.getCnt(),username, "rwxdr-x-");
+        this.addFile(dir);
+        
+        Directory home = (Directory) (md.getRootdir()).getFileByName("home");
+		home.addFile(dir);
+        
+        
     }
+    
+    
+    
+    
+    
+    
+    
+    
     public String ToString(){
       return (username + " - " + getName() + " - " + getMask());
 

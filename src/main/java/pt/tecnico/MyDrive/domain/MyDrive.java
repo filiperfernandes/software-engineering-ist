@@ -10,26 +10,18 @@ import org.apache.logging.log4j.Logger;
 import pt.ist.fenixframework.FenixFramework;
 
 public class MyDrive extends MyDrive_Base {
-	/*
-	public MyDrive(Integer cnt) {
-		super();
-		setCounter(cnt);
 
-
-	}
-	 */
 	public static MyDrive getInstance() {
 		MyDrive md = FenixFramework.getDomainRoot().getMydrive();
 		if (md != null){
 			return md;}
-
 		return new MyDrive();
 	}
 
 	private MyDrive() {
 		setRoot(FenixFramework.getDomainRoot());
 		setCounter(0);
-		SuperUser su = new SuperUser();
+		new SuperUser();
 	}
 
 	public Integer getCnt(){
@@ -39,15 +31,7 @@ public class MyDrive extends MyDrive_Base {
 	}
 	
 
-	/*
-	public File getFileByName(String name){
-		for (File file: getRootdir().getFileSet()){
-			if(file.getName().equals(name)){
-				return file;
-			}
-		}
-		System.out.println("returning null");
-		return null;
-	}*/
+	
+
 
 }

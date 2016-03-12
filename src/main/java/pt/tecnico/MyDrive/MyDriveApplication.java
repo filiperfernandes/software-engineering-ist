@@ -24,7 +24,6 @@ public class MyDriveApplication {
 		System.out.println("*** Welcome to the MyDrive application! ***");
 		try {
 
-			System.out.println("Hello");
 			setup();
 			display();
 
@@ -35,10 +34,9 @@ public class MyDriveApplication {
 		} finally { FenixFramework.shutdown(); }
 	}
 
-
+	@Atomic
 	public static void display() {
 		boolean  quit = true;
-
 		while(quit){
 			System.out.println("-- MENU --");
 			System.out.println(
@@ -47,11 +45,11 @@ public class MyDriveApplication {
 							"  2) New User\n" +
 							"  3) New Directory\n" +
 							"  4) New Plain File\n" +
-					"  5) List Directories\n " +
-					" 6) Remove Directory\n" +
-					"  7) Remove File\n" +
-					"  8) Remove Plain File\n" +
-					"  9) Show Plain File\n" +
+							"  5) List Directories\n " +
+							" 6) Remove Directory\n" +
+							"  7) Remove File\n" +
+							"  8) Remove Plain File\n" +
+							"  9) Show Plain File\n" +
 					"  0) EXIT\n");
 
 			int selection = input.nextInt();
@@ -71,7 +69,7 @@ public class MyDriveApplication {
 				//newPlainFile();
 				break;
 			case 5:
-				//listDirectories();
+				//listDirectory();
 				break;
 			case 6:
 				//removeDirectory();
@@ -83,7 +81,8 @@ public class MyDriveApplication {
 				//removePlainFile();
 				break;
 			case 9:
-				//showPlainFile();
+				System.out.println("Insert path of file");
+				readPlainFile(input.next());
 				break;
 			case 0:
 				quit = false;
@@ -93,15 +92,47 @@ public class MyDriveApplication {
 				System.out.println("Invalid selection.");
 				break;
 			}
-//			while(quit);
-//			System.out.println("Exit Success!");
+			//			while(quit);
+			//			System.out.println("Exit Success!");
 		}
 	}
+	
+	
+	
+	
+	
+	@Atomic
+	public static void readPlainFile(String path) {
+		MyDrive md = MyDrive.getInstance();
+		String dirname = "";
+		Directory dir = md.getRootdir() ;
+		Integer c = 0;
+		for(char ch : path.toCharArray()){
+			if(c.equals(0)){
+				c++;
+			}
+			else if(ch == '/'){
+				dir = (Directory) (dir.getFileByName(dirname));
+				dirname="";
+			}
+			else{
+				dirname += ch;
+			}
+		}
+
+		System.out.println(((PlainFile) (dir.getFileByName(dirname))).getData());
+	}
+
 
 	@Atomic
 	public static void setup() {
 
 		MyDrive md = MyDrive.getInstance();
+		PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
+		Directory home = (Directory) (md.getRootdir()).getFileByName("home");
+		Directory root = (Directory) (home.getFileByName("root"));
+
+		root.addFile(file);
 
 		//new SuperUser();
 
@@ -113,7 +144,7 @@ public class MyDriveApplication {
 	}
 }
 
-	/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
+/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
 	@Atomic
 		MyDrive md = MyDrive.getInstance();
 		DateTime date = new DateTime();
@@ -125,7 +156,7 @@ public class MyDriveApplication {
 
 	}*/
 
-	/*	@Atomic
+/*	@Atomic
 	public static void test1() {
 
 		MyDrive md = MyDrive.getInstance();
