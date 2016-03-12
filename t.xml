@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <myDrive>
-  <user username="jtb" password="1" name="2"></user>
+  <user username="filiperfernandes">
+  	<password>fpw</password>
+  	<name>Filipe</name>
+  </user>
+  <user username="Jbernardino">
+    <password>Jpw</password>
+    <name>Joao Bernardino</name>
+  </user>
+  <user username="Vultos">
+    <name>Joao Vultos</name>
+    <password>joao pw</password>
+  </user>
 </myDrive>

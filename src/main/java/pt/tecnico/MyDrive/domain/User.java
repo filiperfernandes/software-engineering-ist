@@ -1,10 +1,12 @@
 package pt.tecnico.MyDrive.domain;
 
 import java.io.UnsupportedEncodingException;
+import java.security.Permissions;
 
 import org.jdom2.Element;
 import org.joda.time.DateTime;
 
+import pt.tecnico.MyDrive.domain.MyDrive;
 
 public class User extends User_Base {
 
@@ -19,18 +21,24 @@ public class User extends User_Base {
 		setPassword(password);
 		setName(name);
 		setMask("rwxd----");
+		
+		Directory newD = new Directory(md.getCnt(), username, date, "rwxdr-x-");
+		this.addFile(newD);
+		
+		Directory home = (Directory) (md.getRootdir()).getFileByName("home");
+		home.addFile(newD);
 
 		//new Directory(md.getCnt(),username, "/home/"+ username, "/home", date, "rwxdr-x-");
 	}
 
-	
+
 	public User(MyDrive md, String name) {
-        super();
-        setName(name);
-	setMydrive(md);
-    }
-	
-	
+		super();
+		setName(name);
+		setMydrive(md);
+	}
+
+
 	public User(MyDrive md, Element xml) {
 		super();
 		xmlImport(xml);
@@ -38,6 +46,7 @@ public class User extends User_Base {
 	}
 
 	public void xmlImport(Element personElement) /*throws ImportDocumentException */{
+		DateTime date = new DateTime();
 
 		MyDrive md = MyDrive.getInstance();
 
@@ -52,17 +61,32 @@ public class User extends User_Base {
 		} catch (UnsupportedEncodingException e) {
 			throw new ImportDocumentException();
 		}*/
+		/*
+		for (Element node: personElement.getChildren("password")) {
+			String password = node.getValue();}
 
-		/*for (Element node: element.getChildren("user")) {
-			String username = node.getAttribute("username").getValue();*/
+
+		for (Element node: personElement.getChildren("name")) {
+			String name = node.getValue();}*/
 
 		String username = personElement.getAttribute("username").getValue();
 
-		String password = personElement.getAttribute("password").getValue();
+		String password = personElement.getChildText("password");
 
-		String name = personElement.getAttribute("name").getValue();
+		String name = personElement.getChildText("name");
+		
+		String mask = personElement.getChildText("mask");
+		
+		// String home = personElement.getChildText("home");nao deve ser preciso
+		
+		//Directory newD = new Directory(md.getCnt(), username, date, mask);
+		//Directory x = md.getRootdir();
+		
+		
 
 		//Element user = personElement.getChild("user");
+		
+		//System.out.println(user.getAttributeValue("password"));
 
 		User u1 = new User(username, password, name);
 		/*

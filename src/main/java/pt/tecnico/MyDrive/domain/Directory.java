@@ -12,5 +12,16 @@ public class Directory extends Directory_Base {
         setPermissions(permissions);
         setDimension(2);
     }
-    
+    /*
+	public File getFileByName(String name){
+		
+		MyDrive md = MyDrive.getInstance();
+		for (File file: md.getRootdir().getFileSet()){
+			if(file.getName().equals(name)){
+				return file;
+			}
+		}
+		System.out.println("returning null");
+		return null;
+	}*/
 }
