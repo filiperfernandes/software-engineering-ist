@@ -22,7 +22,7 @@ public class User extends User_Base {
         //new Directory(md.getCnt(),username, "/home/"+ username, "/home", date, "rwxdr-x-");
     }
     public String ToString(){
-      return (username + " - " + name + " - " + mask);
+      return (username + " - " + getName() + " - " + getMask());
     }
 
 
