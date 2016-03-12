@@ -69,7 +69,8 @@ public class MyDriveApplication {
 				//newPlainFile();
 				break;
 			case 5:
-				//listDirectory();
+				System.out.println("Insert path of directory");
+				listDirectory(input.next());
 				break;
 			case 6:
 				//removeDirectory();
@@ -96,11 +97,34 @@ public class MyDriveApplication {
 			//			System.out.println("Exit Success!");
 		}
 	}
-	
-	
-	
-	
-	
+
+	@Atomic
+	public static void listDirectory(String path){
+		MyDrive md = MyDrive.getInstance();
+		String dirname = "";
+		Directory dir = md.getRootdir() ;
+		Integer c = 0;
+		for(char ch : path.toCharArray()){
+			if(c.equals(0)){
+				c++;
+			}
+			else if(ch == '/'){
+				dir = (Directory) (dir.getFileByName(dirname));
+				dirname="";
+			}
+			else{
+				dirname += ch;
+			}
+		}
+		dir = (Directory) (dir.getFileByName(dirname));
+		System.out.println(".\n..");
+		for(File f : dir.getFileSet()){
+			System.out.println(f.getName());
+		}
+	}
+
+
+
 	@Atomic
 	public static void readPlainFile(String path) {
 		MyDrive md = MyDrive.getInstance();
