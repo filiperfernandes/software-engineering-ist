@@ -15,8 +15,6 @@ public class SuperUser extends SuperUser_Base {
 		Directory home = new Directory(md.getCnt(), "home", "rwxdr-x-");
 		rootDir.addFile(home);
 
-		Directory home2 = (Directory) (md.getRootdir()).getFileByName("home");
-
 		Directory rd = new Directory(md.getCnt(), "root", "rwxdr-x-");
 		home.addFile(rd);
 
