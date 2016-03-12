@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.joda.time.DateTime;
 
+import java.util.Scanner;
+
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 import pt.tecnico.MyDrive.domain.Directory;
@@ -15,16 +17,16 @@ import pt.tecnico.MyDrive.domain.PlainFile;
 
 public class MyDriveApplication {
 	//static final Logger log = LogManager.getRootLogger();
+	private static Scanner input = new Scanner(System.in);
 
-	
+
 	public static void main(String[] args) throws IOException {
 		System.out.println("*** Welcome to the MyDrive application! ***");
 		try {
 
 			System.out.println("Hello");
 			setup();
-			test1();
-			DateTime date = new DateTime();
+			display();
 
 
 			//File c = new File(md.getCounter(), "c", "/home/root", "/home/root", date, "rwxdr-x-");
@@ -34,42 +36,105 @@ public class MyDriveApplication {
 	}
 
 
+	public static void display() {
+		boolean  quit = true;
+
+		while(quit){
+			System.out.println("-- MENU --");
+			System.out.println(
+					"Select an option: \n" +
+							"  1) New File\n" +
+							"  2) New User\n" +
+							"  3) New Directory\n" +
+							"  4) New Plain File\n" +
+					"  5) List Directories\n " +
+					" 6) Remove Directory\n" +
+					"  7) Remove File\n" +
+					"  8) Remove Plain File\n" +
+					"  9) Show Plain File\n" +
+					"  0) EXIT\n");
+
+			int selection = input.nextInt();
+			input.nextLine();
+
+			switch (selection) {
+			case 1:
+				//newFile();
+				break;
+			case 2:
+				//newUser();
+				break;
+			case 3:
+				//newDirectory();
+				break;
+			case 4:
+				//newPlainFile();
+				break;
+			case 5:
+				//listDirectories();
+				break;
+			case 6:
+				//removeDirectory();
+				break;
+			case 7:
+				//removeFile();
+				break;
+			case 8:
+				//removePlainFile();
+				break;
+			case 9:
+				//showPlainFile();
+				break;
+			case 0:
+				quit = false;
+				System.out.println("Exit Success!");
+				break;
+			default:
+				System.out.println("Invalid selection.");
+				break;
+			}
+//			while(quit);
+//			System.out.println("Exit Success!");
+		}
+	}
+
 	@Atomic
 	public static void setup() {
 
 		MyDrive md = MyDrive.getInstance();
-		
+
 		//new SuperUser();
 
 		//createPlainFile("root", "/home/root/test", "/home/root", "rwxdr-test", "Hello World!");
 		//r.setDimension(r.getDimension()+1);
-		
+
 		//new User("Filipe", "test", "Filipe Fernandes");
-		
+
 	}
-	
+}
+
 	/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
 	@Atomic
 		MyDrive md = MyDrive.getInstance();
 		DateTime date = new DateTime();
-		
+
 		//new PlainFile(md.getCnt(), owner, name, pathToFile, date, "rwxdr-test", "Hello World!");
 		//Directory f = (Directory)md.getFileByPath(pathToFile);
-		
-		
-		
+
+
+
 	}*/
 
-	@Atomic
+	/*	@Atomic
 	public static void test1() {
-		
+
 		MyDrive md = MyDrive.getInstance();
 
 		DateTime date = new DateTime();
 
 	}
 }
-/*
+
 	@Atomic
 	public static void xmlScan(File file) {
 		MyDrive md = MyDrive.getInstance();
@@ -81,5 +146,3 @@ public class MyDriveApplication {
 			e.printStackTrace();
 		}
 	}*/
-
-
