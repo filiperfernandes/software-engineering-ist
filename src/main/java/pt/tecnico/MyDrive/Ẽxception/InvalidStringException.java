@@ -1,4 +1,4 @@
-package pt.tecnico.mydrive.Ẽxception;
+package pt.tecnico.MyDrive.Ẽxception;
 
 public class InvalidStringException extends mydriveException {
 
@@ -6,15 +6,21 @@ public class InvalidStringException extends mydriveException {
 
     private String InvalidString;
 
-    public String InvalidStringException(String InvalidString) {
+    public InvalidStringException(String InvString) {
+       InvalidString = InvString ;
+    }
+
+    
+
+    public String getInvalidString() {
        
         return InvalidString;
 
     }
-
+    
     @Override
     public String getMessage() {
-        return "This input " + InvalidString + " is invalid";
+        return "This input " + getInvalidString() + " is invalid";
     }
 }	
 	

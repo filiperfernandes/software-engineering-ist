@@ -8,12 +8,7 @@ import java.util.Scanner;
 
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
-import pt.tecnico.MyDrive.domain.Directory;
-import pt.tecnico.MyDrive.domain.File;
-import pt.tecnico.MyDrive.domain.MyDrive;
-import pt.tecnico.MyDrive.domain.SuperUser;
-import pt.tecnico.MyDrive.domain.User;
-import pt.tecnico.MyDrive.domain.PlainFile;
+import pt.tecnico.MyDrive.domain.*;
 
 public class MyDriveApplication {
 	//static final Logger log = LogManager.getRootLogger();

@@ -1,4 +1,4 @@
-package pt.tecnico.mydrive.Ẽxception;
+package pt.tecnico.MyDrive.Ẽxception;
 
 public class mydriveException extends RuntimeException {
 	
