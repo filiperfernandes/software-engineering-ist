@@ -13,9 +13,27 @@ public class User extends User_Base {
         super();
 		MyDrive md = MyDrive.getInstance();
 
-		setUsername(username);
-        setPassword(password);
-        setName(name);
+        if (checkValidString(username)==false || checkValidString(password)==false || checkValidString(name)==false){
+          return;
+          //Need tthrow an exception
+        }
+
+        setUsername(username);
+        
+        if (password == null){
+          setPassword(username);
+        }
+        else{
+          setPassword(password);
+		    }
+
+        if(name==null){
+          setName(username);
+        }
+        else{
+          setName(name);
+        }   
+
         setMask("rwxd----");
 
         Directory dir = new Directory(md.getCnt(),username, "rwxdr-x-");
@@ -76,6 +94,10 @@ public class User extends User_Base {
     }
 
     public boolean checkValidString(String check){
+      if (username==null){
+        return false;
+      }
+      else{}
       for(int i=0; i<check.length();i++){
           int asciiCheck = (int) check.charAt(i);
         if (asciiCheck > 47 && asciiCheck < 58 || asciiCheck > 64 && asciiCheck <  91 || asciiCheck > 96 && asciiCheck < 123) {
