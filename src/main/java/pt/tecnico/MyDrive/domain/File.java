@@ -1,6 +1,8 @@
 package pt.tecnico.MyDrive.domain;
 
 import org.joda.time.DateTime;
+import pt.tecnico.MyDrive.domain.*;
+import pt.tecnico.MyDrive.Exception.*;
 
 import pt.tecnico.MyDrive.domain.MyDrive;
 
