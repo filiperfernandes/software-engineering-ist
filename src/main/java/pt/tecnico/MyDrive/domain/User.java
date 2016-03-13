@@ -2,6 +2,9 @@ package pt.tecnico.MyDrive.domain;
 
 import java.lang.String;
 import org.joda.time.DateTime;
+import pt.tecnico.MyDrive.domain.*;
+import pt.tecnico.MyDrive.Exception.*;
+
 
 
 public class User extends User_Base {
@@ -13,9 +16,35 @@ public class User extends User_Base {
         super();
 		MyDrive md = MyDrive.getInstance();
 
-		setUsername(username);
-        setPassword(password);
-        setName(name);
+        if (checkValidString(username)==false ){
+          throw new InvalidStringException(username);
+          
+        }
+
+        if (checkValidString(password)==false){
+        	throw new InvalidPasswordException();
+        }
+        
+        if (checkValidString(name)==false){
+        	throw new InvalidStringException(name);
+        }
+        
+        setUsername(username);
+        
+        if (password == null){
+          setPassword(username);
+        }
+        else{
+          setPassword(password);
+		    }
+
+        if(name==null){
+          setName(username);
+        }
+        else{
+          setName(name);
+        }   
+
         setMask("rwxd----");
 
         Directory dir = new Directory(md.getCnt(),username, "rwxdr-x-");
@@ -43,16 +72,10 @@ public class User extends User_Base {
     public String changeUsername(String newUsername){
       
       if (checkValidString(newUsername)==false){
-        return "Not a valid String";
-        //exception?
+    	throw new InvalidStringException(newUsername);
       }
-      else if (newUsername.equals("root")){
-        return "error that name is reserved";
-        //throw exceptions?
-      }
-      else if (newUsername.equals(getName())){
-        return "your name was already that one";
-        //throw exceptions?
+      else if (newUsername.equals("root") || newUsername.equals(getName())){
+        throw new NameAlreadyExistsException(newUsername);
       }
       else{
         setUsername(newUsername);
@@ -66,8 +89,7 @@ public class User extends User_Base {
 
     public String changeName(String newName){
       if (checkValidString(newName)==false){
-        return "Not a valid String";
-        //exception?
+    	  throw new InvalidStringException(newName);
       }
       else{
         setName(newName);
@@ -76,6 +98,10 @@ public class User extends User_Base {
     }
 
     public boolean checkValidString(String check){
+      if (username==null){
+        return false;
+      }
+      else{}
       for(int i=0; i<check.length();i++){
           int asciiCheck = (int) check.charAt(i);
         if (asciiCheck > 47 && asciiCheck < 58 || asciiCheck > 64 && asciiCheck <  91 || asciiCheck > 96 && asciiCheck < 123) {
