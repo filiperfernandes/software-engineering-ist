@@ -31,6 +31,4 @@ public class SuperUser extends SuperUser_Base {
 	}
 
 
-
-
 }
