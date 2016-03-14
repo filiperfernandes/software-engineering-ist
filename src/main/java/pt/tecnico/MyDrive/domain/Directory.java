@@ -30,6 +30,12 @@ public class Directory extends Directory_Base {
 		throw new FileDoesNotExistException(name);
 	}
 
+	public void removeDir(){
+		setDirectory(null);
+		deleteDomainObject();
+	}
+
+
 	//XML export constructor
 	public Directory(MyDrive md, String name) {
 		super();

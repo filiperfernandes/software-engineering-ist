@@ -16,7 +16,7 @@ public class File extends File_Base {
 		setLastModif(new DateTime());
 		setPermissions(permissions);
 	}
-	
+
 	public String getPath(){
 		String path = "";
 		File f = this;
@@ -27,6 +27,4 @@ public class File extends File_Base {
 		}
 		return path;
 	}
-	
-
 }
