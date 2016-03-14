@@ -14,22 +14,25 @@ public class Directory extends Directory_Base {
         setLastModif(lastModif);
         setPermissions(permissions);
         setDimension(2);
+        
+        //setUser();
     }
 	
-	
+	//XML export constructor
 	public Directory(MyDrive md, String name) {
 		super();
 		setName(name);
 		setMydrive(md);
 	}
 
-
+	//XML import constructor
 	public Directory(MyDrive md, Element xml) {
 		super();
 		xmlImport(xml);
 		setMydrive(md);
 	}
 	
+	//Return File by name
 	public static File getFileByName(String name){
 		MyDrive md = MyDrive.getInstance();
 		for (File file: md.getRootdir().getFileSet()){
@@ -43,7 +46,7 @@ public class Directory extends Directory_Base {
 		return null;
 	}
 	
-	
+	//Not working...
 	public Directory getHome(){
 		MyDrive md = MyDrive.getInstance();
 		md.getRootdir();
@@ -52,7 +55,7 @@ public class Directory extends Directory_Base {
 		return home;
 	}
 	
-	
+	//Return File by ID
 	public File getFileByID(String id){
 
 		MyDrive md = MyDrive.getInstance();
@@ -67,6 +70,8 @@ public class Directory extends Directory_Base {
 	}
 	
 	
+	
+	//Import XML Directory
 	public void xmlImport(Element personElement) /*throws ImportDocumentException */{
 		DateTime date = new DateTime();
 
@@ -113,5 +118,34 @@ public class Directory extends Directory_Base {
 		//userDir.addFile(toAdd);
 		
 	}
+
+	//Export XML Directory
+	public Element xmlExport() {
+        Element dirElement = new Element("dir");
+        dirElement.setAttribute("id", String.valueOf(getId()));
+        
+        //Path
+        Element dirPath = new Element("path");
+        dirPath.setText(getPath());
+        dirElement.addContent(dirPath);
+
+        //Name
+        Element dirName = new Element("name");
+        dirName.setText(getName());
+        dirElement.addContent(dirName);
+        
+        //Owner
+        Element dirOwner = new Element("owner");
+        dirOwner.setText(getUser().getName());
+        dirElement.addContent(dirOwner);
+        
+        //Perm
+        Element dirPerm = new Element("perm");
+        dirPerm.setText(getPermissions());
+        dirElement.addContent(dirPerm);
+        
+        
+        return dirElement;
+    }
     
 }

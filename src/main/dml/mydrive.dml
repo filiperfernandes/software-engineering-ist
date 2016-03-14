@@ -72,6 +72,12 @@ relation MyDriveContainsRootDir{
     multiplicity 1;}
     }
 
+relation MyDriveContainsPlainFile{
+    MyDrive playsRole mydrive;
+    PlainFile playsRole plainfile{
+    multiplicity *;}
+    }
+
 
 
 

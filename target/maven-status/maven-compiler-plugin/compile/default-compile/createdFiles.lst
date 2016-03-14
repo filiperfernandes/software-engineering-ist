@@ -7,6 +7,7 @@ pt/ist/fenixframework/adt/bplustree/BPlusTree_Base$AdtBPlusTreeHasRootNode.class
 pt/ist/fenixframework/consistencyPredicates/DomainConsistencyPredicate_Base$3.class
 pt/ist/fenixframework/data/InstallationData_Base.class
 pt/ist/fenixframework/DomainBPlusTreeData_Base$DO_State.class
+pt/tecnico/MyDrive/domain/MyDrive_Base$5.class
 pt/ist/fenixframework/adt/bplustree/LeafNodeArray_Base$LeafNodeArrayHasSibling.class
 pt/ist/fenixframework/backend/CurrentBackEndId.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$3.class
@@ -63,6 +64,7 @@ pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$5.class
 pt/ist/fenixframework/consistencyPredicates/PublicConsistencyPredicate_Base$1.class
 pt/ist/fenixframework/adt/bplustree/BPlusTree_Base$1.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$DomainConsistencyPredicateDomainDependenceRecords.class
+pt/tecnico/MyDrive/domain/PlainFile_Base$1.class
 pt/tecnico/MyDrive/domain/File_Base$DO_State.class
 pt/ist/fenixframework/DomainMetaClass_Base$7.class
 pt/ist/fenixframework/consistencyPredicates/DomainConsistencyPredicate_Base$2.class
@@ -71,6 +73,7 @@ pt/tecnico/MyDrive/domain/Link.class
 pt/ist/fenixframework/adt/bplustree/AbstractNodeArray_Base$1.class
 pt/ist/fenixframework/DomainMetaObject_Base$4.class
 pt/ist/fenixframework/adt/bplustree/AbstractNodeArray_Base$DO_State.class
+pt/tecnico/MyDrive/domain/MyDrive_Base$6.class
 pt/ist/fenixframework/consistencyPredicates/PublicConsistencyPredicate_Base$2.class
 pt/ist/fenixframework/DomainBPlusTreeData_Base.class
 pt/tecnico/MyDrive/domain/PlainFile_Base.class
@@ -141,6 +144,7 @@ pt/ist/fenixframework/adt/bplustree/DomainLeafNode_Base.class
 pt/ist/fenixframework/DomainMetaClass_Base$DomainMetaSuperclassDomainMetaSubclasses.class
 pt/ist/fenixframework/adt/bplustree/BPlusTreeArray_Base$1.class
 pt/ist/fenixframework/consistencyPredicates/PublicConsistencyPredicate_Base$PublicConsistencyPredicateOverriddenPublicConsistencyPredicatesOverriding.class
+pt/tecnico/MyDrive/domain/PlainFile_Base$MyDriveContainsPlainFile.class
 pt/tecnico/MyDrive/domain/SuperUser_Base.class
 pt/tecnico/MyDrive/domain/User_Base.class
 pt/ist/fenixframework/DomainMetaClass_Base.class

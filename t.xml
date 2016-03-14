@@ -6,10 +6,10 @@
     <home>/home/jtb</home>
     <mask>rwxdr-x-</mask>
   </user>
-  <dir id="5">
+  <!-- <dir id="5">
     <path>/home/jtb</path>
     <name>documents</name>
     <owner>jtb</owner>
     <perm>rwxdr-x-</perm>
-  </dir>
+  </dir> -->
 </myDrive>

@@ -47,7 +47,7 @@ public class User extends User_Base {
 
 		MyDrive md = MyDrive.getInstance();
 
-		// clear current phone book | current mydrive
+		// clear current MyDrive
 		for (User u: md.getUserSet()){
 			System.out.println("vai remover " + u);
 			md.removeUser(u);

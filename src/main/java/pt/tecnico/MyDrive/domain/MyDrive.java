@@ -7,14 +7,7 @@ import org.jdom2.Element;
 import pt.ist.fenixframework.FenixFramework;
 
 public class MyDrive extends MyDrive_Base {
-	/*
-	public MyDrive(Integer cnt) {
-		super();
-		setCounter(cnt);
 
-
-	}
-	 */
 	public static MyDrive getInstance() {
 		MyDrive md = FenixFramework.getDomainRoot().getMydrive();
 		if (md != null){
@@ -82,16 +75,41 @@ public class MyDrive extends MyDrive_Base {
 	}
 
 	public Document xmlExport() {
+
+		MyDrive md = MyDrive.getInstance();
 		Element element = new Element("MyDrive");
 		Document doc = new Document(element);
 		System.out.println("Vai entrar no procusar users");
+
+		//Export Users
 		for (User u: getUserSet()){
 			System.out.println("User: "+ u.getName());
 			element.addContent(u.xmlExport());
 		}
+
+		//Export Directories
+		for (User u: getUserSet()){
+			for (File f: u.getFileSet()){
+				if(f instanceof Directory){
+					System.out.println("File: "+ f.getName());
+					element.addContent(((Directory) f).xmlExport());
+				}
+			}
+		}
+
+		//ExportPlainFiles
+		for (User u1: getUserSet()){
+			for (File f1: u1.getFileSet()){
+				if(f1 instanceof PlainFile){
+					System.out.println("File: "+ f1.getName());
+					element.addContent(((PlainFile) f1).xmlExport());
+				}
+			}
+		}
+
 		return doc;
 	}
-	
+
 
 }
 

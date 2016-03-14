@@ -15,8 +15,8 @@ import org.joda.time.DateTime;
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 import pt.tecnico.MyDrive.domain.Directory;
-//import pt.tecnico.MyDrive.domain.File;
 import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.PlainFile;
 import pt.tecnico.MyDrive.domain.User;
 
 public class MyDriveApplication {
@@ -29,32 +29,17 @@ public class MyDriveApplication {
 
 			System.out.println("Hello");
 			setup();
-			//getHome();
-			//for (String s: args) xmlScan(new File(s));
+			for (String s: args) xmlScan(new File(s));
 			
 			addData();
 			xmlPrint();
-			//File c = new File(md.getCounter(), "c", "/home/root", "/home/root", date, "rwxdr-x-");
-			//md.setCounter(md.getCounter()+1);
+			
 
 		} finally { FenixFramework.shutdown(); }
 	}
 
 	
-	@Atomic
-	public void xmlImport(Element personElement){}
-	
-	/*
-	@Atomic
-	public static void acabaAi(String owner, Integer id, String name, DateTime date, String perm){
-		MyDrive md = MyDrive.getInstance();
-		Directory home = (Directory) Directory.getFileByName("home");
-		System.out.println(home);
-		Directory userDir = (Directory) home.getFileByName(owner);
-		
-		Directory toAdd = new Directory (id, name, date, perm);
-		userDir.addFile(toAdd);
-	}*/
+	//Initialize MyDrive
 	@Atomic
 	public static void setup() {
 
@@ -62,13 +47,24 @@ public class MyDriveApplication {
 
 	}
 	
+	
+	//Add data to database
 	@Atomic
 	public static void addData(){
-		//MyDrive md = MyDrive.getInstance();
+		MyDrive md = MyDrive.getInstance();
 		
-		new User("filiperfernandes", "fPW", "Filipe");
+		DateTime date = new DateTime();
+		
+		User u= new User("filiperfernandes", "fPW", "Filipe");
+		
+		PlainFile p = new PlainFile(md.getCnt(), "Hello", date, "rwxdr-x-", "HelloWorld"); 
+		
+		//u.addFile(p);
+		
+		
 	}
 	
+	//Not sure if needed
 	@Atomic
 	public static Directory getHome(){
 		MyDrive md = MyDrive.getInstance();
@@ -77,6 +73,7 @@ public class MyDriveApplication {
 		return home;
 	}
 	
+	//Export XML
 	@Atomic
     public static void xmlPrint() {
 	Document doc = MyDrive.getInstance().xmlExport();
@@ -85,7 +82,7 @@ public class MyDriveApplication {
 	} catch (IOException e) { System.out.println(e); }
     }
 	
-
+	//Import XML
 	@Atomic
 	public static void xmlScan(File file) {
 
