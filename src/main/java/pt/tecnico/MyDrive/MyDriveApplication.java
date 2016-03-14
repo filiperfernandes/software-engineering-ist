@@ -1,6 +1,7 @@
 package pt.tecnico.MyDrive;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import org.joda.time.DateTime;
 
@@ -106,14 +107,18 @@ public class MyDriveApplication {
 				c++;
 			}
 			else if(ch == '/'){
-				dir = (Directory) (dir.getFileByName(dirname));
-				dirname="";
+				try{
+					dir = (Directory) (dir.getFileByName(dirname));
+					dirname="";
+				}catch (FileDoesNotExistException e) { System.err.println(e); }
 			}
 			else{
 				dirname += ch;
 			}
 		}
-		dir = (Directory) (dir.getFileByName(dirname));
+		try{
+			dir = (Directory) (dir.getFileByName(dirname));
+		}catch (FileDoesNotExistException e) { System.err.println(e); }
 		System.out.println(".\n..");
 		for(File f : dir.getFileSet()){
 			System.out.println(f.getName());
