@@ -256,10 +256,11 @@ public class MyDriveApplication {
 
 	}
 
+
 	/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
-
+=======
 	//Add data to database
-
+>>>>>>> 45c6eb58f7c34f375f4f3688736ed7be23596c6d
 	@Atomic
 	public static void addData(){
 		MyDrive md = MyDrive.getInstance();
@@ -267,9 +268,7 @@ public class MyDriveApplication {
 		//new PlainFile(md.getCnt(), owner, name, pathToFile, date, "rwxdr-test", "Hello World!");
 		//Directory f = (Directory)md.getFileByPath(pathToFile);
 
-
-
-
+<<<<<<< HEAD
 
 
 	}*/
@@ -277,7 +276,7 @@ public class MyDriveApplication {
 	/*	@Atomic
 	public static void test1() {
 
-
+=======
 		User u= new User("filiperfernandes", "fPW", "Filipe");
 		
 		PlainFile p = new PlainFile(md.getCnt(), "Hello", "rwxdr-x-", "HelloWorld"); 
@@ -289,13 +288,11 @@ public class MyDriveApplication {
 	//Not sure if needed
 	@Atomic
 	public static Directory getHome(){
-
+>>>>>>> 45c6eb58f7c34f375f4f3688736ed7be23596c6d
 		MyDrive md = MyDrive.getInstance();
 		Directory home = (Directory) md.getRootdir().getFileByName("home");
 		System.out.println("APP O HOME E:" + home);
 		return home;
-
-
 	}
 
 
@@ -321,7 +318,7 @@ public class MyDriveApplication {
 		} catch (JDOMException | IOException e) {
 			e.printStackTrace();
 		}
-
+<<<<<<< HEAD
 	}*/
 
 	@Atomic
