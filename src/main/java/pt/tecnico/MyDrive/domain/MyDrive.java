@@ -1,6 +1,7 @@
 package pt.tecnico.MyDrive.domain;
 
 
+import org.jdom2.Document;
 import org.jdom2.Element;
 
 import pt.ist.fenixframework.FenixFramework;
@@ -40,7 +41,6 @@ public class MyDrive extends MyDrive_Base {
 				return user;
 			}
 		}
-		System.out.println("fodeu "+username);
 		return null;
 	}
 
@@ -49,7 +49,7 @@ public class MyDrive extends MyDrive_Base {
 	public void xmlImport(Element element) {
 
 		MyDrive md = MyDrive.getInstance();
-		
+
 		//Import users
 		for (Element node: element.getChildren("user")) {
 			String username = node.getAttribute("username").getValue();
@@ -79,7 +79,21 @@ public class MyDrive extends MyDrive_Base {
 
 
 
-	}}
+	}
+
+	public Document xmlExport() {
+		Element element = new Element("MyDrive");
+		Document doc = new Document(element);
+		System.out.println("Vai entrar no procusar users");
+		for (User u: getUserSet()){
+			System.out.println("User: "+ u.getName());
+			element.addContent(u.xmlExport());
+		}
+		return doc;
+	}
+	
+
+}
 
 /*
 	public File getFileByName(String name){

@@ -3,6 +3,8 @@ package pt.tecnico.MyDrive.domain;
 import org.jdom2.Element;
 import org.joda.time.DateTime;
 
+import pt.tecnico.MyDrive.MyDriveApplication;
+
 public class Directory extends Directory_Base {
     
 	public Directory( Integer id, String name, DateTime lastModif, String permissions) {
@@ -28,11 +30,10 @@ public class Directory extends Directory_Base {
 		setMydrive(md);
 	}
 	
-	public File getFileByName(String name){
-
-		System.out.println("a procurar ficheiro com o nome " + name + " no directorio " + this.getName());
-		for (File file: this.getFileSet()){
-			System.out.println("o directorio: " + this.getName() + " encontrou o ficheiro " + file.getName());
+	public static File getFileByName(String name){
+		MyDrive md = MyDrive.getInstance();
+		for (File file: md.getRootdir().getFileSet()){
+			System.out.println(" encontrou o ficheiro " + file.getName());
 			if(file.getName().equals(name)){
 				System.out.println("ficheiro encontrado");
 				return file;
@@ -45,8 +46,9 @@ public class Directory extends Directory_Base {
 	
 	public Directory getHome(){
 		MyDrive md = MyDrive.getInstance();
-		Directory home = (Directory) md.getRootdir().getFileByName("home");
-		System.out.println("O HOME E:" + home);
+		md.getRootdir();
+		Directory home = (Directory) Directory.getFileByName("home");
+		System.out.println("Dir O HOME E:" + home);
 		return home;
 	}
 	
@@ -54,7 +56,7 @@ public class Directory extends Directory_Base {
 	public File getFileByID(String id){
 
 		MyDrive md = MyDrive.getInstance();
-		for (File file: md.getRootdir().getFileSet()){
+		for (File file: this.getFileSet()){
 			String x = String.valueOf(file.getId());
 			if(x.equals(id)){
 				return file;
@@ -90,33 +92,26 @@ public class Directory extends Directory_Base {
 		String perm = personElement.getChildText("perm");
 		
 		System.out.println("sid: "+sid + " id: "+id + " name: "+name + " owner: "+owner+ " perm: "+perm);
-		Directory toAdd = new Directory (id, name, date, perm);
+		//Directory toAdd = new Directory (id, name, date, perm);
 		
-		//Directory dir = md.getRootdir();
 		
 		System.out.println("-----vamos procurar a pasta home no directorio ");
 		
 		//Directory home = (Directory) (md.getRootdir()).getFileByName("home");
 		//System.out.println("home = "+home + " rootdir= "+md.getRootdir());
 		//System.out.println();
-		Directory userDir = (Directory) getHome().getFileByName(owner);
 		
+		
+		
+		//Directory userDir = (Directory) getHome().getFileByName(owner);
+		getHome();
+		
+		//MyDriveApplication.acabaAi(owner, id, name, date, perm);
+		System.out.println("aqui e nao e pouco");
 		//home.addFile(userDir);
 		
-		userDir.addFile(toAdd);
+		//userDir.addFile(toAdd);
 		
 	}
     
 }
-/*
-	public File getFileByName(String name){
-		
-		MyDrive md = MyDrive.getInstance();
-		for (File file: md.getRootdir().getFileSet()){
-			if(file.getName().equals(name)){
-				return file;
-			}
-		}
-		System.out.println("returning null");
-		return null;
-	}*/

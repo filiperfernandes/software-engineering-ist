@@ -15,7 +15,13 @@ public class SuperUser extends SuperUser_Base {
 		md.setRootdir(rootDir);
 		Directory home = new Directory(md.getCnt(), "home", date, "rwxdr-x-");
 		rootDir.addFile(home);
-        
+		
+		// para apagar
+		/*
+		System.out.println("Sup O HOME E:" + home);
+		Directory home2 = (Directory) md.getRootdir().getFileByName("home");
+		System.out.println("Sup O HOME E:" + home2);
+		//isto*/
         Directory rd = new Directory(md.getCnt(), "root", date, "rwxdr-x-");
         
         home.addFile(rd);
@@ -26,7 +32,10 @@ public class SuperUser extends SuperUser_Base {
         setMask("rwxdr-x-");
         this.addFile(rd);
         
+        
+        
+        
+        
     }
-    
-    
+
 }

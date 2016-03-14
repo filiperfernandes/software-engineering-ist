@@ -18,6 +18,8 @@ public class User extends User_Base {
 		setName(name);
 		setMask("rwxd----");
 		
+		md.addUser(this);
+		
 		Directory newD = new Directory(md.getCnt(), username, date, "rwxdr-x-");
 		this.addFile(newD);
 		
@@ -72,26 +74,37 @@ public class User extends User_Base {
 
 		String name = personElement.getChildText("name");
 		
-		
-		// String home = personElement.getChildText("home");nao deve ser preciso
-		
-		//Directory newD = new Directory(md.getCnt(), username, date, mask);
-		//Directory x = md.getRootdir();
-		
-		
-
-		//Element user = personElement.getChild("user");
-		
-		//System.out.println(user.getAttributeValue("password"));
-
 		new User(username, password, name);
-		/*
-		for (Element contactElement: contacts.getChildren("contact"))
-			new Contact(this, contactElement);
-
-		for (Element contactElement: contacts.getChildren("email-contact"))
-			new EmailContact(this, contactElement);
-	}*/
+		
 
 	}
+
+	public Element xmlExport() {
+        Element userElement = new Element("user");
+        userElement.setAttribute("username", getUsername());
+        
+        
+        //Password
+        Element userPassword = new Element("password");
+        userPassword.setText(getPassword());
+        userElement.addContent(userPassword);
+
+        //Name
+        Element uName = new Element("name");
+        uName.setText(getName());
+        userElement.addContent(uName);
+        
+        //Home
+        Element uHome = new Element("home");
+        uHome.setText("/home/"+getUsername());
+        userElement.addContent(uHome);
+        
+        //Mask
+        Element uMask = new Element("mask");
+        uMask.setText("rwxdr-x-");
+        userElement.addContent(uMask);
+        
+        
+        return userElement;
+    }
 }

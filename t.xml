@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <myDrive>
-  <!-- <user username="jtb">
+  <user username="jtb">
     <password>fernandes</password>
     <name>Joaquim Teófilo Braga</name>
     <home>/home/jtb</home>
     <mask>rwxdr-x-</mask>
-  </user> -->
+  </user>
   <dir id="5">
     <path>/home/jtb</path>
     <name>documents</name>
