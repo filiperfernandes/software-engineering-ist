@@ -1,7 +1,15 @@
 package pt.tecnico.MyDrive;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.joda.time.DateTime;
 
 import java.util.Scanner;
@@ -9,11 +17,9 @@ import java.util.Scanner;
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 import pt.tecnico.MyDrive.domain.Directory;
-import pt.tecnico.MyDrive.domain.File;
 import pt.tecnico.MyDrive.domain.MyDrive;
-import pt.tecnico.MyDrive.domain.SuperUser;
-import pt.tecnico.MyDrive.domain.User;
 import pt.tecnico.MyDrive.domain.PlainFile;
+import pt.tecnico.MyDrive.domain.User;
 
 public class MyDriveApplication {
 	//static final Logger log = LogManager.getRootLogger();
@@ -27,9 +33,10 @@ public class MyDriveApplication {
 			setup();
 			display();
 
-
-			//File c = new File(md.getCounter(), "c", "/home/root", "/home/root", date, "rwxdr-x-");
-			//md.setCounter(md.getCounter()+1);
+			for (String s: args) xmlScan(new java.io.File(s));
+			
+			addData();
+			xmlPrint();
 
 		} finally { FenixFramework.shutdown(); }
 	}
@@ -64,10 +71,10 @@ public class MyDriveApplication {
 				newUser();
 				break;
 			case 3:
-				//newDirectory();
+				newDirectory();
 				break;
 			case 4:
-				//newPlainFile();
+				newPlainFile();
 				break;
 			case 5:
 				listDirectory();
@@ -110,7 +117,7 @@ public class MyDriveApplication {
 			System.out.println("Changed to previous Directory");
 		}
 		else {
-			for(File dir : (md.getCurrentdir()).getFileSet()){
+			for(pt.tecnico.MyDrive.domain.File dir : (md.getCurrentdir()).getFileSet()){
 				if(name.equals(dir.getName())){
 					if(dir instanceof Directory ){
 						md.setCurrentdir((Directory) dir);
@@ -149,6 +156,16 @@ public class MyDriveApplication {
 	}
 
 	@Atomic
+	public static void newDirectory(){
+		MyDrive md = MyDrive.getInstance();
+		System.out.println("Insert name of new directory");
+		String name = input.next();
+		Directory d = new Directory(md.getCnt(), name, "rwxdr-x-");
+		(md.getCurrentdir()).addFile(d);
+		(md.getCurrentuser()).addFile(d);
+	}
+
+	@Atomic
 	public static void listDirectory(){
 		System.out.println("Insert path of directory");
 		String path = input.next();
@@ -170,11 +187,22 @@ public class MyDriveApplication {
 		}
 		dir = (Directory) (dir.getFileByName(dirname));
 		System.out.println(".\n..");
-		for(File f : dir.getFileSet()){
+		for(pt.tecnico.MyDrive.domain.File f : dir.getFileSet()){
 			System.out.println(f.getName());
 		}
 	}
 
+	@Atomic
+	public static void newPlainFile(){
+		MyDrive md = MyDrive.getInstance();
+		System.out.println("Insert name of new PlainFile");
+		String name = input.next();
+		System.out.println("Insert data of new PlainFile");
+		String data = input.next();
+		PlainFile f = new PlainFile(md.getCnt(), name, "rwxdr-x-", data);
+		(md.getCurrentdir()).addFile(f);
+		(md.getCurrentuser()).addFile(f);
+	}
 
 
 	@Atomic
@@ -201,7 +229,8 @@ public class MyDriveApplication {
 		System.out.println(((PlainFile) (dir.getFileByName(dirname))).getData());
 	}
 
-
+	
+	//Initialize MyDrive
 	@Atomic
 	public static void setup() {
 
@@ -227,14 +256,19 @@ public class MyDriveApplication {
 
 	}
 
-	/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
-	@Atomic
-		MyDrive md = MyDrive.getInstance();
-		DateTime date = new DateTime();
 
+	/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
+=======
+	//Add data to database
+>>>>>>> 45c6eb58f7c34f375f4f3688736ed7be23596c6d
+	@Atomic
+	public static void addData(){
+		MyDrive md = MyDrive.getInstance();
+		
 		//new PlainFile(md.getCnt(), owner, name, pathToFile, date, "rwxdr-test", "Hello World!");
 		//Directory f = (Directory)md.getFileByPath(pathToFile);
 
+<<<<<<< HEAD
 
 
 	}*/
@@ -242,16 +276,41 @@ public class MyDriveApplication {
 	/*	@Atomic
 	public static void test1() {
 
-		MyDrive md = MyDrive.getInstance();
-
-		DateTime date = new DateTime();
-
+=======
+		User u= new User("filiperfernandes", "fPW", "Filipe");
+		
+		PlainFile p = new PlainFile(md.getCnt(), "Hello", "rwxdr-x-", "HelloWorld"); 
+		
+		//u.addFile(p);
+		
 	}
-}
+	
+	//Not sure if needed
+	@Atomic
+	public static Directory getHome(){
+>>>>>>> 45c6eb58f7c34f375f4f3688736ed7be23596c6d
+		MyDrive md = MyDrive.getInstance();
+		Directory home = (Directory) md.getRootdir().getFileByName("home");
+		System.out.println("APP O HOME E:" + home);
+		return home;
+	}
 
+
+	//Export XML
+	@Atomic
+    public static void xmlPrint() {
+	Document doc = MyDrive.getInstance().xmlExport();
+	XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
+	try { xmlOutput.output(doc, new PrintStream(System.out));
+	} catch (IOException e) { System.out.println(e); }
+    }
+	
+	//Import XML
 	@Atomic
 	public static void xmlScan(File file) {
+
 		MyDrive md = MyDrive.getInstance();
+
 		SAXBuilder builder = new SAXBuilder();
 		try {
 			Document document = (Document)builder.build(file);
@@ -259,6 +318,7 @@ public class MyDriveApplication {
 		} catch (JDOMException | IOException e) {
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 	}*/
 
 	@Atomic
@@ -331,9 +391,29 @@ public class MyDriveApplication {
 		if (!exists){
 			//throws IOException 
 			System.out.println("Excepção Activa!");
+
+	}
+
+
+	@Atomic
+	public static void removeDirectory(String name ) {
+		MyDrive md = MyDrive.getInstance();
+		System.out.println("Name1: "+name);
+		if(((md.getCurrentdir()).equals(null))) 
+		{ 
+			//throws IOException 
+			System.out.println("Excepção Activa!");
+
+		}else if ((md.getCurrentdir()).getFileByName(name).equals(null))
+		{
+			//throws IOException 
+			System.out.println("Excepção Activa!");
+
+		}else { 
+			//Remove Directory
+			(md.getCurrentdir()).removeFile((md.getCurrentdir()).getFileByName(name));
 		}
 	}
 }
 
-   //Continua nao remover
 
