@@ -16,6 +16,10 @@ public class File extends File_Base {
 		setPermissions(permissions);
 	}
 
+	public File removeFile(Integer id, String name,  String permissions){
+		MyDrive md = MyDrive.getInstance();
+		Directory d = new Directory(md.getCnt(), name, permissions);
+		(md.getCurrentdir()).removeFile(d);
+		return d;
 
-
-}
+}}

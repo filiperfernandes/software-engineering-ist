@@ -74,6 +74,8 @@ public class MyDriveApplication {
 				break;
 			case 6:
 				//removeDirectory();
+				System.out.println("Insert name directory");
+				removeDirectory(input.next());
 				break;
 			case 7:
 				//removeFile();
@@ -97,6 +99,10 @@ public class MyDriveApplication {
 			//			System.out.println("Exit Success!");
 		}
 	}
+
+	/*private static void removeDirectory() {
+		// TODO Auto-generated method stub
+		}*/
 
 	@Atomic
 	public static void listDirectory(String path){
@@ -166,7 +172,7 @@ public class MyDriveApplication {
 		//new User("Filipe", "test", "Filipe Fernandes");
 
 	}
-}
+
 
 /*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
 	@Atomic
@@ -201,3 +207,22 @@ public class MyDriveApplication {
 			e.printStackTrace();
 		}
 	}*/
+
+
+public static void removeDirectory(String name ) {
+	MyDrive md = MyDrive.getInstance();
+	
+	if(((md.getCurrentdir()).equals(null))) 
+	{ 
+		//throws IOException 
+		System.out.println("Excepção Activa!");
+	}else if (md.getCurrentdir().getFileByName(name).equals(null))
+		{
+		//throws IOException 
+		System.out.println("Excepção Activa!");
+	
+	}else { 
+		//Remove Directory
+		(md.getCurrentdir()).removeFile((md.getCurrentdir()).getFileByName(name));
+}}
+}

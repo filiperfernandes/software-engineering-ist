@@ -41,22 +41,13 @@ public class User extends User_Base {
         
         Directory home = (Directory) (md.getRootdir()).getFileByName("home");
 		home.addFile(dir);
-        
-        
+          
     }
-    
-    
-    
-    
-    
-    
-    
     
     public String ToString(){
       return (username + " - " + getName() + " - " + getMask());
 
     }
-
 
     public String changeUsername(String newUsername){
       

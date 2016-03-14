@@ -1,5 +1,7 @@
 package pt.tecnico.MyDrive.domain;
 
+import java.io.IOException;
+
 import org.joda.time.DateTime;
 
 public class Directory extends Directory_Base {
@@ -24,7 +26,7 @@ public class Directory extends Directory_Base {
 		return null;
 	}
 
-
+}
 
 	/*public Directory createDirectory(String name,  String permissions){
 		MyDrive md = MyDrive.getInstance();
@@ -33,4 +35,5 @@ public class Directory extends Directory_Base {
 		return d;
 	}*/
 
-}
+	
+
