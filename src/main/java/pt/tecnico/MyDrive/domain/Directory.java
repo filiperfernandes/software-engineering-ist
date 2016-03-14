@@ -28,12 +28,12 @@ public class Directory extends Directory_Base {
 
 }
 
-	/*public Directory createDirectory(String name,  String permissions){
+/*public Directory createDirectory(String name,  String permissions){
 		MyDrive md = MyDrive.getInstance();
 		Directory d = new Directory(md.getCnt(), name, permissions);
 		(md.getCurrentdir()).addFile(d);
 		return d;
 	}*/
 
-	
+
 

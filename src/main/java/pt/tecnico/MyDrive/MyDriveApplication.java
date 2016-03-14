@@ -79,9 +79,12 @@ public class MyDriveApplication {
 				break;
 			case 7:
 				//removeFile();
+
 				break;
 			case 8:
 				//removePlainFile();
+				System.out.println("Insert name directory");
+				removePlainFile(input.next());
 				break;
 			case 9:
 				System.out.println("Insert path of file");
@@ -161,6 +164,9 @@ public class MyDriveApplication {
 		PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
 		Directory home = (Directory) (md.getRootdir()).getFileByName("home");
 		Directory root = (Directory) (home.getFileByName("root"));
+		Directory d = new Directory(md.getCnt(), "casa","rwxdr-test");
+
+		root.addFile(d);
 
 		root.addFile(file);
 
@@ -174,7 +180,7 @@ public class MyDriveApplication {
 	}
 
 
-/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
+	/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
 	@Atomic
 		MyDrive md = MyDrive.getInstance();
 		DateTime date = new DateTime();
@@ -186,7 +192,7 @@ public class MyDriveApplication {
 
 	}*/
 
-/*	@Atomic
+	/*	@Atomic
 	public static void test1() {
 
 		MyDrive md = MyDrive.getInstance();
@@ -208,21 +214,36 @@ public class MyDriveApplication {
 		}
 	}*/
 
+	@Atomic
+	public static void removeDirectory(String name ) {
+		MyDrive md = MyDrive.getInstance();
+		System.out.println("Name1: "+name);
+		if(((md.getCurrentdir()).equals(null))) 
+		{ 
+			//throws IOException 
+			System.out.println("Excepção Activa!");
+			System.out.println("Name2: "+name);
 
-public static void removeDirectory(String name ) {
-	MyDrive md = MyDrive.getInstance();
-	
-	if(((md.getCurrentdir()).equals(null))) 
-	{ 
-		//throws IOException 
-		System.out.println("Excepção Activa!");
-	}else if (md.getCurrentdir().getFileByName(name).equals(null))
+		}else if ((md.getCurrentdir()).getFileByName(name).equals(null))
 		{
-		//throws IOException 
-		System.out.println("Excepção Activa!");
-	
-	}else { 
-		//Remove Directory
+			//throws IOException 
+			System.out.println("Excepção Activa!");
+			System.out.println("Name3: "+name);
+
+		}else { 
+			//Remove Directory
+			System.out.println("Name - Removido1: "+name);
+			(md.getCurrentdir()).removeFile((md.getCurrentdir()).getFileByName(name));
+			System.out.println("Name - Removido2: "+name);
+			//Continua nao remover
+
+		}}
+
+	@Atomic
+	public static void removePlainFile(String name){ //Remove PlainFile
+		MyDrive md = MyDrive.getInstance();
 		(md.getCurrentdir()).removeFile((md.getCurrentdir()).getFileByName(name));
-}}
+	}   //Continua nao remover
 }
+
+
