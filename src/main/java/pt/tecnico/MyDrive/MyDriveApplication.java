@@ -71,29 +71,18 @@ public class MyDriveApplication {
 				break;
 			case 5:
 				listDirectory();
-				/*System.out.println("Insert path of directory");
-				listDirectory(input.next());
-				 */	
 				break;
 			case 6:
 				changeCurrentDirectory();
-				//System.out.println("Insert name directory");
-				//removeDirectory(input.next());
 				break;
 			case 7:
-				/*MyDrive md = MyDrive.getInstance();
-				System.out.println((md.getCurrentdir()).getName());*/
-				//removeFile();
+				removeDirectory();
 				break;
 			case 8:
-				//removePlainFile();
-				System.out.println("Insert name directory");
-				removePlainFile(input.next());
+				removePlainFile();
 				break;
 			case 9:
 				readPlainFile();
-				//System.out.println("Insert path of file");
-				//readPlainFile(input.next());
 				break;
 			case 0:
 				quit = false;
@@ -149,7 +138,6 @@ public class MyDriveApplication {
 		System.out.println("Insert password of new User");
 		String pass = input.next();
 		User u = new User(username, pass, name);
-		System.out.println("ola");
 	}
 
 	@Atomic
@@ -228,7 +216,7 @@ public class MyDriveApplication {
 		root.addFile(file);
 
 		new User("joao", "passe", "vultos");
-	
+
 		//new SuperUser();
 
 		//createPlainFile("root", "/home/root/test", "/home/root", "rwxdr-test", "Hello World!");
@@ -236,10 +224,10 @@ public class MyDriveApplication {
 
 		//new User("Filipe", "test", "Filipe Fernandes");
 
-	
-}
 
-/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
+	}
+
+	/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
 	@Atomic
 		MyDrive md = MyDrive.getInstance();
 		DateTime date = new DateTime();
@@ -251,7 +239,7 @@ public class MyDriveApplication {
 
 	}*/
 
-/*	@Atomic
+	/*	@Atomic
 	public static void test1() {
 
 		MyDrive md = MyDrive.getInstance();
@@ -273,36 +261,79 @@ public class MyDriveApplication {
 		}
 	}*/
 
-@Atomic
-public static void removeDirectory(String name ) {
-	MyDrive md = MyDrive.getInstance();
-	System.out.println("Name1: "+name);
-	if(((md.getCurrentdir()).equals(null))) 
-	{ 
-		//throws IOException 
-		System.out.println("Excepção Activa!");
-		System.out.println("Name2: "+name);
+	@Atomic
+	public static void removeDirectory() {
+		MyDrive md = MyDrive.getInstance();
+		System.out.println("Insert name of Directory you want to remove:");
+		String name_dir = input.next();
+		boolean exists =false;
+		if((((md.getCurrentdir()).getDimension()).equals(1))) 
+		{ 
+			//throws IOException 
+			System.out.println("Excepção Activa!");
 
-	}else if ((md.getCurrentdir()).getFileByName(name).equals(null))
-	{
-		//throws IOException 
-		System.out.println("Excepção Activa!");
-		System.out.println("Name3: "+name);
+		}else {//(!(md.getCurrentdir()).getFileByName(name_dir).equals(null))
 
-	}else { 
-		//Remove Directory
-		System.out.println("Name - Removido1: "+name);
-		(md.getCurrentdir()).removeFile((md.getCurrentdir()).getFileByName(name));
-		System.out.println("Name - Removido2: "+name);
-		//Continua nao remover
-
+			for (File f: (md.getCurrentdir()).getFileSet()){
+				if (f.getName().equals(name_dir)){
+					if (f instanceof Directory){
+						if  ( ( ( (Directory) ( (md.getCurrentdir()).getFileByName(name_dir) ) ).getDimension() ).equals(2)){						
+							Directory dir = (Directory) (md.getCurrentdir()).getFileByName(name_dir);
+							(md.getCurrentuser()).removeFile(dir);
+							(md.getCurrentdir()).removeFile(dir);
+							dir.removeDir();
+							exists = true;
+							break;
+						}else {
+							//throws IOException que não é directorio é ficheiro
+						}
+					}else {
+						//throws IOException que não é directorio é ficheiro
+					}
+				}
+			}
+			if (!exists){
+				//throws IOException 
+				System.out.println("Excepção Activa!");
+			}
+		}
 	}
+
+	@Atomic
+	public static void removePlainFile(){ //Remove PlainFile
+		MyDrive md = MyDrive.getInstance();
+		System.out.println("Insert name of PlainFile you want to remove:");
+		String name_rmplfile = input.next();
+		boolean exists =false;
+		if((((md.getCurrentdir()).getDimension()).equals(1))) 
+		{ 
+			//throws IOException 
+			System.out.println("Excepção Activa!");
+
+		}else {//(!(md.getCurrentdir()).getFileByName(name_dir).equals(null))
+
+			for (File f: (md.getCurrentdir()).getFileSet()){
+				if (f.getName().equals(name_rmplfile)){
+					if (f instanceof PlainFile){
+						PlainFile plfile = (PlainFile) (md.getCurrentdir()).getFileByName(name_rmplfile);
+						(md.getCurrentuser()).removeFile(plfile);
+						(md.getCurrentdir()).removeFile(plfile);
+						plfile.removePlainFile();
+						exists = true;
+						break;
+
+					}
+				}else {
+					//throws IOException que não é directorio é ficheiro
+				}
+			}
+		}
+		if (!exists){
+			//throws IOException 
+			System.out.println("Excepção Activa!");
+		}
 	}
-
-@Atomic
-public static void removePlainFile(String name){ //Remove PlainFile
-	MyDrive md = MyDrive.getInstance();
-	(md.getCurrentdir()).removeFile((md.getCurrentdir()).getFileByName(name));
-}   //Continua nao remover
-
 }
+
+   //Continua nao remover
+

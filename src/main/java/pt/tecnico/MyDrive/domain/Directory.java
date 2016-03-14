@@ -26,14 +26,13 @@ public class Directory extends Directory_Base {
 		return null;
 	}
 
+
+	public void removeDir(){
+		setDirectory(null);
+		deleteDomainObject();
+	}
 }
 
-/*public Directory createDirectory(String name,  String permissions){
-		MyDrive md = MyDrive.getInstance();
-		Directory d = new Directory(md.getCnt(), name, permissions);
-		(md.getCurrentdir()).addFile(d);
-		return d;
-	}*/
 
 
 

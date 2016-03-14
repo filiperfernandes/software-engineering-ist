@@ -16,6 +16,12 @@ public class PlainFile extends PlainFile_Base {
 		setData(data);
 	}
 
+	
+	public void removePlainFile(){
+		setData(null);
+		deleteDomainObject();
+	}
+	
 /*	public void readPlainFile(String path) {
 		MyDrive md = MyDrive.getInstance();
 		String dirname = "";
