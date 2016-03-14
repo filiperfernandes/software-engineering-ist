@@ -33,7 +33,7 @@ public class MyDriveApplication {
 			setup();
 			display();
 
-			for (String s: args) xmlScan(new File(s));
+			for (String s: args) xmlScan(new java.io.File(s));
 			
 			addData();
 			xmlPrint();
@@ -128,7 +128,7 @@ public class MyDriveApplication {
 			System.out.println("Changed to previous Directory");
 		}
 		else {
-			for(File dir : (md.getCurrentdir()).getFileSet()){
+			for(pt.tecnico.MyDrive.domain.File dir : (md.getCurrentdir()).getFileSet()){
 				if(name.equals(dir.getName())){
 					if(dir instanceof Directory ){
 						md.setCurrentdir((Directory) dir);
@@ -199,7 +199,7 @@ public class MyDriveApplication {
 		}
 		dir = (Directory) (dir.getFileByName(dirname));
 		System.out.println(".\n..");
-		for(File f : dir.getFileSet()){
+		for(pt.tecnico.MyDrive.domain.File f : dir.getFileSet()){
 			System.out.println(f.getName());
 		}
 	}
@@ -278,7 +278,7 @@ public class MyDriveApplication {
 
 		User u= new User("filiperfernandes", "fPW", "Filipe");
 		
-		PlainFile p = new PlainFile(md.getCnt(), "Hello", date, "rwxdr-x-", "HelloWorld"); 
+		PlainFile p = new PlainFile(md.getCnt(), "Hello", "rwxdr-x-", "HelloWorld"); 
 		
 		//u.addFile(p);
 		
@@ -292,7 +292,7 @@ public class MyDriveApplication {
 		System.out.println("APP O HOME E:" + home);
 		return home;
 	}
-}
+
 
 	//Export XML
 	@Atomic

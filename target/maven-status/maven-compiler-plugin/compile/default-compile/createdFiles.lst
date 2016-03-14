@@ -33,6 +33,7 @@ pt/ist/fenixframework/consistencyPredicates/DomainConsistencyPredicate_Base.clas
 pt/ist/fenixframework/adt/bplustree/BPlusTreeArray_Base.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$DependentDomainMetaObjectOwnDependenceRecords.class
 pt/ist/fenixframework/DomainBPlusTreeJVSTM_Base$DO_State.class
+pt/tecnico/MyDrive/domain/User_Base$4.class
 pt/tecnico/MyDrive/domain/File_Base.class
 pt/tecnico/MyDrive/domain/User_Base$UserOwnsFile.class
 pt/ist/fenixframework/adt/bplustree/AbstractNode_Base$AdtNodeHasParent.class
@@ -43,6 +44,7 @@ pt/ist/fenixframework/adt/bplustree/DomainInnerNode_Base.class
 pt/ist/fenixframework/DomainRoot_Base$DO_State.class
 pt/ist/fenixframework/consistencyPredicates/FinalConsistencyPredicate_Base$DO_State.class
 pt/tecnico/MyDrive/domain/File_Base$1.class
+pt/tecnico/MyDrive/domain/MyDrive_Base$8.class
 pt/ist/fenixframework/adt/bplustree/DomainLeafNode_Base$DO_State.class
 pt/ist/fenixframework/DomainMetaObject_Base$6.class
 pt/ist/fenixframework/adt/bplustree/AbstractNode_Base.class
@@ -56,6 +58,7 @@ pt/ist/fenixframework/DomainMetaObject_Base$3.class
 pt/tecnico/MyDrive/MyDriveApplication.class
 pt/ist/fenixframework/adt/bplustree/AbstractNodeArray_Base.class
 pt/tecnico/MyDrive/domain/File.class
+pt/tecnico/MyDrive/domain/MyDrive_Base$7.class
 pt/tecnico/MyDrive/domain/MyDrive_Base.class
 pt/ist/fenixframework/DomainMetaClass_Base$1.class
 pt/tecnico/MyDrive/domain/User_Base$MyDriveContainsUser.class
@@ -64,6 +67,7 @@ pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$5.class
 pt/ist/fenixframework/consistencyPredicates/PublicConsistencyPredicate_Base$1.class
 pt/ist/fenixframework/adt/bplustree/BPlusTree_Base$1.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$DomainConsistencyPredicateDomainDependenceRecords.class
+pt/tecnico/MyDrive/domain/Directory_Base$4.class
 pt/tecnico/MyDrive/domain/PlainFile_Base$1.class
 pt/tecnico/MyDrive/domain/File_Base$DO_State.class
 pt/ist/fenixframework/DomainMetaClass_Base$7.class
@@ -80,6 +84,7 @@ pt/tecnico/MyDrive/domain/PlainFile_Base.class
 pt/ist/fenixframework/DomainRoot_Base$DomainRootHasPhoneBookApplication.class
 pt/ist/fenixframework/DomainMetaClass_Base$DomainMetaClassExistingDomainMetaObjects.class
 pt/tecnico/MyDrive/domain/App_Base.class
+pt/tecnico/MyDrive/domain/MyDrive_Base$MyDriveContainsCurrentDir.class
 pt/tecnico/MyDrive/domain/App.class
 pt/ist/fenixframework/consistencyPredicates/DomainDependenceRecord_Base$DependedDomainMetaObjectsDependingDependenceRecords.class
 pt/ist/fenixframework/DomainBPlusTreeJVSTM_Base.class
@@ -151,6 +156,7 @@ pt/ist/fenixframework/DomainMetaClass_Base.class
 pt/ist/fenixframework/adt/bplustree/BPlusTree_Base.class
 pt/ist/fenixframework/DomainMetaObject_Base$DomainMetaObjectsDomainMetaClass.class
 pt/tecnico/MyDrive/domain/MyDrive_Base$3.class
+pt/tecnico/MyDrive/domain/MyDrive_Base$MyDriveContainsCurrentUser.class
 pt/ist/fenixframework/DomainBPlusTreeData_Base$DomainBPlusTreeJVSTMData.class
 pt/ist/fenixframework/DomainRoot_Base$3.class
 pt/ist/fenixframework/DomainMetaObject_Base$1.class
