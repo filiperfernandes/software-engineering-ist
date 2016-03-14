@@ -1,0 +1,87 @@
+package pt.tecnico.MyDrive.domain;
+
+class MyDrive {
+    Integer counter;
+}
+
+class User {
+    String username;
+    String password;
+    String name;
+    String mask;
+}
+
+class SuperUser extends User;
+
+class File {
+    Integer id;
+    String name;
+    DateTime lastModif;
+    String permissions;
+}
+
+
+class PlainFile extends File{
+    String data;
+}
+
+
+class Directory extends File{
+    Integer dimension;
+}
+
+class Link extends PlainFile;
+
+class App extends PlainFile{
+    String appData;
+}
+
+
+relation DomainRootHasPhoneBookApplication {
+  .pt.ist.fenixframework.DomainRoot playsRole root {
+    multiplicity 0..1;
+  }
+  MyDrive playsRole mydrive {
+    multiplicity 0..1;
+  }
+}
+
+
+relation UserOwnsFile{
+    User playsRole user;
+    File playsRole file{
+    multiplicity *;}
+}
+
+relation DirectoryContainsFile{
+    Directory playsRole directory;
+    File playsRole file{
+    multiplicity *;}
+}
+
+
+relation MyDriveContainsUser{
+    MyDrive playsRole mydrive;
+    User playsRole user{
+    multiplicity *;}
+}
+
+relation MyDriveContainsRootDir{
+    MyDrive playsRole mydrive;
+    Directory playsRole rootdir{
+    multiplicity 1;}
+  	}
+    
+relation MyDriveContainsCurrentDir{
+	MyDrive playsRole mydrive1;
+	Directory playsRole currentdir{
+	multiplicity 1;}
+	}
+
+relation MyDriveContainsCurrentUser{
+	MyDrive playsRole mydrive1;
+	User playsRole currentuser{
+	multiplicity 1;}
+	}
+
+
