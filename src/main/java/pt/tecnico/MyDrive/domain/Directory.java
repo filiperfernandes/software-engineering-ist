@@ -1,6 +1,8 @@
 package pt.tecnico.MyDrive.domain;
 
 import org.joda.time.DateTime;
+import pt.tecnico.MyDrive.domain.*;
+import pt.tecnico.MyDrive.Exception.*;
 
 public class Directory extends Directory_Base {
 
@@ -20,8 +22,7 @@ public class Directory extends Directory_Base {
 				return file;
 			}
 		}
-		System.out.println("returning null");
-		return null;
+		throw new FileDoesNotExistException(name);
 	}
 
 

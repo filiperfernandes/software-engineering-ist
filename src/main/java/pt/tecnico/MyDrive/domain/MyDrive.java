@@ -6,6 +6,8 @@ import org.jdom2.Document;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import pt.tecnico.MyDrive.domain.*;
+import pt.tecnico.MyDrive.Exception.*;
 
 import pt.ist.fenixframework.FenixFramework;
 
