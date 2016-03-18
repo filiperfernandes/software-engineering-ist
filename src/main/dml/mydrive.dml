@@ -26,9 +26,7 @@ class PlainFile extends File{
 }
 
 
-class Directory extends File{
-    Integer dimension;
-}
+class Directory extends File{}
 
 class Link extends PlainFile;
 
