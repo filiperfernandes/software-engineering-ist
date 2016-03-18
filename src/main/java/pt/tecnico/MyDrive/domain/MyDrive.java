@@ -43,7 +43,7 @@ public class MyDrive extends MyDrive_Base {
 
 
 
-	public void xmlImport(Element element) {
+	public void xmlImport(Element element) throws ImportXmlException {
 
 		MyDrive md = MyDrive.getInstance();
 
@@ -75,7 +75,7 @@ public class MyDrive extends MyDrive_Base {
 
 	}
 
-	public Document xmlExport() {
+	public Document xmlExport() throws ExportXmlException {
 
 		MyDrive md = MyDrive.getInstance();
 		Element element = new Element("MyDrive");

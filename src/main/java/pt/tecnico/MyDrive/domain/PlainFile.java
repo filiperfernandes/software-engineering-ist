@@ -23,6 +23,7 @@ public class PlainFile extends PlainFile_Base {
 		deleteDomainObject();
 	}
 	
+
 /*	public void readPlainFile(String path) {
 		MyDrive md = MyDrive.getInstance();
 		String dirname = "";
@@ -72,7 +73,7 @@ public class PlainFile extends PlainFile_Base {
 >>>>>>> 45c6eb58f7c34f375f4f3688736ed7be23596c6d
 	}*/
 
-	public Element xmlExport() {
+	public Element xmlExport() throws ExportXmlException {
 		Element plainElement = new Element("plain");
 		plainElement.setAttribute("id", String.valueOf(getId()));
 

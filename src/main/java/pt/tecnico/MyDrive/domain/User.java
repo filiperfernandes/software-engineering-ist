@@ -9,19 +9,31 @@ import org.jdom2.Element;
 
 
 public class User extends User_Base {
-
+	
 	protected User(){}
-
+	//public int check = 0;
 	public User(String username, String password, String name ) {
 		super();
 		MyDrive md = MyDrive.getInstance();
+		
 
 		if (checkValidString(username)==false ){
 			throw new InvalidStringException(username);
 
 		}
-
-
+		else if (username.equals("root") ){
+			throw new UsernameAlreadyExistsException(username);
+		}
+		if (md.getUserSet()!=null){
+			for (User user : md.getUserSet()){				
+				if(user.getUsername().equals(username)){
+					throw new UsernameAlreadyExistsException(username);
+					
+				}
+			}
+		}
+		//check++;
+		//System.out.println(check);
 		setUsername(username);
 
 		if (password == null){
@@ -54,6 +66,17 @@ public class User extends User_Base {
 		return (getUsername() + " - " + getName() + " - " + getMask());
 
 	}
+	
+
+	public User getUserByUsername(String username){
+		for (User user : getMydrive().getUserSet()){
+			if(user.getName().equals(username)){
+				return user;
+					
+			}
+		}
+		throw new UsernameDoesNotExistException(username);		
+	}
 
 
 	public String changeUsername(String newUsername){
@@ -62,27 +85,35 @@ public class User extends User_Base {
 		if (checkValidString(newUsername)==false){
 			throw new InvalidStringException(newUsername);
 		}
-		else if (newUsername.equals("root") || newUsername.equals(getName())){
-			throw new NameAlreadyExistsException(newUsername);
-		}else{
-			setUsername(newUsername);
-			// setFilename(newUsername);
-			return  "sucess";
+		else if (newUsername.equals("root")){
+			throw new UsernameAlreadyExistsException(newUsername);
 		}
+		for (User user : getMydrive().getUserSet()){
+			if(user.getUsername().equals(newUsername)){
+				throw new UsernameAlreadyExistsException(newUsername);
+					
+			}
+		}
+				
+		setUsername(newUsername);
+		// setFilename(newUsername);
+		return  "sucess";
+	}
 
 		// falta verificar se o username pedido ja se encontra em uso+++
-	}
+	
 
 
 	public String changeName(String newName) {
 		if (checkValidString(newName)==false){
 			throw new InvalidStringException(newName);
-				}
-				else{
-					setName(newName);
-					return "sucess";
-				}
-			}
+			
+		}
+		else{
+			setName(newName);
+			return "sucess";
+		}
+	}
 
 
 			public boolean checkValidString(String check) {
@@ -114,7 +145,7 @@ public class User extends User_Base {
 				setMydrive(md);
 			}
 
-			public void xmlImport(Element personElement) /*throws ImportDocumentException */{
+			public void xmlImport(Element personElement) throws ImportXmlException {
 
 				MyDrive md = MyDrive.getInstance();
 
@@ -150,7 +181,7 @@ public class User extends User_Base {
 
 			}
 
-			public Element xmlExport() {
+			public Element xmlExport() throws ExportXmlException {
 				Element userElement = new Element("user");
 				userElement.setAttribute("username", getUsername());
 

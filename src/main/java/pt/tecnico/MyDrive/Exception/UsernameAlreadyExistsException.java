@@ -1,12 +1,12 @@
 package pt.tecnico.MyDrive.Exception;
 
-public class NameAlreadyExistsException extends MyDriveException {
+public class UsernameAlreadyExistsException extends MyDriveException {
 
     private static final long serialVersionUID = 1L;
 
     private String conflictingName;
 
-    public NameAlreadyExistsException(String confName) {
+    public UsernameAlreadyExistsException(String confName) {
         conflictingName = confName;
     }
 
@@ -17,6 +17,6 @@ public class NameAlreadyExistsException extends MyDriveException {
 
     @Override
     public String getMessage() {
-        return "This name " + getConflictingName() + " is already being used";
+        return "This Username " + getConflictingName() + " is already being used";
     }
 }

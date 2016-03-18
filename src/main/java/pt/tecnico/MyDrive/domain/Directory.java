@@ -20,7 +20,41 @@ public class Directory extends Directory_Base {
 		setDimension(2);
 
 	}
-
+	
+	public boolean DirectoryEmpty(Directory dir){
+		for(pt.tecnico.MyDrive.domain.File f : dir.getFileSet()){
+			if(f != null){
+				throw new DirectoryIsNotEmptyException();
+			}
+		}
+		return true;
+	}
+	
+	public File getDirByName(String name){
+		for (File dir : this.getFileSet()){
+			if(dir.getName().equals(name)){
+				if(dir instanceof Directory ){
+					return dir;
+				}
+				throw new FileIsPlainFileException();
+			}
+		}
+		throw new DirectoryDoesNotExistException(name);
+	}
+	
+	public File getPlainfileByName(String name){
+		for (File plainfile : this.getFileSet()){
+			if(plainfile.getName().equals(name)){
+				if(plainfile instanceof PlainFile ){
+					return plainfile;
+				}
+				throw new FileIsDirectoryException();
+			}
+		}
+		throw new FileDoesNotExistException(name);
+	}
+	
+	
 	public File getFileByName(String name){
 		for (File file: this.getFileSet()){
 			if(file.getName().equals(name)){
@@ -85,7 +119,7 @@ public class Directory extends Directory_Base {
 
 
 	//Import XML Directory
-	public void xmlImport(Element personElement) /*throws ImportDocumentException */{
+	public void xmlImport(Element personElement) throws ImportXmlException {
 		DateTime date = new DateTime();
 
 		MyDrive md = MyDrive.getInstance();
@@ -134,7 +168,7 @@ public class Directory extends Directory_Base {
 	}
 
 	//Export XML Directory
-	public Element xmlExport() {
+	public Element xmlExport() throws ExportXmlException {
 		Element dirElement = new Element("dir");
 		dirElement.setAttribute("id", String.valueOf(getId()));
 
