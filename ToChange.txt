@@ -1,0 +1,24 @@
+meter o link po firt sprint —> Feito
+
+home dir do user
+
+pasta com os dml's de toda a gente —> Feito
+
+String app e String app data strings a mais
+
+Dimension no directory é de evitar- Calcular na altura que for para mostrar —> (falta 2 parte)
+
+Mudar o root e rootroot para mydrive —> Feito
+
+Set my drive ou set manager blindar User não pode criar a propria home
+
+Users so se não for indicado o home dir é que tem de ser o default
+
+CheckvalidString meter com o nome setUsername para ter de passar nesta função sempre
+
+Não verificamos que os ficheiros nao podem ter nem 1 barra nem 1 ponto
+
+Imports e exports meio manhasos, Vai buscar e manda fazer imediatamente os users
+
+ID não é para ser aproveitado
+
