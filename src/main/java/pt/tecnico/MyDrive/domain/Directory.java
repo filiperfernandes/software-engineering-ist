@@ -17,7 +17,6 @@ public class Directory extends Directory_Base {
 		setName(name);
 		setLastModif(new DateTime());
 		setPermissions(permissions);
-		setDimension(2);
 
 	}
 	
