@@ -41,8 +41,13 @@ public class MyDriveApplication {
 			setup();
 			long p =login();
 			System.out.println(p);
-			display();
-
+			//	Sessao s = getSessaoByToken(p);
+			//Directory d = s.getCurrentdir();
+			//Directory dir = new Directory(7, "joao","rwxd--x-" );
+			//d.addFile(dir);
+			String s = changeCurrentDirectory("/home", p);
+			System.out.println(s);
+			//display();
 			/*			for (String s: args) xmlScan(new java.io.File(s));
 
 
@@ -79,16 +84,16 @@ public class MyDriveApplication {
 	}
 
 
-public Sessao getSessaoByToken(long token){
+	public static Sessao getSessaoByToken(long token){
 		MyDrive md = MyDrive.getInstance();
 
-    	for(Sessao s : md.getSessaoSet()){
-    		if(s.getToken().equals(token)){
-    			return s;
-    		}
-    	}
-    	throw new SessaoDoesNotExistException(token);
-    }
+		for(Sessao s : md.getSessaoSet()){
+			if(s.getToken().equals(token)){
+				return s;
+			}
+		}
+		throw new SessaoDoesNotExistException(token);
+	}
 
 
 	@Atomic
@@ -168,52 +173,34 @@ public Sessao getSessaoByToken(long token){
 
 
 	@Atomic
-	public String changeCurrentDirectory(String name, long tok){
+	public static String changeCurrentDirectory(String name, long tok){
 		MyDrive md = MyDrive.getInstance();
 		Sessao sessao = getSessaoByToken(tok);
 		Directory dir = sessao.getCurrentdir();
-
+		Directory rd = md.getRootdir();
 
 		if(name.equals(".")){
-
-			return dir.getPath();/*listar O DIRECTORIO tem de funcionar bem*/
-
+			return dir.getPath();
 		}
 		else if(name.equals("..")){
-			dir=dir.getDirectory();
+			dir = dir.getDirectory();
 			sessao.setCurrentdir(dir);
-
 			return dir.getPath();
 		}
 		else {
-			Directory rd = md.getCurrentdir();
-			String dirname = "";
-			Integer c = 0;
-			for(char ch : name.toCharArray()){
-			if(c.equals(0)){
-				c++;
+			if(checkPath(name, dir).equals("absolute")){
+				Directory directory = getDirByPath(name, rd);
+				sessao.setCurrentdir(directory);
+				return directory.getPath();
 			}
-			else if(ch == '/'){
-				try{
-					//if(dirname.equals(md.getRootdir().getDirByName("home").getName()))
-					rd = (Directory) (rd.getDirByName(dirname));
-					if(rd.getPath().equals(dir.getPath()))
-					dirname="";
-				}catch (DirectoryDoesNotExistException | FileIsPlainFileException e) { System.err.println(e); }
+			else if(checkPath(name, dir).equals("relative")){
+				Directory directory = getDirByPath(name, dir);
+				sessao.setCurrentdir(directory);
+				return directory.getPath();
 			}
 			else{
-				dirname += ch;
+				throw new DirectoryDoesNotExistException(name);
 			}
-		}
-			try{
-				dir = (Directory) (dir.getDirByName(name));
-
-				
-
-				sessao.setCurrentdir(dir);
-				listPath(name);
-			}catch(DirectoryDoesNotExistException | FileIsPlainFileException e){ System.err.println(e); }
-
 		}
 	}
 
@@ -478,5 +465,63 @@ public Sessao getSessaoByToken(long token){
 		}catch(FileDoesNotExistException | FileIsDirectoryException e) { 
 			System.err.println(e); }
 	}
-}
 
+	public static String checkPath(String path, Directory dir){
+
+		MyDrive md = MyDrive.getInstance();
+		Directory rd = md.getRootdir();
+		String dirname = "";
+		Integer c = 0;
+		String auxname = path + "/";
+		for(char ch : auxname.toCharArray()){
+			if(c.equals(0)){
+				c++;
+			}
+			else if(ch == '/'){
+				for (pt.tecnico.MyDrive.domain.File d : rd.getFileSet()){
+					if(d.getName().equals(dirname)){
+						if(d instanceof Directory ){
+							return "absolute";
+						}
+					}
+				}
+				for (pt.tecnico.MyDrive.domain.File d2 : dir.getFileSet()){
+					if(d2.getName().equals(dirname)){
+						if(d2 instanceof Directory ){
+							return "relative";
+						}
+					}
+				}
+				break;
+			}
+			else{
+				dirname += ch;
+			}
+		}
+		return "wrong path";
+	}
+
+	public static Directory getDirByPath(String path, Directory dir){
+		String dirname = "";
+		Integer c = 0;
+		for(char ch : path.toCharArray()){
+			if(c.equals(0)){
+				c++;
+			}
+			else if(ch == '/'){
+				try{
+					dir = (Directory) (dir.getDirByName(dirname));
+					dirname="";
+				}catch (DirectoryDoesNotExistException | FileIsPlainFileException e) { System.err.println(e); }
+			}
+			else{
+				dirname += ch;
+			}
+		}
+		try{
+			dir = (Directory) (dir.getDirByName(dirname));
+		}catch (DirectoryDoesNotExistException | FileIsPlainFileException e) { System.err.println(e); }
+		return dir;
+
+	}
+}
