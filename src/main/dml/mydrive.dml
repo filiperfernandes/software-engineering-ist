@@ -4,6 +4,13 @@ class MyDrive {
     Integer counter;
 }
 
+class Login{
+	}
+
+class Sessao{
+	Long token;
+	}
+
 class User {
     String username;
     String password;
@@ -35,6 +42,7 @@ class App extends PlainFile{
 }
 
 
+
 relation DomainRootHasPhoneBookApplication {
   .pt.ist.fenixframework.DomainRoot playsRole root {
     multiplicity 0..1;
@@ -44,11 +52,34 @@ relation DomainRootHasPhoneBookApplication {
   }
 }
 
+relation LoginContainsSessao{
+	Login playsRole login;
+	Sessao playsRole sessao{
+	multiplicity *;}
+}
+
+relation UserOwnsSessao{
+    User playsRole user;
+    Sessao playsRole sessao{
+    multiplicity *;}
+}
+
+relation SessaoContainsCurrentDir{
+	Sessao playsRole sessao;
+	Directory playsRole currentdir{
+	multiplicity 1;}
+	}
 
 relation UserOwnsFile{
     User playsRole user;
     File playsRole file{
     multiplicity *;}
+}
+
+relation UserContainsHomeDir{
+    User playsRole user;
+    Directory playsRole homedir{
+    multiplicity 1;}
 }
 
 relation DirectoryContainsFile{

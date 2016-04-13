@@ -23,8 +23,10 @@ import pt.tecnico.MyDrive.Exception.*;
 
 
 import pt.tecnico.MyDrive.domain.Directory;
+import pt.tecnico.MyDrive.domain.Login;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.PlainFile;
+import pt.tecnico.MyDrive.domain.Sessao;
 import pt.tecnico.MyDrive.domain.User;
 
 public class MyDriveApplication {
@@ -37,22 +39,55 @@ public class MyDriveApplication {
 		try {
 
 			setup();
+			long p =login();
+			System.out.println(p);
 			display();
 
-			for (String s: args) xmlScan(new java.io.File(s));
+			/*			for (String s: args) xmlScan(new java.io.File(s));
 
-			
+
 			xmlPrint();
-
+			 */
 		} finally { FenixFramework.shutdown(); }
 	}
+	@Atomic
+	public static long login(){
+		new Sessao();
+		MyDrive md = MyDrive.getInstance();
+		Login l = new Login();
+		boolean quit = true;
+		while(quit){
+			System.out.println("-- Login --");
+			System.out.println("Insert Username");
+			String username = input.next();
+			System.out.println("Insert password");
+			String pass = input.next();
+			try{
+				User user = md.getUserByUsername(username);
+				if(user.CheckPassword(pass)){
+					System.out.println("Login Successful");
+					Sessao sessao = new Sessao();
+					l.addSessao(sessao);
+					user.addSessao(sessao);
+					sessao.setCurrentdir(user.getHomedir());
+					return sessao.getToken();
+				}
+			}catch(UsernameDoesNotExistException | InvalidPasswordException e) {System.err.println(e);}
+
+		}
+		return 0;
+	}
+
+
+
+
 
 	@Atomic
 	public static void display() {
 		PlainFile p = new PlainFile(null, null, null, null);
 		boolean  quit = true;
 		while(quit){
-			
+
 			System.out.println("-- MENU --");
 			System.out.println(
 					"Select an option: \n" +
@@ -66,61 +101,62 @@ public class MyDriveApplication {
 							"  8) Remove Plain File\n" +
 							"  9) Show Plain File\n" +
 					"  0) EXIT\n");
-			
+
 			if(!input.hasNextInt()){
 				System.out.println("Invalid Selection");
 				input.nextLine();
 
-				
+
 			}
 			else{
-			int selection = input.nextInt();
-			input.nextLine();
-			
-			switch (selection) {
-			case 1:
-				listUsers();
-				break;
-			case 2:
-				newUser();
-				break;
-			case 3:
-				newDirectory();
-				break;
-			case 4:
-				newPlainFile();
-				break;
-			case 5:
-				listDirectory();
-				break;
-			case 6:
-				changeCurrentDirectory();
-				break;
-			case 7:
-				removeDirectory();
-				break;
-			case 8:
-				removePlainFile();
-				break;
-			case 9:
-				readPlainFile();
-				break;
-			case 0:
-				quit = false;
-				System.out.println("Exit Success!");
-				break;
-			default:
-				System.out.println("Invalid selection.");
-				break;
-			
-			}}
+				int selection = input.nextInt();
+				input.nextLine();
+
+				switch (selection) {
+				case 1:
+					listUsers();
+					break;
+				case 2:
+					newUser();
+					break;
+				case 3:
+					newDirectory();
+					break;
+				case 4:
+					newPlainFile();
+					break;
+				case 5:
+					listDirectory();
+					break;
+				case 6:
+					changeCurrentDirectory();
+					break;
+				case 7:
+					removeDirectory();
+					break;
+				case 8:
+					removePlainFile();
+					break;
+				case 9:
+					readPlainFile();
+					break;
+				case 0:
+					quit = false;
+					System.out.println("Exit Success!");
+					break;
+				default:
+					System.out.println("Invalid selection.");
+					break;
+
+				}
 			}
-		
-		
+		}
+
+
 	}
-	
-	
-	
+
+
+
 	@Atomic
 	public static void changeCurrentDirectory(){
 		MyDrive md = MyDrive.getInstance();
@@ -141,7 +177,7 @@ public class MyDriveApplication {
 				md.setCurrentdir((Directory) dir);
 				System.out.println("Changed current Directory to " + name);
 			}catch(DirectoryDoesNotExistException | FileIsPlainFileException e){ System.err.println(e); }
-			
+
 		}
 	}
 
@@ -155,9 +191,11 @@ public class MyDriveApplication {
 		String name = input.next();
 		System.out.println("Insert password of new User");
 		String pass = input.next();
+		System.out.println("Insert name of User's HomeDir");
+		String homedir = input.next();
+
 		try{
-			User u = new User(username, pass, name);
-			System.out.println("ola");
+			User u = new User(username, pass, name, homedir);
 		}catch(InvalidStringException | UsernameAlreadyExistsException e){ System.err.println(e); }
 
 	}
@@ -258,16 +296,16 @@ public class MyDriveApplication {
 	public static void setup() {
 
 		MyDrive md = MyDrive.getInstance();
-		PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
-		Directory home = (Directory) (md.getRootdir()).getDirByName("home");
-		Directory root = (Directory) (home.getFileByName("root"));
-		Directory d = new Directory(md.getCnt(), "casa","rwxdr-test");
-		md.setCurrentdir(md.getRootdir());
-		root.addFile(d);
+		//PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
+		//Directory home = (Directory) (md.getRootdir()).getDirByName("home");
+		//Directory root = (Directory) (home.getFileByName("root"));
+		//Directory d = new Directory(md.getCnt(), "casa","rwxdr-test");
+		//md.setCurrentdir(md.getRootdir());
+		//root.addFile(d);
 
-		root.addFile(file);
+		//root.addFile(file);
 
-		new User("joao", "passe", "vultos");
+		//new User("joao", "passe", "vultos");
 
 		//new SuperUser();
 
@@ -297,7 +335,7 @@ public class MyDriveApplication {
 
 	}*/
 
-	
+
 
 	//Not sure if needed
 	@Atomic
@@ -314,12 +352,12 @@ public class MyDriveApplication {
 
 	//Export XML
 	@Atomic
-    public static void xmlPrint() {
-	Document doc = MyDrive.getInstance().xmlExport();
-	XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
-	try { xmlOutput.output(doc, new PrintStream(System.out));
-	} catch (IOException | ExportXmlException e) { System.err.println(e); }
-    }
+	public static void xmlPrint() {
+		Document doc = MyDrive.getInstance().xmlExport();
+		XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
+		try { xmlOutput.output(doc, new PrintStream(System.out));
+		} catch (IOException | ExportXmlException e) { System.err.println(e); }
+	}
 
 	//Import XML
 	@Atomic
@@ -332,7 +370,7 @@ public class MyDriveApplication {
 			Document document = (Document)builder.build(file);
 			md.xmlImport(document.getRootElement());
 		} catch (JDOMException | IOException | ImportXmlException e) { System.err.println(e); }
-		
+
 	}
 
 	@Atomic
@@ -368,9 +406,9 @@ public class MyDriveApplication {
 		}catch(DirectoryDoesNotExistException | FileIsPlainFileException | DirectoryIsNotEmptyException e) { 
 			System.err.println(e); }
 	}
-			
-			
-				
+
+
+
 
 
 	@Atomic
@@ -405,4 +443,4 @@ public class MyDriveApplication {
 			System.err.println(e); }
 	}
 }
-		
+

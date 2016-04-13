@@ -27,4 +27,13 @@ public class File extends File_Base {
 		}
 		return path;
 	}
+	
+	public static boolean fileNameCheck(String name){
+		for(char ch : name.toCharArray()){
+			if(ch == '/' || ch == '.'){
+				return false;
+			}
+		}
+		return true;
+	}
 }

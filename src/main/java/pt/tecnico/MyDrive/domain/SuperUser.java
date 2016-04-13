@@ -25,8 +25,8 @@ public class SuperUser extends SuperUser_Base {
 		setName("Super User");
 		setMask("rwxdr-x-");
 		this.addFile(rd);
-		md.setCurrentdir(rd);
-		md.setCurrentuser(this);
+		this.setHomedir(rd);
+
 		md.addUser(this);
 	}
 
