@@ -4,9 +4,6 @@ class MyDrive {
     Integer counter;
 }
 
-class Login{
-	}
-
 class Sessao{
 	Long token;
 	}
@@ -52,8 +49,8 @@ relation DomainRootHasPhoneBookApplication {
   }
 }
 
-relation LoginContainsSessao{
-	Login playsRole login;
+relation MyDriveContainsSessao{
+	MyDrive playsRole mydrive;
 	Sessao playsRole sessao{
 	multiplicity *;}
 }

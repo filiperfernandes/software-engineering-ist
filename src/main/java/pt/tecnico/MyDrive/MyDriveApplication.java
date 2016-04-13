@@ -23,7 +23,7 @@ import pt.tecnico.MyDrive.Exception.*;
 
 
 import pt.tecnico.MyDrive.domain.Directory;
-import pt.tecnico.MyDrive.domain.Login;
+
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.PlainFile;
 import pt.tecnico.MyDrive.domain.Sessao;
@@ -54,7 +54,7 @@ public class MyDriveApplication {
 	public static long login(){
 		new Sessao();
 		MyDrive md = MyDrive.getInstance();
-		Login l = new Login();
+
 		boolean quit = true;
 		while(quit){
 			System.out.println("-- Login --");
@@ -67,7 +67,7 @@ public class MyDriveApplication {
 				if(user.CheckPassword(pass)){
 					System.out.println("Login Successful");
 					Sessao sessao = new Sessao();
-					l.addSessao(sessao);
+					md.addSessao(sessao);
 					user.addSessao(sessao);
 					sessao.setCurrentdir(user.getHomedir());
 					return sessao.getToken();
@@ -79,7 +79,16 @@ public class MyDriveApplication {
 	}
 
 
+public Sessao getSessaoByToken(long token){
+		MyDrive md = MyDrive.getInstance();
 
+    	for(Sessao s : md.getSessaoSet()){
+    		if(s.getToken().equals(token)){
+    			return s;
+    		}
+    	}
+    	throw new SessaoDoesNotExistException(token);
+    }
 
 
 	@Atomic
@@ -128,8 +137,10 @@ public class MyDriveApplication {
 				case 5:
 					listDirectory();
 					break;
-				case 6:
-					changeCurrentDirectory();
+				case 6:	
+					System.out.println("Insert name of Directory you want to go");
+					String name = input.next();
+					changeCurrentDirectory(name,654376);
 					break;
 				case 7:
 					removeDirectory();
@@ -158,24 +169,25 @@ public class MyDriveApplication {
 
 
 	@Atomic
-	public static void changeCurrentDirectory(){
+	public static void changeCurrentDirectory(String name, long tok){
 		MyDrive md = MyDrive.getInstance();
 		Directory dir = md.getCurrentdir();
 
-		System.out.println("Insert name of Directory you want to go");
-		String name = input.next();
 		if(name.equals(".")){
-			System.out.println("Still on same Directory");
+
+			listDirectory();/*listar O DIRECTORIO tem de funcionar bem*/
 		}
 		else if(name.equals("..")){
 			md.setCurrentdir((md.getCurrentdir()).getDirectory());
-			System.out.println("Changed to previous Directory");
+
+			listDirectory();
 		}
 		else {
 			try{
 				dir = (Directory) (dir.getDirByName(name));
-				md.setCurrentdir((Directory) dir);
-				System.out.println("Changed current Directory to " + name);
+				Sessao sessao = new Sessao();
+				sessao.setCurrentdir(dir);
+				listDirectory();
 			}catch(DirectoryDoesNotExistException | FileIsPlainFileException e){ System.err.println(e); }
 
 		}
