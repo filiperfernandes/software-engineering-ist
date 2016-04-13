@@ -140,7 +140,7 @@ public Sessao getSessaoByToken(long token){
 				case 6:	
 					System.out.println("Insert name of Directory you want to go");
 					String name = input.next();
-					changeCurrentDirectory(name,654376);
+					//changeCurrentDirectory(name,654376);
 					break;
 				case 7:
 					removeDirectory();
@@ -167,27 +167,51 @@ public Sessao getSessaoByToken(long token){
 	}
 
 
-
 	@Atomic
-	public static void changeCurrentDirectory(String name, long tok){
+	public String changeCurrentDirectory(String name, long tok){
 		MyDrive md = MyDrive.getInstance();
-		Directory dir = md.getCurrentdir();
+		Sessao sessao = getSessaoByToken(tok);
+		Directory dir = sessao.getCurrentdir();
+
 
 		if(name.equals(".")){
 
-			listDirectory();/*listar O DIRECTORIO tem de funcionar bem*/
+			return dir.getPath();/*listar O DIRECTORIO tem de funcionar bem*/
+
 		}
 		else if(name.equals("..")){
-			md.setCurrentdir((md.getCurrentdir()).getDirectory());
+			dir=dir.getDirectory();
+			sessao.setCurrentdir(dir);
 
-			listDirectory();
+			return dir.getPath();
 		}
 		else {
+			Directory rd = md.getCurrentdir();
+			String dirname = "";
+			Integer c = 0;
+			for(char ch : name.toCharArray()){
+			if(c.equals(0)){
+				c++;
+			}
+			else if(ch == '/'){
+				try{
+					//if(dirname.equals(md.getRootdir().getDirByName("home").getName()))
+					rd = (Directory) (rd.getDirByName(dirname));
+					if(rd.getPath().equals(dir.getPath()))
+					dirname="";
+				}catch (DirectoryDoesNotExistException | FileIsPlainFileException e) { System.err.println(e); }
+			}
+			else{
+				dirname += ch;
+			}
+		}
 			try{
 				dir = (Directory) (dir.getDirByName(name));
-				Sessao sessao = new Sessao();
+
+				
+
 				sessao.setCurrentdir(dir);
-				listDirectory();
+				listPath(name);
 			}catch(DirectoryDoesNotExistException | FileIsPlainFileException e){ System.err.println(e); }
 
 		}
