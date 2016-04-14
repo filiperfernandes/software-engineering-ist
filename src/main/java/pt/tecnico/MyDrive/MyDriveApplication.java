@@ -3,7 +3,6 @@ package pt.tecnico.MyDrive;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Iterator;
 import java.util.Scanner;
 
 import org.jdom2.Document;
@@ -14,11 +13,23 @@ import org.jdom2.output.XMLOutputter;
 
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
-import pt.tecnico.MyDrive.Exception.*;
-
-
-
-import pt.tecnico.MyDrive.domain.*;
+import pt.tecnico.MyDrive.Exception.DirectoryDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.DirectoryIsNotEmptyException;
+import pt.tecnico.MyDrive.Exception.ExportXmlException;
+import pt.tecnico.MyDrive.Exception.FileDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.FileIsDirectoryException;
+import pt.tecnico.MyDrive.Exception.FileIsPlainFileException;
+import pt.tecnico.MyDrive.Exception.ImportXmlException;
+import pt.tecnico.MyDrive.Exception.InvalidStringException;
+import pt.tecnico.MyDrive.Exception.InvalidTypeException;
+import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.UserDoesNotHavePermissionsException;
+import pt.tecnico.MyDrive.Exception.UsernameAlreadyExistsException;
+import pt.tecnico.MyDrive.domain.Directory;
+import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.PlainFile;
+import pt.tecnico.MyDrive.domain.Session;
+import pt.tecnico.MyDrive.domain.User;
 
 
 
@@ -42,17 +53,6 @@ public class MyDriveApplication {
 			xmlPrint();
 			 */
 		} finally { FenixFramework.shutdown(); }
-	}
-
-
-	@Atomic
-	public static long login(String username, String pass) throws UsernameDoesNotExistException , InvalidPasswordException{
-		MyDrive md = MyDrive.getInstance();	
-		//try{
-		Session session = new Session(md, username, pass);
-		return session.getToken();
-		//}catch(UsernameDoesNotExistException | InvalidPasswordException e) {System.err.println(e);}
-		//return 0;
 	}
 
 
@@ -265,21 +265,26 @@ public class MyDriveApplication {
 
 		MyDrive md = MyDrive.getInstance();
 
-		long p =login("root","***");
-		Session s = getSessionByToken(p);
-		Directory d = s.getCurrentdir();
-		User u = s.getUser();
-		Directory dir = new Directory(7, "joao","rwxd--x-" );
-		d.addFile(dir);
-		//String path = changeCurrentDirectory("/home", p);
-		//System.out.println(path);
-		PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
-		d.addFile(file);
-		u.addFile(file);
-		ReadFile("test",p);
-		WriteFile("test",p,"HI !!!!!!!");
-		ReadFile("test",p);
-		createFile(p, "joao", "Directory", null);
+//		long p =login("root","***");
+//		Session s = getSessionByToken(p);
+//		Directory d = s.getCurrentdir();
+//		User u = s.getUser();
+//		Directory dir = new Directory(7, "joao","rwxd--x-" );
+//		d.addFile(dir);
+//		//String path = changeCurrentDirectory("/home", p);
+//		//System.out.println(path);
+//		PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
+//		d.addFile(file);
+//		u.addFile(file);
+//		ReadFile("test",p);
+//		WriteFile("test",p,"HI !!!!!!!");
+//		ReadFile("test",p);
+//		createFile(p, "joao", "Directory", null);
+		//long p =login("root","***");
+		//Session s = getSessionByToken(p);
+		//Directory d = s.getCurrentdir();
+		
+		
 		//Directory dir = new Directory(7, "joao","rwxd--x-" );
 		//d.addFile(dir);
 		//String path = changeCurrentDirectory("/joao", p);
