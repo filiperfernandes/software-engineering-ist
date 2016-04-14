@@ -1,5 +1,5 @@
 package pt.tecnico.MyDrive.domain;
-
+import pt.tecnico.MyDrive.domain.Session;
 import org.jdom2.Element;
 import org.joda.time.DateTime;
 import pt.tecnico.MyDrive.domain.*;
@@ -15,6 +15,8 @@ public class File extends File_Base {
 		setName(name);
 		setLastModif(new DateTime());
 		setPermissions(permissions);
+
+
 	}
 
 	public String getPath(){
@@ -36,4 +38,5 @@ public class File extends File_Base {
 		}
 		return true;
 	}
+
 }
