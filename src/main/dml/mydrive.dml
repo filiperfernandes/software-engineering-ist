@@ -22,6 +22,7 @@ class File {
     String name;
     DateTime lastModif;
     String permissions;
+    
 }
 
 
