@@ -7,10 +7,7 @@ import org.junit.Test;
 public class DeleteFileTest extends AbstractServiceTest{
 
 
-	@Test
-	public void test() {
-		//fail("Not yet implemented");
-	}
+
 
 
 	@Override
@@ -19,6 +16,9 @@ public class DeleteFileTest extends AbstractServiceTest{
 		
 	}
 
+	
+	
+	
 	
 	
 	

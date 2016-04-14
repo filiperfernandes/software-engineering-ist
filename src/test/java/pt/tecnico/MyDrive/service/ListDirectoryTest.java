@@ -7,10 +7,7 @@ import org.junit.Test;
 public class ListDirectoryTest extends AbstractServiceTest {
 
 
-	@Test
-	public void test() {
-		//fail("Not yet implemented");
-	}
+
 
 	@Override
 	protected void populate() {
@@ -18,6 +15,8 @@ public class ListDirectoryTest extends AbstractServiceTest {
 		
 	}
 
+	
+	
 	
 	
 	
