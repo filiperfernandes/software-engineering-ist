@@ -3,6 +3,7 @@ package pt.tecnico.MyDrive;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import org.jdom2.Document;
@@ -14,11 +15,11 @@ import org.jdom2.output.XMLOutputter;
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 import pt.tecnico.MyDrive.Exception.*;
-import pt.tecnico.MyDrive.domain.Directory;
-import pt.tecnico.MyDrive.domain.MyDrive;
-import pt.tecnico.MyDrive.domain.PlainFile;
-import pt.tecnico.MyDrive.domain.Session;
-import pt.tecnico.MyDrive.domain.User;
+
+
+
+import pt.tecnico.MyDrive.domain.*;
+
 
 
 
@@ -33,8 +34,8 @@ public class MyDriveApplication {
 		try {
 			System.out.println("VOufazer setup");
 
-			// display();
 			setup();
+			display();
 			/*			for (String s: args) xmlScan(new java.io.File(s));
 
 
@@ -126,7 +127,9 @@ public class MyDriveApplication {
 					removePlainFile();
 					break;
 				case 9:
-					readPlainFile();
+					System.out.println("Insert path of file");
+					String path = input.next();
+					//ReadFile(path,p);
 					break;
 				case 0:
 					quit = false;
@@ -152,26 +155,29 @@ public class MyDriveApplication {
 		Directory rd = md.getRootdir();
 
 		if(name.equals(".")){
-			return dir.getPath();
+          	return dir.getPath();
 		}
+		
+		
 		else if(name.equals("..")){
 			dir = dir.getDirectory();
 			session.setCurrentdir(dir);
 			return dir.getPath();
 		}
 		else {
-			if(checkPath(name, dir).equals("absolute")){
+			if(checkPath(name, dir).equals("absolute")|| checkPath(name, dir).equals("")){
 				Directory directory = getDirByPath(name, rd);
 				session.setCurrentdir(directory);
+				System.out.println("absolute");
 				return directory.getPath();
 			}
-			else if(checkPath(name, dir).equals("relative")){
+			else if(checkPath(name, dir).equals("relative") || checkPath(name, dir).equals("")){
 				Directory directory = getDirByPath(name, dir);
 				session.setCurrentdir(directory);
 				return directory.getPath();
 			}
 			else{
-				throw new DirectoryDoesNotExistException(name);
+				return "null";
 			}
 		}
 	}
@@ -225,30 +231,31 @@ public class MyDriveApplication {
 
 
 	@Atomic
-	public static void readPlainFile() {
-		System.out.println("Insert path of file");
-		String path = input.next();
+	public static void ReadFile(String name, long tok) {
+		
 		MyDrive md = MyDrive.getInstance();
-		String dirname = "";
-		Directory dir = md.getRootdir() ;
-		Integer c = 0;
-		for(char ch : path.toCharArray()){
-			if(c.equals(0)){
-				c++;
-			}
-			else if(ch == '/'){
-				try{
-					dir = (Directory) (dir.getFileByName(dirname));
-					dirname="";
-				}catch(FileDoesNotExistException e) { System.err.println(e); }
-			}
-			else{
-				dirname += ch;
-			}
-		}
+		Session session = getSessionByToken(tok);
+		Directory dir = session.getCurrentdir() ;
+		
+		
 		try{
-			System.out.println(((PlainFile) (dir.getPlainfileByName(dirname))).getData());
-		}catch(FileDoesNotExistException | FileIsDirectoryException e) { System.err.println(e); }
+			PlainFile file = ((PlainFile) (dir.getPlainfileByName(name)));
+			checkPermissionsRead(session.getUser(), file.getUser(), file.getPermissions());
+			System.out.println(file.getData());
+		}catch(FileDoesNotExistException | FileIsDirectoryException | UserDoesNotHavePermissionsException e) { System.err.println(e); }
+	}
+	
+	public static void WriteFile(String name, long tok,String content) {
+		
+		MyDrive md = MyDrive.getInstance();		
+		Session session = getSessionByToken(tok);
+		Directory dir = session.getCurrentdir() ;
+		
+		try{
+			PlainFile file = ((PlainFile) (dir.getPlainfileByName(name)));
+			checkPermissionsWrite(session.getUser(), file.getUser(), file.getPermissions());
+			file.setData(content);
+		}catch(FileDoesNotExistException | FileIsDirectoryException | UserDoesNotHavePermissionsException e) { System.err.println(e); }
 	}
 
 
@@ -261,12 +268,24 @@ public class MyDriveApplication {
 		long p =login("root","***");
 		Session s = getSessionByToken(p);
 		Directory d = s.getCurrentdir();
+		User u = s.getUser();
+		Directory dir = new Directory(7, "joao","rwxd--x-" );
+		d.addFile(dir);
+		//String path = changeCurrentDirectory("/home", p);
+		//System.out.println(path);
+		PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
+		d.addFile(file);
+		u.addFile(file);
+		ReadFile("test",p);
+		WriteFile("test",p,"HI !!!!!!!");
+		ReadFile("test",p);
+
 		//Directory dir = new Directory(7, "joao","rwxd--x-" );
 		//d.addFile(dir);
 		//String path = changeCurrentDirectory("/joao", p);
 		//System.out.println(path);
 
-		//PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
+
 		//Directory home = (Directory) (md.getRootdir()).getDirByName("home");
 		//Directory root = (Directory) (home.getFileByName("root"));
 		//Directory d = new Directory(md.getCnt(), "casa","rwxdr-test");
@@ -417,6 +436,7 @@ public class MyDriveApplication {
 
 		MyDrive md = MyDrive.getInstance();
 		Directory rd = md.getRootdir();
+		rd.getPermissions();
 		String dirname = "";
 		Integer c = 0;
 		String auxname = path + "/";
@@ -445,7 +465,7 @@ public class MyDriveApplication {
 				dirname += ch;
 			}
 		}
-		return "wrong path";
+		return "";
 	}
 
 	public static Directory getDirByPath(String path, Directory dir){
@@ -472,9 +492,6 @@ public class MyDriveApplication {
 
 	}
 
-
-
-
 public static boolean checkPermissionsRead(User user, User owner, String permissions){
 	char ch1[] = permissions.toCharArray();
 	String userPermissions = user.getMask();
@@ -487,7 +504,7 @@ public static boolean checkPermissionsRead(User user, User owner, String permiss
 		return true;
 	}
 	else{
-		return false;
+		throw new UserDoesNotHavePermissionsException();
 	}
 
 }
@@ -504,7 +521,7 @@ public static boolean checkPermissionsWrite(User user, User owner, String permis
 		return true;
 	}
 	else{
-		return false;
+		throw new UserDoesNotHavePermissionsException();
 	}
 }
 
@@ -584,7 +601,4 @@ public static void createFile(long token, String name, String type, String conte
 }
 
 }
-
-
-
 

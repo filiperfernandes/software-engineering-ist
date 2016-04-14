@@ -19,7 +19,7 @@ public class Directory extends Directory_Base {
 		setPermissions(permissions);
 
 	}
-	
+
 	public boolean DirectoryEmpty(Directory dir){
 		for(pt.tecnico.MyDrive.domain.File f : dir.getFileSet()){
 			if(f != null){
@@ -28,7 +28,7 @@ public class Directory extends Directory_Base {
 		}
 		return true;
 	}
-	
+
 	public File getDirByName(String name){
 		for (File dir : this.getFileSet()){
 			if(dir.getName().equals(name)){
@@ -40,7 +40,7 @@ public class Directory extends Directory_Base {
 		}
 		throw new DirectoryDoesNotExistException(name);
 	}
-	
+
 	public File getPlainfileByName(String name){
 		for (File plainfile : this.getFileSet()){
 			if(plainfile.getName().equals(name)){
@@ -52,8 +52,8 @@ public class Directory extends Directory_Base {
 		}
 		throw new FileDoesNotExistException(name);
 	}
-	
-	
+
+
 	public File getFileByName(String name){
 		for (File file: this.getFileSet()){
 			if(file.getName().equals(name)){
@@ -132,7 +132,7 @@ public class Directory extends Directory_Base {
 
 
 
-		
+
 		String sid = personElement.getAttribute("id").getValue();
 
 		Integer id = Integer.parseInt(sid);
@@ -195,4 +195,17 @@ public class Directory extends Directory_Base {
 		return dirElement;
 	}
 
+	public void remove() {
+		for (File dire: this.getFileSet()){
+			if (dire instanceof Directory) {
+				((Directory) dire).remove();				
+			}
+			else if (dire instanceof PlainFile) {
+				((PlainFile) dire).removePlainFile();
+			}
+			setDirectory(null);
+			deleteDomainObject();
+		}
+
+	}
 }
