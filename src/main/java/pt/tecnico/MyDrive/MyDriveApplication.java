@@ -3,7 +3,6 @@ package pt.tecnico.MyDrive;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Iterator;
 import java.util.Scanner;
 
 import org.jdom2.Document;
@@ -17,11 +16,23 @@ import org.apache.logging.log4j.Logger;
 
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
-import pt.tecnico.MyDrive.Exception.*;
-
-
-
-import pt.tecnico.MyDrive.domain.*;
+import pt.tecnico.MyDrive.Exception.DirectoryDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.DirectoryIsNotEmptyException;
+import pt.tecnico.MyDrive.Exception.ExportXmlException;
+import pt.tecnico.MyDrive.Exception.FileDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.FileIsDirectoryException;
+import pt.tecnico.MyDrive.Exception.FileIsPlainFileException;
+import pt.tecnico.MyDrive.Exception.ImportXmlException;
+import pt.tecnico.MyDrive.Exception.InvalidStringException;
+import pt.tecnico.MyDrive.Exception.InvalidTypeException;
+import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.UserDoesNotHavePermissionsException;
+import pt.tecnico.MyDrive.Exception.UsernameAlreadyExistsException;
+import pt.tecnico.MyDrive.domain.Directory;
+import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.PlainFile;
+import pt.tecnico.MyDrive.domain.Session;
+import pt.tecnico.MyDrive.domain.User;
 
 
 
@@ -35,7 +46,7 @@ public class MyDriveApplication {
 	public static void main(String[] args) throws IOException {
 		System.out.println("*** Welcome to the MyDrive application! ***");
 		try {
-			System.out.println("VOufazer setup");
+			//System.out.println("VOufazer setup");
 
 			setup();
 			//display();
@@ -52,17 +63,6 @@ public class MyDriveApplication {
 //	log.trace("Init: " + FenixFramework.getDomainRoot());
 //	MyDrive.getInstance().cleanup();
 //    }
-
-	@Atomic
-	public static long login(String username, String pass) throws UsernameDoesNotExistException , InvalidPasswordException{
-		MyDrive md = MyDrive.getInstance();	
-		//try{
-		Session session = new Session(md, username, pass);
-		return session.getToken();
-		//}catch(UsernameDoesNotExistException | InvalidPasswordException e) {System.err.println(e);}
-		//return 0;
-	}
-
 
 	@Atomic
 	public static Session getSessionByToken(long token){
@@ -163,10 +163,10 @@ public class MyDriveApplication {
 		Directory rd = md.getRootdir();
 
 		if(name.equals(".")){
-          	return dir.getPath();
+			return dir.getPath();
 		}
-		
-		
+
+
 		else if(name.equals("..")){
 			dir = dir.getDirectory();
 			session.setCurrentdir(dir);
@@ -223,7 +223,7 @@ public class MyDriveApplication {
 		MyDrive md = MyDrive.getInstance();
 		Directory dir = md.getRootdir() ;
 		Integer c = 0;
-		
+
 
 
 		try{
@@ -240,25 +240,25 @@ public class MyDriveApplication {
 
 	@Atomic
 	public static void ReadFile(String name, long tok) {
-		
+
 		MyDrive md = MyDrive.getInstance();
 		Session session = getSessionByToken(tok);
 		Directory dir = session.getCurrentdir() ;
-		
-		
+
+
 		try{
 			PlainFile file = ((PlainFile) (dir.getPlainfileByName(name)));
 			checkPermissionsRead(session.getUser(), file.getUser(), file.getPermissions());
 			System.out.println(file.getData());
 		}catch(FileDoesNotExistException | FileIsDirectoryException | UserDoesNotHavePermissionsException e) { System.err.println(e); }
 	}
-	
+
 	public static void WriteFile(String name, long tok,String content) {
-		
+
 		MyDrive md = MyDrive.getInstance();		
 		Session session = getSessionByToken(tok);
 		Directory dir = session.getCurrentdir() ;
-		
+
 		try{
 			PlainFile file = ((PlainFile) (dir.getPlainfileByName(name)));
 			checkPermissionsWrite(session.getUser(), file.getUser(), file.getPermissions());
@@ -273,21 +273,26 @@ public class MyDriveApplication {
 
 		MyDrive md = MyDrive.getInstance();
 
-		long p =login("root","***");
-		Session s = getSessionByToken(p);
-		Directory d = s.getCurrentdir();
-		User u = s.getUser();
-		Directory dir = new Directory(7, "joao","rwxd--x-" );
-		d.addFile(dir);
-		//String path = changeCurrentDirectory("/home", p);
-		//System.out.println(path);
-		PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
-		d.addFile(file);
-		u.addFile(file);
-		ReadFile("test",p);
-		WriteFile("test",p,"HI !!!!!!!");
-		ReadFile("test",p);
-		createFile(p, "joao", "Directory", null);
+//		long p =login("root","***");
+//		Session s = getSessionByToken(p);
+//		Directory d = s.getCurrentdir();
+//		User u = s.getUser();
+//		Directory dir = new Directory(7, "joao","rwxd--x-" );
+//		d.addFile(dir);
+//		//String path = changeCurrentDirectory("/home", p);
+//		//System.out.println(path);
+//		PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
+//		d.addFile(file);
+//		u.addFile(file);
+//		ReadFile("test",p);
+//		WriteFile("test",p,"HI !!!!!!!");
+//		ReadFile("test",p);
+//		createFile(p, "joao", "Directory", null);
+		//long p =login("root","***");
+		//Session s = getSessionByToken(p);
+		//Directory d = s.getCurrentdir();
+		
+		
 		//Directory dir = new Directory(7, "joao","rwxd--x-" );
 		//d.addFile(dir);
 		//String path = changeCurrentDirectory("/joao", p);
@@ -397,7 +402,7 @@ public class MyDriveApplication {
 			if(dir.DirectoryEmpty(dir));{
 				(md.getCurrentuser()).removeFile(dir);
 				(md.getCurrentdir()).removeFile(dir);
-				dir.removeDir();
+				//dir.removeDir();
 				System.out.println("remove sucessfull");
 			}
 		}catch(DirectoryDoesNotExistException | FileIsPlainFileException | DirectoryIsNotEmptyException e) { 
@@ -500,117 +505,142 @@ public class MyDriveApplication {
 
 	}
 
-public static boolean checkPermissionsRead(User user, User owner, String permissions){
-	char ch1[] = permissions.toCharArray();
-	String userPermissions = user.getMask();
-	char ch2[] = userPermissions.toCharArray();
+	public static boolean checkPermissionsRead(User user, User owner, String permissions){
+		char ch1[] = permissions.toCharArray();
+		String userPermissions = user.getMask();
+		char ch2[] = userPermissions.toCharArray();
 
-	if(owner.equals(user)){
-		return true;	
+		if(owner.equals(user)){
+			return true;	
+		}
+		else if (ch1[5]==ch2[5] && ch1[5]=='r'){
+			return true;
+		}
+		else{
+			throw new UserDoesNotHavePermissionsException();
+		}
+
 	}
-	else if (ch1[5]==ch2[5] && ch1[5]=='r'){
-		return true;
+
+	public static boolean checkPermissionsWrite(User user, User owner, String permissions){
+		char ch1[] = permissions.toCharArray();
+		String userPermissions = user.getMask();
+		char ch2[] = userPermissions.toCharArray();
+
+		if(owner.equals(user)){
+			return true;	
+		}
+		else if (ch1[6]==ch2[6] && ch1[6]=='w'){
+			return true;
+		}
+		else{
+			throw new UserDoesNotHavePermissionsException();
+		}
 	}
-	else{
-		throw new UserDoesNotHavePermissionsException();
+
+	public static boolean checkPermissionsExecute(User user, User owner, String permissions){
+		char ch1[] = permissions.toCharArray();
+		String userPermissions = user.getMask();
+		char ch2[] = userPermissions.toCharArray();
+
+		if(owner.equals(user)){
+			return true;	
+		}
+		else if (ch1[7]==ch2[7] && ch1[7]=='x'){
+			return true;
+		}
+		else{
+			throw new UserDoesNotHavePermissionsException();
+		}
 	}
+	public static boolean checkPermissionsDelete(User user, User owner, String permissions){
+		char ch1[] = permissions.toCharArray();
+		String userPermissions = user.getMask();
+		char ch2[] = userPermissions.toCharArray();
+
+		if(owner.equals(user)){
+			return true;	
+		}
+		else if (ch1[8]==ch2[8] && ch1[8]=='d'){
+			return true;
+		}
+		else{
+			throw new UserDoesNotHavePermissionsException();
+		}
+	}
+
+
+	@Atomic
+	public static void createFile(long token, String name, String type, String content){
+		MyDrive md = MyDrive.getInstance();
+		Session s = getSessionByToken(token);
+		User user = s.getUser();
+		Directory dir = s.getCurrentdir();
+		String perm = user.getMask();
+
+
+
+		try{
+			checkPermissionsWrite(user,dir.getUser(),dir.getPermissions());
+
+
+
+			for(char namecheck : name.toCharArray()){
+
+				if(namecheck== '/' || namecheck=='.'){
+
+					throw new InvalidStringException(name);
+				}
+
+
+			}
+
+			if(type.equals("Directory")){
+
+				Directory d = new Directory(md.getCnt(), name, perm);
+				dir.addFile(d);
+				user.addFile(d);
+
+			}
+			else if(type.equals("PlainFile")){
+
+				PlainFile f = new PlainFile(md.getCnt(), name, perm, content);
+				dir.addFile(f);
+				user.addFile(f);
+
+			}
+			else{
+				throw new InvalidTypeException(); //Erro porque a excepcao ainda nao foi criada
+			}
+					
+		}catch(InvalidTypeException | UserDoesNotHavePermissionsException | InvalidStringException e){ System.err.println(e);}
 
 }
 
-public static boolean checkPermissionsWrite(User user, User owner, String permissions){
-	char ch1[] = permissions.toCharArray();
-	String userPermissions = user.getMask();
-	char ch2[] = userPermissions.toCharArray();
 
-	if(owner.equals(user)){
-		return true;	
-	}
-	else if (ch1[6]==ch2[6] && ch1[6]=='w'){
-		return true;
-	}
-	else{
-		throw new UserDoesNotHavePermissionsException();
-	}
-}
-
-public static boolean checkPermissionsExecute(User user, User owner, String permissions){
-	char ch1[] = permissions.toCharArray();
-	String userPermissions = user.getMask();
-	char ch2[] = userPermissions.toCharArray();
-
-	if(owner.equals(user)){
-		return true;	
-	}
-	else if (ch1[7]==ch2[7] && ch1[7]=='x'){
-		return true;
-	}
-	else{
-		throw new UserDoesNotHavePermissionsException();
-	}
-}
-public static boolean checkPermissionsDelete(User user, User owner, String permissions){
-	char ch1[] = permissions.toCharArray();
-	String userPermissions = user.getMask();
-	char ch2[] = userPermissions.toCharArray();
-
-	if(owner.equals(user)){
-		return true;	
-	}
-	else if (ch1[8]==ch2[8] && ch1[8]=='d'){
-		return true;
-	}
-	else{
-		throw new UserDoesNotHavePermissionsException();
-	}
-}
 
 
 @Atomic
-public static void createFile(long token, String name, String type, String content){
-	MyDrive md = MyDrive.getInstance();
-	Session s = getSessionByToken(token);
-	User user = s.getUser();
-	Directory dir = s.getCurrentdir();
-	String perm = user.getMask();
+public static void DeleteFile(String name, long tok) {
 
+	MyDrive md = MyDrive.getInstance();
+	Session session = getSessionByToken(tok);
+	Directory dir = session.getCurrentdir() ;
 
 
 	try{
-		checkPermissionsWrite(user,dir.getUser(),dir.getPermissions());
-		
-		
+		pt.tecnico.MyDrive.domain.File file = dir.getFileByName(name);
+		if (file instanceof Directory) {
+			checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
 
-		for(char namecheck : name.toCharArray()){
-
-			if(namecheck== '/' || namecheck=='.'){
-
-				throw new InvalidStringException(name);
-			}
-
-
+			((Directory) file).removeDir(dir);				
 		}
+		else if (file instanceof PlainFile) {
+			checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
 
-		if(type.equals("Directory")){
-
-			Directory d = new Directory(md.getCnt(), name, perm);
-			dir.addFile(d);
-			user.addFile(d);
-
+			((PlainFile) file).removePlainFile();
 		}
-		else if(type.equals("PlainFile")){
-
-			PlainFile f = new PlainFile(md.getCnt(), name, perm, content);
-			dir.addFile(f);
-			user.addFile(f);
-
-		}
-		else{
-			throw new InvalidTypeException();
-		}
-
-	}
-	catch(InvalidTypeException | UserDoesNotHavePermissionsException | InvalidStringException e){ System.err.println(e);}
+	}catch(FileDoesNotExistException | FileIsDirectoryException | UserDoesNotHavePermissionsException e) { System.err.println(e); }
 }
-
 }
 

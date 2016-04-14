@@ -62,10 +62,25 @@ public class Directory extends Directory_Base {
 		}
 		throw new FileDoesNotExistException(name);
 	}
-
-	public void removeDir(){
-		setDirectory(null);
-		deleteDomainObject();
+	
+	public void removeDir(Directory dir){
+		if (DirectoryEmpty(dir) == true) {
+			this.setDirectory(null);
+			this.deleteDomainObject();
+		}
+		else{
+			for(pt.tecnico.MyDrive.domain.File f : (dir).getFileSet()){
+				if (f instanceof PlainFile){
+					this.setDirectory(null);
+					this.deleteDomainObject();
+				}
+				else{
+					removeDir((Directory) f);
+				}
+			}
+		//this.setDirectory(null);
+		//this.deleteDomainObject();
+		}
 	}
 
 
@@ -193,19 +208,5 @@ public class Directory extends Directory_Base {
 
 
 		return dirElement;
-	}
-
-	public void remove() {
-		for (File dire: this.getFileSet()){
-			if (dire instanceof Directory) {
-				((Directory) dire).remove();				
-			}
-			else if (dire instanceof PlainFile) {
-				((PlainFile) dire).removePlainFile();
-			}
-			setDirectory(null);
-			deleteDomainObject();
-		}
-
 	}
 }
