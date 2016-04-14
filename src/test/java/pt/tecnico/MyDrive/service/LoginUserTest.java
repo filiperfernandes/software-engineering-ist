@@ -10,37 +10,39 @@ import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.Session;
 import pt.tecnico.MyDrive.domain.User;
 import pt.tecnico.MyDrive.MyDriveApplication;
+import pt.tecnico.MyDrive.service.LoginUserService;
 
 public class LoginUserTest extends AbstractServiceTest {
 
 	@Override
 	protected void populate() {
-//		MyDrive md = MyDrive.getInstance();
-//		
-//		new User("joao", "12345", "Joao", "/home/joao");
-//		new Session(md, "joao", "12345");
-//		
+		MyDrive md = MyDrive.getInstance();
+		
+		new User("joao", "12345", "Joao", "/home/joao");
+		
 	}
 
 	@Test(expected=InvalidPasswordException.class)
 	public void invalidPasswordLoginUser(){
-		
+		LoginUserService log =  new LoginUserService("joao", "99999");
+		log.execute();
 		
 	}
 	
 	@Test(expected=UsernameDoesNotExistException.class)
 	public void userNameDoesNotExistLoginUser(){
-		
+		LoginUserService log =  new LoginUserService("Carvalho", "12345");
+		log.execute();
 	}
 	
 	@Test
 	public void userLogin(){
-		long actual  = login("joao", "12345");
+		LoginUserService log =  new LoginUserService("joao", "12345");
+		log.execute();
+		long a = log.result();
 		
-		assertTrue(actual instanceof long);
+		assertEquals("", a);
 	}
-	
-	
 	
 	
 	

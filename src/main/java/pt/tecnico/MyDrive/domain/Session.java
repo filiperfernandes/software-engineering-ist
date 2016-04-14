@@ -14,7 +14,7 @@ public class Session extends Session_Base {
 		User user = md.getUserByUsername(username);
 		if(user.checkPassword(password)){
 			//criar timer de 2 horas
-			updateSessions();
+			//updateSessions();
 			user.addSession(this);
 			setCurrentdir(user.getHomedir());
 			DateTime time = new DateTime();
