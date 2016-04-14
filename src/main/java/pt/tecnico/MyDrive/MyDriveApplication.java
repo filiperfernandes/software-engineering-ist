@@ -203,13 +203,6 @@ public class MyDriveApplication {
 		}
 	}
 
-	@Atomic
-	public static void newDirectory(String name){
-		MyDrive md = MyDrive.getInstance();
-		Directory d = new Directory(md.getCnt(), name, "rwxdr-x-");
-		(md.getCurrentdir()).addFile(d);
-		(md.getCurrentuser()).addFile(d);
-	}
 
 	@Atomic
 	public static void listDirectory(long token){
@@ -228,14 +221,6 @@ public class MyDriveApplication {
 			}
 		}catch (DirectoryDoesNotExistException | FileIsPlainFileException e) { System.err.println(e); }
 
-	}
-
-	@Atomic
-	public static void newPlainFile(String name, String data){
-		MyDrive md = MyDrive.getInstance();
-		PlainFile f = new PlainFile(md.getCnt(), name, "rwxdr-x-", data);
-		(md.getCurrentdir()).addFile(f);
-		(md.getCurrentuser()).addFile(f);
 	}
 
 
@@ -554,20 +539,48 @@ public static boolean checkPermissionsDelete(User user, User owner, String permi
 	}
 }
 
+
 @Atomic
 public static void createFile(long token, String name, String type, String content){
-	
-	if(type.equals("Directory")){
-		newDirectory(name);
-	}
-	else if(type.equals("PlainFile")){
-		newPlainFile(name, content);
-	}
-	else{
-		return;
-	}
+	MyDrive md = MyDrive.getInstance();
+	Session s = getSessionByToken(token);
+	User user = s.getUser();
+	Directory dir = s.getCurrentdir();
+	String perm = user.getMask();
 
 
+
+	try{
+		checkPermissionsWrite(user,dir.getUser(),dir.getPermissions());
+		
+		char namecheck[] = name.toCharArray();
+		int i=0;
+		while(namecheck[i] != '\0'){
+			if(namecheck[i]== '/' || namecheck[i]=='.'){
+				throw new InvalidStringException(name);
+			}
+		}
+
+		if(type.equals("Directory")){
+
+			Directory d = new Directory(md.getCnt(), name, perm);
+			dir.addFile(d);
+			user.addFile(d);
+
+		}
+		else if(type.equals("PlainFile")){
+
+			PlainFile f = new PlainFile(md.getCnt(), name, perm, content);
+			dir.addFile(f);
+			user.addFile(f);
+
+		}
+		else{
+			return;
+		}
+
+	}
+	catch(InvalidStringException e){ System.err.println(e);}
 }
 
 }

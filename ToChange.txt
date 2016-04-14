@@ -16,7 +16,7 @@ Users so se não for indicado o home dir é que tem de ser o default
 
 CheckvalidString meter com o nome setUsername para ter de passar nesta função sempre
 
-Não verificamos que os ficheiros nao podem ter nem 1 barra nem 1 ponto
+Não verificamos que os ficheiros nao podem ter nem 1 barra nem 1 ponto->Feito	
 
 Imports e exports meio manhasos, Vai buscar e manda fazer imediatamente os users
 
