@@ -35,7 +35,7 @@ public class MyDriveApplication {
 			System.out.println("VOufazer setup");
 
 			setup();
-			display();
+			//display();
 			/*			for (String s: args) xmlScan(new java.io.File(s));
 
 
@@ -537,7 +537,7 @@ public static boolean checkPermissionsExecute(User user, User owner, String perm
 		return true;
 	}
 	else{
-		return false;
+		throw new UserDoesNotHavePermissionsException();
 	}
 }
 public static boolean checkPermissionsDelete(User user, User owner, String permissions){
@@ -552,7 +552,7 @@ public static boolean checkPermissionsDelete(User user, User owner, String permi
 		return true;
 	}
 	else{
-		return false;
+		throw new UserDoesNotHavePermissionsException();
 	}
 }
 
@@ -570,14 +570,16 @@ public static void createFile(long token, String name, String type, String conte
 	try{
 		checkPermissionsWrite(user,dir.getUser(),dir.getPermissions());
 		
-		char namecheck[] = name.toCharArray();
-		int i=0;
-		while(namecheck[i] != '\0'){
-			if(namecheck[i]== '/' || namecheck[i]=='.'){
+		
+
+		for(char namecheck : name.toCharArray()){
+
+			if(namecheck== '/' || namecheck=='.'){
+
 				throw new InvalidStringException(name);
 			}
-			i++;
-			
+
+
 		}
 
 		if(type.equals("Directory")){
@@ -595,11 +597,11 @@ public static void createFile(long token, String name, String type, String conte
 
 		}
 		else{
-			return;
+			throw new InvalidTypeException();
 		}
 
 	}
-	catch(InvalidStringException e){ System.err.println(e);}
+	catch(InvalidTypeException | UserDoesNotHavePermissionsException | InvalidStringException e){ System.err.println(e);}
 }
 
 }

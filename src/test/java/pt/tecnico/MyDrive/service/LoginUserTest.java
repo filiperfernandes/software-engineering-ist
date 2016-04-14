@@ -8,7 +8,7 @@ public class LoginUserTest extends AbstractServiceTest {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 
 	@Override

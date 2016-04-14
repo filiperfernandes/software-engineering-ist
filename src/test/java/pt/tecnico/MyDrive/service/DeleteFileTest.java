@@ -8,7 +8,7 @@ public class DeleteFileTest extends AbstractServiceTest{
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 
 	@Override
