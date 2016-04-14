@@ -279,7 +279,7 @@ public class MyDriveApplication {
 		ReadFile("test",p);
 		WriteFile("test",p,"HI !!!!!!!");
 		ReadFile("test",p);
-
+		createFile(p, "joao", "Directory", null);
 		//Directory dir = new Directory(7, "joao","rwxd--x-" );
 		//d.addFile(dir);
 		//String path = changeCurrentDirectory("/joao", p);
@@ -576,6 +576,8 @@ public static void createFile(long token, String name, String type, String conte
 			if(namecheck[i]== '/' || namecheck[i]=='.'){
 				throw new InvalidStringException(name);
 			}
+			i++;
+			
 		}
 
 		if(type.equals("Directory")){
