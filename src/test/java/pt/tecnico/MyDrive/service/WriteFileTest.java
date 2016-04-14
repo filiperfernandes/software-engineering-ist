@@ -6,10 +6,12 @@ import org.junit.Test;
 
 public class WriteFileTest extends AbstractServiceTest{
 
+
 	@Test
 	public void test() {
 		//fail("Not yet implemented");
 	}
+
 
 	@Override
 	protected void populate() {
@@ -17,4 +19,6 @@ public class WriteFileTest extends AbstractServiceTest{
 		
 	}
 
+	
+	
 }

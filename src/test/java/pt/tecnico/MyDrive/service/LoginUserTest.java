@@ -6,10 +6,12 @@ import org.junit.Test;
 
 public class LoginUserTest extends AbstractServiceTest {
 
+
 	@Test
 	public void test() {
 		//fail("Not yet implemented");
 	}
+
 
 	@Override
 	protected void populate() {
@@ -17,4 +19,10 @@ public class LoginUserTest extends AbstractServiceTest {
 		
 	}
 
+	
+	
+	
+	
+	
+	
 }
