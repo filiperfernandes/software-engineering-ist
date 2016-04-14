@@ -57,8 +57,7 @@ public class MyDriveApplication {
 
 
 	@Atomic
-
-	public static long login(String username, String pass) throws UsernameDoesNotExistException , InvalidPasswordException{
+	public static long login(String username, String pass){
 		MyDrive md = MyDrive.getInstance();
 	
 		//try{
