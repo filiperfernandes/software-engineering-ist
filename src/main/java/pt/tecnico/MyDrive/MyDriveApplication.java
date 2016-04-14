@@ -12,6 +12,9 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 import pt.tecnico.MyDrive.Exception.*;
@@ -24,7 +27,7 @@ import pt.tecnico.MyDrive.domain.*;
 
 
 public class MyDriveApplication {
-	//static final Logger log = LogManager.getRootLogger();
+	static final Logger log = LogManager.getRootLogger();
 	private static Scanner input = new Scanner(System.in);
 
 	//static MyDrive md;
@@ -44,6 +47,11 @@ public class MyDriveApplication {
 		} finally { FenixFramework.shutdown(); }
 	}
 
+//    @Atomic
+//    public static void init() { // empty phonebook
+//	log.trace("Init: " + FenixFramework.getDomainRoot());
+//	MyDrive.getInstance().cleanup();
+//    }
 
 	@Atomic
 	public static long login(String username, String pass) throws UsernameDoesNotExistException , InvalidPasswordException{
