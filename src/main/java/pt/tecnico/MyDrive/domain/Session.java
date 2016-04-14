@@ -12,7 +12,9 @@ public class Session extends Session_Base {
 			if(user.checkPassword(password)){
 				//criar timer de 2 horas
 				user.addSession(this);
-				setCurrentdir(user.getHomedir());
+				System.out.println("0" + user.getUsername() + " \n");
+				this.setCurrentdir(user.getHomedir());
+				System.out.println("0" + (user.getHomedir()).getName() + " \n");
 				md.addSession(this);
 			}
 	}
