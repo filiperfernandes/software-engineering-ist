@@ -75,7 +75,7 @@ public class User extends User_Base {
 
 
 	}
-	public boolean CheckPassword( String pass){
+	public boolean checkPassword( String pass){
 		if(this.getPassword().equals(pass)){
 			return true;
 		}

@@ -2,51 +2,36 @@ package pt.tecnico.MyDrive;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import org.jdom2.Document;
-import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-import org.joda.time.DateTime;
-
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 import pt.tecnico.MyDrive.Exception.*;
-
-
 import pt.tecnico.MyDrive.domain.Directory;
-
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.PlainFile;
-import pt.tecnico.MyDrive.domain.Sessao;
+import pt.tecnico.MyDrive.domain.Session;
 import pt.tecnico.MyDrive.domain.User;
 
 public class MyDriveApplication {
 	//static final Logger log = LogManager.getRootLogger();
 	private static Scanner input = new Scanner(System.in);
 
+	//static MyDrive md;
 
 	public static void main(String[] args) throws IOException {
 		System.out.println("*** Welcome to the MyDrive application! ***");
 		try {
-
+			System.out.println("VOufazer setup");
 			setup();
-			long p =login();
-			System.out.println(p);
-			//	Sessao s = getSessaoByToken(p);
-			//Directory d = s.getCurrentdir();
-			//Directory dir = new Directory(7, "joao","rwxd--x-" );
-			//d.addFile(dir);
-			String s = changeCurrentDirectory("/home", p);
-			System.out.println(s);
+
 			//display();
 			/*			for (String s: args) xmlScan(new java.io.File(s));
 
@@ -55,44 +40,29 @@ public class MyDriveApplication {
 			 */
 		} finally { FenixFramework.shutdown(); }
 	}
+
+
 	@Atomic
-	public static long login(){
-		new Sessao();
-		MyDrive md = MyDrive.getInstance();
-
-		boolean quit = true;
-		while(quit){
-			System.out.println("-- Login --");
-			System.out.println("Insert Username");
-			String username = input.next();
-			System.out.println("Insert password");
-			String pass = input.next();
-			try{
-				User user = md.getUserByUsername(username);
-				if(user.CheckPassword(pass)){
-					System.out.println("Login Successful");
-					Sessao sessao = new Sessao();
-					md.addSessao(sessao);
-					user.addSessao(sessao);
-					sessao.setCurrentdir(user.getHomedir());
-					return sessao.getToken();
-				}
-			}catch(UsernameDoesNotExistException | InvalidPasswordException e) {System.err.println(e);}
-
-		}
-		return 0;
+	public static long login(String username, String pass) throws UsernameDoesNotExistException , InvalidPasswordException{
+		MyDrive md = MyDrive.getInstance();	
+		//try{
+		Session session = new Session(md, username, pass);
+		return session.getToken();
+		//}catch(UsernameDoesNotExistException | InvalidPasswordException e) {System.err.println(e);}
+		//return 0;
 	}
 
 
-	public static Sessao getSessaoByToken(long token){
+	@Atomic
+	public static Session getSessionByToken(long token){
 		MyDrive md = MyDrive.getInstance();
 
-		for(Sessao s : md.getSessaoSet()){
-			if(s.getToken().equals(token)){
+		for(Session s : md.getSessionSet()){
+			if(s.getToken()==token){
 				return s;
 			}
 		}
-		throw new SessaoDoesNotExistException(token);
+		throw new SessionDoesNotExistException(token);
 	}
 
 
@@ -175,8 +145,8 @@ public class MyDriveApplication {
 	@Atomic
 	public static String changeCurrentDirectory(String name, long tok){
 		MyDrive md = MyDrive.getInstance();
-		Sessao sessao = getSessaoByToken(tok);
-		Directory dir = sessao.getCurrentdir();
+		Session session = getSessionByToken(tok);
+		Directory dir = session.getCurrentdir();
 		Directory rd = md.getRootdir();
 
 		if(name.equals(".")){
@@ -184,18 +154,18 @@ public class MyDriveApplication {
 		}
 		else if(name.equals("..")){
 			dir = dir.getDirectory();
-			sessao.setCurrentdir(dir);
+			session.setCurrentdir(dir);
 			return dir.getPath();
 		}
 		else {
 			if(checkPath(name, dir).equals("absolute")){
 				Directory directory = getDirByPath(name, rd);
-				sessao.setCurrentdir(directory);
+				session.setCurrentdir(directory);
 				return directory.getPath();
 			}
 			else if(checkPath(name, dir).equals("relative")){
 				Directory directory = getDirByPath(name, dir);
-				sessao.setCurrentdir(directory);
+				session.setCurrentdir(directory);
 				return directory.getPath();
 			}
 			else{
@@ -319,6 +289,15 @@ public class MyDriveApplication {
 	public static void setup() {
 
 		MyDrive md = MyDrive.getInstance();
+
+		long p =login("root","**");
+		Session s = getSessionByToken(p);
+		Directory d = s.getCurrentdir();
+		Directory dir = new Directory(7, "joao","rwxd--x-" );
+		d.addFile(dir);
+		String path = changeCurrentDirectory("/joao", p);
+		System.out.println(path);
+
 		//PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
 		//Directory home = (Directory) (md.getRootdir()).getDirByName("home");
 		//Directory root = (Directory) (home.getFileByName("root"));

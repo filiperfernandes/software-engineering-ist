@@ -38,7 +38,7 @@ public class MyDrive extends MyDrive_Base {
 				return user;
 			}
 		}
-		return null;
+		throw new UsernameDoesNotExistException(username);
 	}
 
 

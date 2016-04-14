@@ -4,8 +4,8 @@ class MyDrive {
     Integer counter;
 }
 
-class Sessao{
-	Long token;
+class Session{
+	long token;
 	}
 
 class User {
@@ -49,20 +49,20 @@ relation DomainRootHasPhoneBookApplication {
   }
 }
 
-relation MyDriveContainsSessao{
+relation MyDriveContainsSession{
 	MyDrive playsRole mydrive;
-	Sessao playsRole sessao{
+	Session playsRole session{
 	multiplicity *;}
 }
 
-relation UserOwnsSessao{
+relation UserOwnsSession{
     User playsRole user;
-    Sessao playsRole sessao{
+    Session playsRole session{
     multiplicity *;}
 }
 
-relation SessaoContainsCurrentDir{
-	Sessao playsRole sessao;
+relation SessionContainsCurrentDir{
+	Session playsRole session;
 	Directory playsRole currentdir{
 	multiplicity 1;}
 	}
