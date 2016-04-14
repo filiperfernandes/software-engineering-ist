@@ -7,18 +7,15 @@ import org.junit.Test;
 public class WriteFileTest extends AbstractServiceTest{
 
 
-	@Test
-	public void test() {
-		//fail("Not yet implemented");
-	}
-
-
 	@Override
 	protected void populate() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	
+	
+	
 	
 	
 }

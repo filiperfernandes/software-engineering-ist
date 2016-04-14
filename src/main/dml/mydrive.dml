@@ -6,6 +6,7 @@ class MyDrive {
 
 class Session{
 	long token;
+    DateTime state;
 	}
 
 class User {
