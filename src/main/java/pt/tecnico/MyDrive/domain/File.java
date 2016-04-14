@@ -22,12 +22,12 @@ public class File extends File_Base {
 		File f = this;
 		while(!((f.getName()).equals("/"))){
 			path = "/" + f.getName() + path;
-		//	System.out.println(f.getName());
+			//	System.out.println(f.getName());
 			f = f.getDirectory();
 		}
 		return path;
 	}
-	
+
 	public static boolean fileNameCheck(String name){
 		for(char ch : name.toCharArray()){
 			if(ch == '/' || ch == '.'){

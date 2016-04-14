@@ -41,8 +41,6 @@ public class MyDrive extends MyDrive_Base {
 		throw new UsernameDoesNotExistException(username);
 	}
 
-
-
 	public void xmlImport(Element element) throws ImportXmlException {
 
 		MyDrive md = MyDrive.getInstance();

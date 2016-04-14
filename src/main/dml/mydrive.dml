@@ -24,11 +24,9 @@ class File {
     String permissions;
 }
 
-
 class PlainFile extends File{
     String data;
 }
-
 
 class Directory extends File{}
 

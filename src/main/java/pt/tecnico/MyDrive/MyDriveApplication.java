@@ -3,6 +3,7 @@ package pt.tecnico.MyDrive;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import org.jdom2.Document;
@@ -31,8 +32,8 @@ public class MyDriveApplication {
 		try {
 			System.out.println("VOufazer setup");
 
-			display();
 			setup();
+			display();
 			/*			for (String s: args) xmlScan(new java.io.File(s));
 
 
@@ -40,7 +41,6 @@ public class MyDriveApplication {
 			 */
 		} finally { FenixFramework.shutdown(); }
 	}
-
 
 	@Atomic
 	public static long login(String username, String pass) throws UsernameDoesNotExistException , InvalidPasswordException{
@@ -449,6 +449,7 @@ public class MyDriveApplication {
 
 		MyDrive md = MyDrive.getInstance();
 		Directory rd = md.getRootdir();
+		rd.getPermissions();
 		String dirname = "";
 		Integer c = 0;
 		String auxname = path + "/";
@@ -502,5 +503,79 @@ public class MyDriveApplication {
 		}catch (DirectoryDoesNotExistException | FileIsPlainFileException e) { System.err.println(e); }
 		return dir;
 
+	}
+
+	public static boolean checkPermissionsRead(User user, File file){
+		User fileOwner = file.getUser();
+		String filePermissions = file.getPermissions();
+		char ch1[] = filePermissions.toCharArray();
+		String userPermissions = user.getMask();
+		char ch2[] = userPermissions.toCharArray();
+
+		if(fileOwner.equals(user)){
+			return true;	
+		}
+		else if (ch1[5]==ch2[5] && ch1[5]=='r'){
+			return true;
+		}
+		else{
+			return false;
+		}
+
+	}
+
+	public static boolean checkPermissionsWrite(User user, File file){
+		User fileOwner = file.getUser();
+		String filePermissions = file.getPermissions();
+		char ch1[] = filePermissions.toCharArray();
+		String userPermissions = user.getMask();
+		char ch2[] = userPermissions.toCharArray();
+
+		if(fileOwner.equals(user)){
+			return true;	
+		}
+		else if (ch1[6]==ch2[6] && ch1[6]=='w'){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public static boolean checkPermissionsExecute(User user, File file){
+		User fileOwner = file.getUser();
+		String filePermissions = file.getPermissions();
+		char ch1[] = filePermissions.toCharArray();
+		String userPermissions = user.getMask();
+		char ch2[] = userPermissions.toCharArray();
+
+		if(fileOwner.equals(user)){
+			return true;	
+		}
+		else if (ch1[7]==ch2[7] && ch1[7]=='x'){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	@Atomic
+	public static boolean checkPermissionsDelete(User user, File file){
+		User fileOwner = file.getUser();
+		String filePermissions = file.getPermissions();
+		char ch1[] = filePermissions.toCharArray();
+		String userPermissions = user.getMask();
+		char ch2[] = userPermissions.toCharArray();
+
+		if(fileOwner.equals(user)){
+			return true;	
+		}
+		else if (ch1[8]==ch2[8] && ch1[8]=='d'){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }
