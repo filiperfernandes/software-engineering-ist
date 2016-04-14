@@ -2,9 +2,9 @@ M Y D R I V E
 
 es16tg_23-project
 
-$ mysql -p -u root
+$ mysql -p -u mydrive
 
-Enter password: rootroot
+Enter password: mydriv3
 
 mysql> USE drivedb;
 
