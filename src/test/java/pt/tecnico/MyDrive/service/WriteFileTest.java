@@ -7,15 +7,15 @@ import org.junit.Test;
 public class WriteFileTest extends AbstractServiceTest{
 
 
-	
-	
-
 	@Override
 	protected void populate() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	
+	
+	
 	
 	
 }

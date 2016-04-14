@@ -35,7 +35,7 @@ public class MyDriveApplication {
 			//System.out.println("VOufazer setup");
 
 			setup();
-			display();
+			//display();
 			/*			for (String s: args) xmlScan(new java.io.File(s));
 
 
@@ -537,7 +537,7 @@ public class MyDriveApplication {
 			return true;
 		}
 		else{
-			return false;
+			throw new UserDoesNotHavePermissionsException();
 		}
 	}
 	public static boolean checkPermissionsDelete(User user, User owner, String permissions){
@@ -552,7 +552,7 @@ public class MyDriveApplication {
 			return true;
 		}
 		else{
-			return false;
+			throw new UserDoesNotHavePermissionsException();
 		}
 	}
 
@@ -570,13 +570,15 @@ public class MyDriveApplication {
 		try{
 			checkPermissionsWrite(user,dir.getUser(),dir.getPermissions());
 
-			char namecheck[] = name.toCharArray();
-			int i=0;
-			while(namecheck[i] != '\0'){
-				if(namecheck[i]== '/' || namecheck[i]=='.'){
+
+
+			for(char namecheck : name.toCharArray()){
+
+				if(namecheck== '/' || namecheck=='.'){
+
 					throw new InvalidStringException(name);
 				}
-				i++;
+
 
 			}
 
@@ -595,36 +597,37 @@ public class MyDriveApplication {
 
 			}
 			else{
-				return;
+				throw new InvalidTypeException(); //Erro porque a excepcao ainda nao foi criada
 			}
+					
+		}catch(InvalidTypeException | UserDoesNotHavePermissionsException | InvalidStringException e){ System.err.println(e);}
 
+}
+
+
+
+
+@Atomic
+public static void DeleteFile(String name, long tok) {
+
+	MyDrive md = MyDrive.getInstance();
+	Session session = getSessionByToken(tok);
+	Directory dir = session.getCurrentdir() ;
+
+
+	try{
+		pt.tecnico.MyDrive.domain.File file = dir.getFileByName(name);
+		if (file instanceof Directory) {
+			checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
+
+			((Directory) file).removeDir(dir);				
 		}
-		catch(InvalidStringException e){ System.err.println(e);}
-	}
+		else if (file instanceof PlainFile) {
+			checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
 
-
-
-	@Atomic
-	public static void DeleteFile(String name, long tok) {
-
-		MyDrive md = MyDrive.getInstance();
-		Session session = getSessionByToken(tok);
-		Directory dir = session.getCurrentdir() ;
-
-
-		try{
-			pt.tecnico.MyDrive.domain.File file = dir.getFileByName(name);
-			if (file instanceof Directory) {
-				checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
-
-				((Directory) file).removeDir(dir);				
-			}
-			else if (file instanceof PlainFile) {
-				checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
-
-				((PlainFile) file).removePlainFile();
-			}
-		}catch(FileDoesNotExistException | FileIsDirectoryException | UserDoesNotHavePermissionsException e) { System.err.println(e); }
-	}
+			((PlainFile) file).removePlainFile();
+		}
+	}catch(FileDoesNotExistException | FileIsDirectoryException | UserDoesNotHavePermissionsException e) { System.err.println(e); }
+}
 }
 
