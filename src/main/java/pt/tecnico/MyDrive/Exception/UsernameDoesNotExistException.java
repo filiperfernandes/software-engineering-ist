@@ -17,6 +17,6 @@ public class UsernameDoesNotExistException extends MyDriveException {
 
     @Override
     public String getMessage() {
-        return "This Directory " + getUsername() + " does not exist \n";
+        return "The user " + getUsername() + " does not exist \n";
     }
 }
