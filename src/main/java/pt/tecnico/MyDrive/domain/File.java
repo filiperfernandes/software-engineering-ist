@@ -1,5 +1,5 @@
 package pt.tecnico.MyDrive.domain;
-
+import pt.tecnico.MyDrive.domain.Session;
 import org.jdom2.Element;
 import org.joda.time.DateTime;
 import pt.tecnico.MyDrive.domain.*;
@@ -15,6 +15,8 @@ public class File extends File_Base {
 		setName(name);
 		setLastModif(new DateTime());
 		setPermissions(permissions);
+
+
 	}
 
 	public String getPath(){
@@ -22,12 +24,12 @@ public class File extends File_Base {
 		File f = this;
 		while(!((f.getName()).equals("/"))){
 			path = "/" + f.getName() + path;
-		//	System.out.println(f.getName());
+			//	System.out.println(f.getName());
 			f = f.getDirectory();
 		}
 		return path;
 	}
-	
+
 	public static boolean fileNameCheck(String name){
 		for(char ch : name.toCharArray()){
 			if(ch == '/' || ch == '.'){
@@ -36,4 +38,5 @@ public class File extends File_Base {
 		}
 		return true;
 	}
+
 }

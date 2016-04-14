@@ -3,6 +3,7 @@ package pt.tecnico.MyDrive;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import org.jdom2.Document;
@@ -18,6 +19,8 @@ import pt.tecnico.MyDrive.Exception.*;
 
 
 import pt.tecnico.MyDrive.domain.*;
+
+
 
 
 public class MyDriveApplication {
@@ -40,7 +43,6 @@ public class MyDriveApplication {
 			 */
 		} finally { FenixFramework.shutdown(); }
 	}
-
 
 
 	@Atomic
@@ -105,13 +107,13 @@ public class MyDriveApplication {
 					newUser();
 					break;
 				case 3:
-					newDirectory();
+					//newDirectory();
 					break;
 				case 4:
-					newPlainFile();
+					//newPlainFile();
 					break;
 				case 5:
-					listDirectory();
+					//listDirectory();
 					break;
 				case 6:	
 					System.out.println("Insert name of Directory you want to go");
@@ -208,39 +210,24 @@ public class MyDriveApplication {
 	}
 
 	@Atomic
-	public static void newDirectory(){
+	public static void newDirectory(String name){
 		MyDrive md = MyDrive.getInstance();
-		System.out.println("Insert name of new directory");
-		String name = input.next();
 		Directory d = new Directory(md.getCnt(), name, "rwxdr-x-");
 		(md.getCurrentdir()).addFile(d);
 		(md.getCurrentuser()).addFile(d);
 	}
 
 	@Atomic
-	public static void listDirectory(){
-		System.out.println("Insert path of directory");
-		String path = input.next();
+	public static void listDirectory(long token){
 		MyDrive md = MyDrive.getInstance();
-		String dirname = "";
 		Directory dir = md.getRootdir() ;
 		Integer c = 0;
-		for(char ch : path.toCharArray()){
-			if(c.equals(0)){
-				c++;
-			}
-			else if(ch == '/'){
-				try{
-					dir = (Directory) (dir.getDirByName(dirname));
-					dirname="";
-				}catch (DirectoryDoesNotExistException | FileIsPlainFileException e) { System.err.println(e); }
-			}
-			else{
-				dirname += ch;
-			}
-		}
+		
+
+
 		try{
-			dir = (Directory) (dir.getDirByName(dirname));
+			Session s= getSessionByToken(token);
+			dir = s.getCurrentdir();
 			System.out.println(".\n..");
 			for(pt.tecnico.MyDrive.domain.File f : dir.getFileSet()){
 				System.out.println(f.getName());
@@ -250,12 +237,8 @@ public class MyDriveApplication {
 	}
 
 	@Atomic
-	public static void newPlainFile(){
+	public static void newPlainFile(String name, String data){
 		MyDrive md = MyDrive.getInstance();
-		System.out.println("Insert name of new PlainFile");
-		String name = input.next();
-		System.out.println("Insert data of new PlainFile");
-		String data = input.next();
 		PlainFile f = new PlainFile(md.getCnt(), name, "rwxdr-x-", data);
 		(md.getCurrentdir()).addFile(f);
 		(md.getCurrentuser()).addFile(f);
@@ -271,9 +254,10 @@ public class MyDriveApplication {
 		
 		
 		try{
-			
-			System.out.println(((PlainFile) (dir.getPlainfileByName(name))).getData());
-		}catch(FileDoesNotExistException | FileIsDirectoryException e) { System.err.println(e); }
+			PlainFile file = ((PlainFile) (dir.getPlainfileByName(name)));
+			checkPermissionsRead(session.getUser(), file.getUser(), file.getPermissions());
+			System.out.println(file.getData());
+		}catch(FileDoesNotExistException | FileIsDirectoryException | UserDoesNotHavePermissionsException e) { System.err.println(e); }
 	}
 	
 	public static void WriteFile(String name, long tok,String content) {
@@ -283,9 +267,10 @@ public class MyDriveApplication {
 		Directory dir = session.getCurrentdir() ;
 		
 		try{
-			
-			((PlainFile) (dir.getPlainfileByName(name))).setData(content);
-		}catch(FileDoesNotExistException | FileIsDirectoryException e) { System.err.println(e); }
+			PlainFile file = ((PlainFile) (dir.getPlainfileByName(name)));
+			checkPermissionsWrite(session.getUser(), file.getUser(), file.getPermissions());
+			file.setData(content);
+		}catch(FileDoesNotExistException | FileIsDirectoryException | UserDoesNotHavePermissionsException e) { System.err.println(e); }
 	}
 
 
@@ -298,15 +283,23 @@ public class MyDriveApplication {
 		long p =login("root","***");
 		Session s = getSessionByToken(p);
 		Directory d = s.getCurrentdir();
+		User u = s.getUser();
 		Directory dir = new Directory(7, "joao","rwxd--x-" );
 		d.addFile(dir);
-		String path = changeCurrentDirectory("/home", p);
-		System.out.println(path);
+		//String path = changeCurrentDirectory("/home", p);
+		//System.out.println(path);
 		PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
 		d.addFile(file);
+		u.addFile(file);
 		ReadFile("test",p);
 		WriteFile("test",p,"HI !!!!!!!");
 		ReadFile("test",p);
+
+		//Directory dir = new Directory(7, "joao","rwxd--x-" );
+		//d.addFile(dir);
+		//String path = changeCurrentDirectory("/joao", p);
+		//System.out.println(path);
+
 
 		//Directory home = (Directory) (md.getRootdir()).getDirByName("home");
 		//Directory root = (Directory) (home.getFileByName("root"));
@@ -458,6 +451,7 @@ public class MyDriveApplication {
 
 		MyDrive md = MyDrive.getInstance();
 		Directory rd = md.getRootdir();
+		rd.getPermissions();
 		String dirname = "";
 		Integer c = 0;
 		String auxname = path + "/";
@@ -512,4 +506,86 @@ public class MyDriveApplication {
 		return dir;
 
 	}
+
+public static boolean checkPermissionsRead(User user, User owner, String permissions){
+	char ch1[] = permissions.toCharArray();
+	String userPermissions = user.getMask();
+	char ch2[] = userPermissions.toCharArray();
+
+	if(owner.equals(user)){
+		return true;	
+	}
+	else if (ch1[5]==ch2[5] && ch1[5]=='r'){
+		return true;
+	}
+	else{
+		throw new UserDoesNotHavePermissionsException();
+	}
+
 }
+
+public static boolean checkPermissionsWrite(User user, User owner, String permissions){
+	char ch1[] = permissions.toCharArray();
+	String userPermissions = user.getMask();
+	char ch2[] = userPermissions.toCharArray();
+
+	if(owner.equals(user)){
+		return true;	
+	}
+	else if (ch1[6]==ch2[6] && ch1[6]=='w'){
+		return true;
+	}
+	else{
+		throw new UserDoesNotHavePermissionsException();
+	}
+}
+
+public static boolean checkPermissionsExecute(User user, User owner, String permissions){
+	char ch1[] = permissions.toCharArray();
+	String userPermissions = user.getMask();
+	char ch2[] = userPermissions.toCharArray();
+
+	if(owner.equals(user)){
+		return true;	
+	}
+	else if (ch1[7]==ch2[7] && ch1[7]=='x'){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+public static boolean checkPermissionsDelete(User user, User owner, String permissions){
+	char ch1[] = permissions.toCharArray();
+	String userPermissions = user.getMask();
+	char ch2[] = userPermissions.toCharArray();
+
+	if(owner.equals(user)){
+		return true;	
+	}
+	else if (ch1[8]==ch2[8] && ch1[8]=='d'){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+@Atomic
+public static void createFile(long token, String name, String type, String content){
+	
+	if(type.equals("Directory")){
+		newDirectory(name);
+	}
+	else if(type.equals("PlainFile")){
+		newPlainFile(name, content);
+	}
+	else{
+		return;
+	}
+
+
+}
+
+}
+
