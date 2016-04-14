@@ -14,7 +14,7 @@ public class DeleteFileService extends MyDriveService {
 	}
 
 	public final void dispatch() throws FileDoesNotExistException {
-		//getPlainFile(fileName).remove();
+		//etPlainFile(fileName).remove();
 	}
 }
 
