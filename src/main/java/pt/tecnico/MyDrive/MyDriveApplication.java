@@ -22,12 +22,7 @@ import pt.ist.fenixframework.FenixFramework;
 import pt.tecnico.MyDrive.Exception.*;
 
 
-import pt.tecnico.MyDrive.domain.Directory;
-
-import pt.tecnico.MyDrive.domain.MyDrive;
-import pt.tecnico.MyDrive.domain.PlainFile;
-import pt.tecnico.MyDrive.domain.Sessao;
-import pt.tecnico.MyDrive.domain.User;
+import pt.tecnico.MyDrive.domain.*;
 
 public class MyDriveApplication {
 	//static final Logger log = LogManager.getRootLogger();
@@ -52,7 +47,7 @@ public class MyDriveApplication {
 	}
 	@Atomic
 	public static long login(){
-		new Sessao();
+		//new Sessao();
 		MyDrive md = MyDrive.getInstance();
 
 		boolean quit = true;
@@ -166,7 +161,7 @@ public Sessao getSessaoByToken(long token){
 
 	}
 
-
+/*
 	@Atomic
 	public String changeCurrentDirectory(String name, long tok){
 		MyDrive md = MyDrive.getInstance();
@@ -176,7 +171,7 @@ public Sessao getSessaoByToken(long token){
 
 		if(name.equals(".")){
 
-			return dir.getPath();/*listar O DIRECTORIO tem de funcionar bem*/
+			return dir.getPath();/*listar O DIRECTORIO tem de funcionar bem
 
 		}
 		else if(name.equals("..")){
@@ -216,7 +211,7 @@ public Sessao getSessaoByToken(long token){
 
 		}
 	}
-
+*/
 
 
 	@Atomic
