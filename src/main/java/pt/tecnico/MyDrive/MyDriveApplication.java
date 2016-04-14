@@ -30,9 +30,9 @@ public class MyDriveApplication {
 		System.out.println("*** Welcome to the MyDrive application! ***");
 		try {
 			System.out.println("VOufazer setup");
-			setup();
 
-			//display();
+			display();
+			setup();
 			/*			for (String s: args) xmlScan(new java.io.File(s));
 
 
@@ -290,7 +290,7 @@ public class MyDriveApplication {
 
 		MyDrive md = MyDrive.getInstance();
 
-		long p =login("root","**");
+		long p =login("root","***");
 		Session s = getSessionByToken(p);
 		Directory d = s.getCurrentdir();
 		Directory dir = new Directory(7, "joao","rwxd--x-" );
