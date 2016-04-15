@@ -80,7 +80,7 @@ public class User extends User_Base {
 		super();
 		
 		MyDrive muuu = MyDrive.getInstance();
-		setMydrive(muuu);
+		this.setMydrive(muuu);
 
 		if (checkValidString(username)==false ){
 			throw new InvalidStringException(username);

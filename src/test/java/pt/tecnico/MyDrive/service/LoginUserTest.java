@@ -24,7 +24,7 @@ public class LoginUserTest extends AbstractServiceTest {
 
 	@Test(expected=InvalidPasswordException.class)
 	public void invalidPasswordLoginUser(){
-		LoginUserService log =  new LoginUserService(md, "joao", "99999");
+		LoginUserService log =  new LoginUserService(md, "root", "99999");
 		log.execute();
 
 	}
