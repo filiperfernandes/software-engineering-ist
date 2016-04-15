@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 */
 import pt.ist.fenixframework.FenixFramework;
 import pt.ist.fenixframework.core.WriteOnReadError;
+import pt.tecnico.MyDrive.MyDriveApplication;
 
 public abstract class AbstractServiceTest {
     protected static final Logger log = LogManager.getRootLogger();
@@ -19,7 +20,7 @@ public abstract class AbstractServiceTest {
    // @BeforeClass // run once berfore each test class
     public static void setUpBeforeAll() throws Exception {
 	// run tests with a clean database!!!
-	//MyDriveApplication.init();
+	MyDriveApplication.init();
     }
 
     //@Before // run before each test

@@ -98,9 +98,17 @@ relation MyDriveContainsRootDir{
     multiplicity 1;}
   	}
     
+relation MyDriveContainsCurrentDir{
+	MyDrive playsRole mydrive1;
+	Directory playsRole currentdir{
+	multiplicity 1;}
+	}
 
-
-
+relation MyDriveContainsCurrentUser{
+	MyDrive playsRole mydrive1;
+	User playsRole currentuser{
+	multiplicity 1;}
+	}
 
 relation MyDriveContainsPlainFile{
     MyDrive playsRole mydrive;

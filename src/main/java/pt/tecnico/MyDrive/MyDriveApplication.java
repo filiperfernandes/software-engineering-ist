@@ -58,11 +58,11 @@ public class MyDriveApplication {
 		} finally { FenixFramework.shutdown(); }
 	}
 
-//    @Atomic
-//    public static void init() { // empty phonebook
-//	log.trace("Init: " + FenixFramework.getDomainRoot());
-//	MyDrive.getInstance().cleanup();
-//    }
+    @Atomic
+    public static void init() { // empty phonebook
+	log.trace("Init: " + FenixFramework.getDomainRoot());
+	MyDrive.getInstance().cleanup();
+    }
 
 	@Atomic
 	public static long login(String username, String pass){
@@ -292,6 +292,7 @@ public class MyDriveApplication {
 
 		MyDrive md = MyDrive.getInstance();
 
+		//Session s = new Session(md, "root", "***");
 
 		long p =login("root","***");
 		Session s = getSessionByToken(p);
@@ -315,6 +316,68 @@ public class MyDriveApplication {
 		changeCurrentDirectory("..", p);
 		listDirectory(p);
 		deleteFile("jojo", p);
+
+
+		//String path = changeCurrentDirectory("/home", p);
+		//System.out.println(path);
+
+		/*PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
+		d.addFile(file);
+		u.addFile(file);
+		ReadFile("test",p);
+		WriteFile("test",p,"HI !!!!!!!");
+		ReadFile("test",p);*/
+		
+		
+//		createFile(p, "jojo", "Directory", null);
+//
+//		listDirectory(p);
+
+
+//		long p =login("root","***");
+//		Session s = getSessionByToken(p);
+//		Directory d = s.getCurrentdir();
+//		User u = s.getUser();
+//		Directory dir = new Directory(7, "joao","rwxd--x-" );
+//		d.addFile(dir);
+//		//String path = changeCurrentDirectory("/home", p);
+//		//System.out.println(path);
+//		PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
+//		d.addFile(file);
+//		u.addFile(file);
+//		ReadFile("test",p);
+//		WriteFile("test",p,"HI !!!!!!!");
+//		ReadFile("test",p);
+//		createFile(p, "joao", "Directory", null);
+		//long p =login("root","***");
+		//Session s = getSessionByToken(p);
+		//Directory d = s.getCurrentdir();
+		
+		
+
+		//Directory dir = new Directory(7, "joao","rwxd--x-" );
+		//d.addFile(dir);
+		//String path = changeCurrentDirectory("/joao", p);
+		//System.out.println(path);
+
+
+		//Directory home = (Directory) (md.getRootdir()).getDirByName("home");
+		//Directory root = (Directory) (home.getFileByName("root"));
+		//Directory d = new Directory(md.getCnt(), "casa","rwxdr-test");
+		//md.setCurrentdir(md.getRootdir());
+		//root.addFile(d);
+
+		//root.addFile(file);
+
+		//new User("joao", "passe", "vultos");
+
+		//new SuperUser();
+
+		//createPlainFile("root", "/home/root/test", "/home/root", "rwxdr-test", "Hello World!");
+		//r.setDimension(r.getDimension()+1);
+
+		//new User("Filipe", "test", "Filipe Fernandes");
+
 
 	}
 

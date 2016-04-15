@@ -55,26 +55,92 @@ public class User extends User_Base {
 		Directory dir;
 
 
-			if(homedir.equals(null)){
-				dir = new Directory(md.getCnt(),username, "rwxdr-x-");
+		if(homedir.equals(null)){
+			dir = new Directory(md.getCnt(),username, "rwxdr-x-");
+		}
+		else{
+			if(pt.tecnico.MyDrive.domain.File.fileNameCheck(homedir)==false){
+				throw new InvalidStringException(homedir);
 			}
-			else{
-				if(pt.tecnico.MyDrive.domain.File.fileNameCheck(homedir)==false){
-					throw new InvalidStringException(homedir);
-				}
-				dir = new Directory(md.getCnt(),homedir, "rwxdr-x-");
-			}
+			dir = new Directory(md.getCnt(),homedir, "rwxdr-x-");
+		}
 
-			this.addFile(dir);
-			this.setHomedir(dir);
+		this.addFile(dir);
+		this.setHomedir(dir);
 
-			Directory home = (Directory) (md.getRootdir()).getFileByName("home");
-			home.addFile(dir);
-			md.addUser(this);
-	
+		Directory home = (Directory) (md.getRootdir()).getFileByName("home");
+		home.addFile(dir);
+		md.addUser(this);
+
 
 
 	}
+	
+	public User(MyDrive md, String username, String password, String name, String homedir ) {
+		super();
+		
+		MyDrive muuu = MyDrive.getInstance();
+		this.setMydrive(muuu);
+
+		if (checkValidString(username)==false ){
+			throw new InvalidStringException(username);
+
+		}
+		else if (username.equals("root") ){
+			throw new UsernameAlreadyExistsException(username);
+		}
+		if (md.getUserSet()!=null){
+			for (User user : md.getUserSet()){				
+				if(user.getUsername().equals(username)){
+					throw new UsernameAlreadyExistsException(username);
+
+				}
+			}
+		}
+		//check++;
+		//System.out.println(check);
+		setUsername(username);
+
+		if (password == null){
+			setPassword(username);
+		}
+		else{
+			setPassword(password);
+		}
+
+		if(name==null){
+			setName(username);
+		}
+		else{
+			setName(name);
+		}   
+
+		setMask("rwxd----");
+
+		Directory dir;
+
+
+		if(homedir.equals(null)){
+			dir = new Directory(md.getCnt(),username, "rwxdr-x-");
+		}
+		else{
+			if(pt.tecnico.MyDrive.domain.File.fileNameCheck(homedir)==false){
+				throw new InvalidStringException(homedir);
+			}
+			dir = new Directory(md.getCnt(),homedir, "rwxdr-x-");
+		}
+
+		this.addFile(dir);
+		this.setHomedir(dir);
+
+		Directory home = (Directory) (md.getRootdir()).getFileByName("home");
+		home.addFile(dir);
+		md.addUser(this);
+
+
+
+	}
+	
 	public boolean checkPassword( String pass){
 		if(this.getPassword().equals(pass)){
 			return true;
@@ -230,5 +296,23 @@ public class User extends User_Base {
 
 
 		return userElement;
+	}
+	public void remove() {
+		MyDrive md = MyDrive.getInstance();
+		for (User u :md.getUserSet()){
+			for (File f : u.getFileSet()){
+				u.removeFile(f);
+				setMydrive(null);
+				deleteDomainObject();
+			}
+			for (Session s: u.getSessionSet()){
+				u.removeSession(s);
+				setMydrive(null);
+				deleteDomainObject();
+			}
+			u.remove();
+		}
+		setMydrive(null);
+		deleteDomainObject();
 	}
 }
