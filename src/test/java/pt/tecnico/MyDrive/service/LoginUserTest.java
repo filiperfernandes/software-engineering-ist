@@ -16,7 +16,7 @@ public class LoginUserTest extends AbstractServiceTest {
 	@Override
 	protected void populate() {
 		md = MyDrive.getInstance();
-		User u = new User( "joao", "12345", "Joao", "lskdjgnfdkj");
+		new User( "joao", "12345", "Joao", "lskdjgnfdkj");
 //		
 //		System.out.println(u.getUserByUsername("joao").getName());
 	}
