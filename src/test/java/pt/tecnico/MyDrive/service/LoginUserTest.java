@@ -12,7 +12,7 @@ import pt.tecnico.MyDrive.domain.User;
 public class LoginUserTest extends AbstractServiceTest {
 
 	MyDrive md;
-
+	
 	@Override
 	protected void populate() {
 		md = MyDrive.getInstance();
