@@ -33,12 +33,12 @@ public class Directory extends Directory_Base {
 			deleteDomainObject();
 		}
 	}
-	
-	
-	public boolean DirectoryEmpty(Directory dir){
-		for(pt.tecnico.MyDrive.domain.File f : dir.getFileSet()){
+
+	public boolean DirectoryEmpty(){
+		for(pt.tecnico.MyDrive.domain.File f : this.getFileSet()){
 			if(f != null){
-				throw new DirectoryIsNotEmptyException();
+				System.out.println("ola2");
+				return false;
 			}
 		}
 		return true;
@@ -78,23 +78,25 @@ public class Directory extends Directory_Base {
 		throw new FileDoesNotExistException(name);
 	}
 	
-	public void removeDir(Directory dir){
-		if (DirectoryEmpty(dir) == true) {
-			this.setDirectory(null);
+	public void removeDir(){
+		if (this.DirectoryEmpty()) {
+			System.out.println("ola3 aqui e que da merda");
+			(this.getUser()).removeFile(this);
+			(this.getDirectory()).removeFile(this);
 			this.deleteDomainObject();
 		}
 		else{
-			for(pt.tecnico.MyDrive.domain.File f : (dir).getFileSet()){
+			for(pt.tecnico.MyDrive.domain.File f : (this).getFileSet()){
 				if (f instanceof PlainFile){
-					this.setDirectory(null);
-					this.deleteDomainObject();
+					((PlainFile) f).removePlainFile();
 				}
 				else{
-					removeDir((Directory) f);
+					((Directory) f).removeDir();
 				}
 			}
-		//this.setDirectory(null);
-		//this.deleteDomainObject();
+		(this.getUser()).removeFile(this);
+		(this.getDirectory()).removeFile(this);
+		this.deleteDomainObject();
 		}
 	}
 

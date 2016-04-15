@@ -1,8 +1,5 @@
 package pt.tecnico.MyDrive.domain;
 
-import org.joda.time.DateTime;
-import pt.tecnico.MyDrive.domain.*;
-import pt.tecnico.MyDrive.Exception.*;
 
 public class SuperUser extends SuperUser_Base {
 	//protected SuperUser (){}
@@ -26,12 +23,10 @@ public class SuperUser extends SuperUser_Base {
 		setPassword("***");
 		setName("Super User");
 		setMask("rwxdr-x-");
-		//this.addFile(rd);
-		System.out.println("oi" + rd.getName() + " \n");
 		this.setHomedir(rd);
-		System.out.println("oi" + (this.getHomedir()).getName() + " \n");
+		rootDir.setUser(this);
 		rd.setUser(this);
-		//home.setUser(this);
+		home.setUser(this);
 		md.addUser(this);
 	}
 

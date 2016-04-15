@@ -37,6 +37,10 @@ class Link extends PlainFile;
 class App extends PlainFile{
     String appData;
 }
+class AmbientVariable{
+    String name;
+    String value;
+}
 
 
 
@@ -53,6 +57,12 @@ relation MyDriveContainsSession{
 	MyDrive playsRole mydrive;
 	Session playsRole session{
 	multiplicity *;}
+}
+
+relation SessionContainsAmbientVariable{
+    Session playsRole session;
+    AmbientVariable playsRole ambientvariable{
+    multiplicity 0..1;}
 }
 
 relation UserOwnsSession{

@@ -22,7 +22,6 @@ public class LoginUserTest extends AbstractServiceTest {
 //		System.out.println(u.getUserByUsername("joao").getName());
 	}
 
-
 	@Test(expected=InvalidPasswordException.class)
 	public void invalidPasswordLoginRoot(){
 		LoginUserService log =  new LoginUserService(md, "root", "99999");
@@ -46,7 +45,6 @@ public class LoginUserTest extends AbstractServiceTest {
 	@Test
 	public void rootLogin(){
 		
-		//MyDrive md = MyDrive.getInstance();
 		LoginUserService log =  new LoginUserService(md, "root", "***");
 		log.execute();
 		long a = log.result();
@@ -62,9 +60,4 @@ public class LoginUserTest extends AbstractServiceTest {
 
 		assertNotNull(a);
 	}
-
-
-
-
-
 }
