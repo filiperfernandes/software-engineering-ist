@@ -1,11 +1,11 @@
 package pt.tecnico.MyDrive.domain;
-import pt.tecnico.MyDrive.domain.Session;
 import org.jdom2.Element;
 import org.joda.time.DateTime;
 import pt.tecnico.MyDrive.domain.*;
 import pt.tecnico.MyDrive.Exception.*;
 
 public class File extends File_Base {
+
 
 	protected File() {}
 
@@ -18,6 +18,7 @@ public class File extends File_Base {
 
 
 	}
+
 
 	public String getPath(){
 		String path = "";
@@ -37,6 +38,15 @@ public class File extends File_Base {
 			}
 		}
 		return true;
+	}
+
+
+	public void remove(){
+			this.remove();
+			this.setUser(null);
+			this.setDirectory(null);
+			deleteDomainObject();
+
 	}
 
 }

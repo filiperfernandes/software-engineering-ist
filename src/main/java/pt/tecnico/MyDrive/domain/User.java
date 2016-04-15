@@ -76,11 +76,19 @@ public class User extends User_Base {
 
 	}
 	
+//	public void setMyDrive(MyDrive md) {
+//		if (md == null)
+//			super.setMydrive1(null);
+//		else{
+//			md.addUser(this);
+//		}
+//	}
+	
 	public User(MyDrive md, String username, String password, String name, String homedir ) {
 		super();
 		
 		MyDrive muuu = MyDrive.getInstance();
-		this.setMydrive(muuu);
+		//setMydrive(muuu);
 
 		if (checkValidString(username)==false ){
 			throw new InvalidStringException(username);
@@ -89,8 +97,8 @@ public class User extends User_Base {
 		else if (username.equals("root") ){
 			throw new UsernameAlreadyExistsException(username);
 		}
-		if (md.getUserSet()!=null){
-			for (User user : md.getUserSet()){				
+		if (muuu.getUserSet()!=null){
+			for (User user : muuu.getUserSet()){				
 				if(user.getUsername().equals(username)){
 					throw new UsernameAlreadyExistsException(username);
 
@@ -121,21 +129,21 @@ public class User extends User_Base {
 
 
 		if(homedir.equals(null)){
-			dir = new Directory(md.getCnt(),username, "rwxdr-x-");
+			dir = new Directory(muuu.getCnt(),username, "rwxdr-x-");
 		}
 		else{
 			if(pt.tecnico.MyDrive.domain.File.fileNameCheck(homedir)==false){
 				throw new InvalidStringException(homedir);
 			}
-			dir = new Directory(md.getCnt(),homedir, "rwxdr-x-");
+			dir = new Directory(muuu.getCnt(),homedir, "rwxdr-x-");
 		}
 
 		this.addFile(dir);
 		this.setHomedir(dir);
 
-		Directory home = (Directory) (md.getRootdir()).getFileByName("home");
+		Directory home = (Directory) (muuu.getRootdir()).getFileByName("home");
 		home.addFile(dir);
-		md.addUser(this);
+		muuu.addUser(this);
 
 
 
@@ -300,19 +308,20 @@ public class User extends User_Base {
 	public void remove() {
 		MyDrive md = MyDrive.getInstance();
 		for (User u :md.getUserSet()){
-			for (File f : u.getFileSet()){
-				u.removeFile(f);
-				setMydrive(null);
-				deleteDomainObject();
+			for (File d :  u.getFileSet()){
+				d.remove();
+				((Directory) d).remove();
+				u.removeFile(d);
+				//setMydrive(null);
+				//deleteDomainObject();
 			}
 			for (Session s: u.getSessionSet()){
-				u.removeSession(s);
-				setMydrive(null);
-				deleteDomainObject();
+				s.remove();
 			}
-			u.remove();
+			//Remove users
+			u.setHomedir(null);
+			setMydrive(null);
+			deleteDomainObject();
 		}
-		setMydrive(null);
-		deleteDomainObject();
 	}
 }

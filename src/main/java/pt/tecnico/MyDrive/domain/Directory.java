@@ -11,6 +11,7 @@ import pt.tecnico.MyDrive.MyDriveApplication;
 
 public class Directory extends Directory_Base {
 
+
 	public Directory( Integer id, String name,  String permissions) {
 		super();
 		setId(id);
@@ -20,6 +21,20 @@ public class Directory extends Directory_Base {
 
 	}
 
+	public void remove(){
+		for (File f : this.getFileSet()){
+			//this.remove();
+			setUser(null);
+			setUser1(null);
+			setMydrive(null);
+			setMydrive1(null);
+			setDirectory(null);
+			setSession(null);
+			deleteDomainObject();
+		}
+	}
+	
+	
 	public boolean DirectoryEmpty(Directory dir){
 		for(pt.tecnico.MyDrive.domain.File f : dir.getFileSet()){
 			if(f != null){
