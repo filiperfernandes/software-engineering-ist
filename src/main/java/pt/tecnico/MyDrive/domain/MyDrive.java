@@ -22,8 +22,6 @@ public class MyDrive extends MyDrive_Base {
 		setRoot(FenixFramework.getDomainRoot());
 		setCounter(0);
 		new SuperUser();
-		/////////APAGAR LINHA DE BAIXO, APENAS PARA TESTE
-		//new User("joao", "12345", "Joao", "joao");
 	}
 
 	public Integer getCnt(){

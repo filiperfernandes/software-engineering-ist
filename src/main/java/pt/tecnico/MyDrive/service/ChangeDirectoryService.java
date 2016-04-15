@@ -13,41 +13,6 @@ import pt.tecnico.MyDrive.domain.Session;
 public class ChangeDirectoryService extends MyDriveService{
 
 
-	//	@Atomic
-	//	public static String changeCurrentDirectory(String name, long tok){
-	//		MyDrive md = MyDrive.getInstance();
-	//		Session session = getSessionByToken(tok);
-	//		Directory dir = session.getCurrentdir();
-	//		Directory rd = md.getRootdir();
-	//
-	//		if(name.equals(".")){
-	//          	return dir.getPath();
-	//		}
-	//		
-	//		
-	//		else if(name.equals("..")){
-	//			dir = dir.getDirectory();
-	//			session.setCurrentdir(dir);
-	//			return dir.getPath();
-	//		}
-	//		else {
-	//			if(checkPath(name, dir).equals("absolute")|| checkPath(name, dir).equals("")){
-	//				Directory directory = getDirByPath(name, rd);
-	//				session.setCurrentdir(directory);
-	//				System.out.println("absolute");
-	//				return directory.getPath();
-	//			}
-	//			else if(checkPath(name, dir).equals("relative") || checkPath(name, dir).equals("")){
-	//				Directory directory = getDirByPath(name, dir);
-	//				session.setCurrentdir(directory);
-	//				return directory.getPath();
-	//			}
-	//			else{
-	//				return "null";
-	//			}
-	//		}
-	//	}
-
 	private String name;
 	private long token;
 	private String path;
