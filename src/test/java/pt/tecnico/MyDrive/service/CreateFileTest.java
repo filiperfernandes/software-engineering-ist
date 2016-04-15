@@ -7,7 +7,9 @@ import org.junit.Test;
 import pt.tecnico.MyDrive.Exception.InvalidStringException;
 import pt.tecnico.MyDrive.Exception.InvalidTypeException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.UserDoesNotHavePermissionsException;
 import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.User;
 
 public class CreateFileTest extends AbstractServiceTest{
 	
@@ -15,6 +17,9 @@ public class CreateFileTest extends AbstractServiceTest{
 	
 	@Override
 	protected void populate() {
+		md = MyDrive.getInstance();
+		new User( "joao", "123", "Joao", "whatever");
+		
 	}
 
 	@Test(expected=SessionDoesNotExistException.class)
@@ -73,6 +78,25 @@ public class CreateFileTest extends AbstractServiceTest{
 		
 		assertEquals("nomePlainFile", actual);
 		
+	}
+	
+	@Test(expected=UserDoesNotHavePermissionsException.class)
+	public void DoNotHavePermissionsCreateFile(){
+		
+		LoginUserService log = new LoginUserService(md, "root","***");
+		log.execute();
+				
+		CreateFileService file = new CreateFileService(log.result(), "test", "Directory", null);
+		file.execute();
+					
+		LoginUserService log1 = new LoginUserService(md, "joao","123");
+		log1.execute();
+		
+		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root/test", log1.result());
+		dir.execute();
+		
+		CreateFileService file1 = new CreateFileService(log1.result(), "test1", "PlainFile", "iiii");
+		file1.execute();
 	}
 	
 }
