@@ -6,23 +6,25 @@ import org.junit.Test;
 
 import pt.tecnico.MyDrive.Exception.FileDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
+import pt.tecnico.MyDrive.domain.MyDrive;
 
 public class ReadFileTest extends AbstractServiceTest{
 
-
+	MyDrive md;
 
 	@Override
 	protected void populate() {
-		// TODO Auto-generated method stub
-		
+				
 	}
 
-//	@Test(expected=SessionDoesNotExistException.class)
-//	public void sessionDoesNotExistReadFile(){
-//		ReadFileService file = new ReadFile(toke, "nomeFicheiro");
-//		file.execute();
-//		//Dá erro porque o token e de uma sessao que nao existe
-//	}
+	@Test(expected=SessionDoesNotExistException.class)
+	public void sessionDoesNotExistReadFile(){
+		LoginUserService log =  new LoginUserService(md, "root", "***");
+		log.execute();
+		
+		ReadFileService file = new ReadFileService("nomeFicheiro", 45656456);
+		file.execute();
+	}
 //	
 //	@Test(expected=FileDoesNotExistException.class)
 //	public void fileDoesNotExistReadFile(){
