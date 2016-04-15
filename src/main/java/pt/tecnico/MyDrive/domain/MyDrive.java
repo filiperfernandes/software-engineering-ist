@@ -23,7 +23,6 @@ public class MyDrive extends MyDrive_Base {
 	private MyDrive() {
 		setRoot(FenixFramework.getDomainRoot());
 		setCounter(0);
-		System.out.println("vim aqui" + " \n");
 		new SuperUser();
 	}
 

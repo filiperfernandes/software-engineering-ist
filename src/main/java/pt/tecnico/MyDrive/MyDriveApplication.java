@@ -188,7 +188,6 @@ public class MyDriveApplication {
 			if(checkPath(name, dir).equals("absolute")|| checkPath(name, dir).equals("")){
 				Directory directory = getDirByPath(name, rd);
 				session.setCurrentdir(directory);
-				System.out.println("absolute");
 				return directory.getPath();
 			}
 			else if(checkPath(name, dir).equals("relative") || checkPath(name, dir).equals("")){
@@ -259,7 +258,7 @@ public class MyDriveApplication {
 
 
 	@Atomic
-	public static void ReadFile(String name, long tok) {
+	public static void readFile(String name, long tok) {
 
 		MyDrive md = MyDrive.getInstance();
 		Session session = getSessionByToken(tok);
@@ -273,7 +272,7 @@ public class MyDriveApplication {
 		}catch(FileDoesNotExistException | FileIsDirectoryException | UserDoesNotHavePermissionsException e) { System.err.println(e); }
 	}
 
-	public static void WriteFile(String name, long tok,String content) {
+	public static void writeFile(String name, long tok,String content) {
 
 		MyDrive md = MyDrive.getInstance();		
 		Session session = getSessionByToken(tok);
@@ -300,88 +299,24 @@ public class MyDriveApplication {
 
 		User u = s.getUser();
 
-
-
-		//String path = changeCurrentDirectory("/home", p);
-		//System.out.println(path);
-
-		/*PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
-		d.addFile(file);
-		u.addFile(file);
-		ReadFile("test",p);
-		WriteFile("test",p,"HI !!!!!!!");
-		ReadFile("test",p);*/
 		createFile(p, "jojo", "Directory", null);
-
 		listDirectory(p);
-
-
-//		long p =login("root","***");
-//		Session s = getSessionByToken(p);
-//		Directory d = s.getCurrentdir();
-//		User u = s.getUser();
-//		Directory dir = new Directory(7, "joao","rwxd--x-" );
-//		d.addFile(dir);
-//		//String path = changeCurrentDirectory("/home", p);
-//		//System.out.println(path);
-//		PlainFile file = new PlainFile(md.getCnt(), "test","rwxdr-test", "Hello World!");
-//		d.addFile(file);
-//		u.addFile(file);
-//		ReadFile("test",p);
-//		WriteFile("test",p,"HI !!!!!!!");
-//		ReadFile("test",p);
-//		createFile(p, "joao", "Directory", null);
-		//long p =login("root","***");
-		//Session s = getSessionByToken(p);
-		//Directory d = s.getCurrentdir();
-		
-		
-
-		//Directory dir = new Directory(7, "joao","rwxd--x-" );
-		//d.addFile(dir);
-		//String path = changeCurrentDirectory("/joao", p);
-		//System.out.println(path);
-
-
-		//Directory home = (Directory) (md.getRootdir()).getDirByName("home");
-		//Directory root = (Directory) (home.getFileByName("root"));
-		//Directory d = new Directory(md.getCnt(), "casa","rwxdr-test");
-		//md.setCurrentdir(md.getRootdir());
-		//root.addFile(d);
-
-		//root.addFile(file);
-
-		//new User("joao", "passe", "vultos");
-
-		//new SuperUser();
-
-		//createPlainFile("root", "/home/root/test", "/home/root", "rwxdr-test", "Hello World!");
-		//r.setDimension(r.getDimension()+1);
-
-		//new User("Filipe", "test", "Filipe Fernandes");
-
+		changeCurrentDirectory("/jojo", p);
+		createFile(p,"test","Directory", null);
+		createFile(p,"filetest","PlainFile", null);
+		listDirectory(p);
+		changeCurrentDirectory("/test", p);
+		createFile(p,"filetest1","PlainFile", null);
+		listDirectory(p);
+		changeCurrentDirectory("..", p);
+		listDirectory(p);
+		deleteFile("test", p);
+		listDirectory(p);
+		changeCurrentDirectory("..", p);
+		listDirectory(p);
+		deleteFile("jojo", p);
 
 	}
-
-	/*public static void createPlainFile(String owner, String name, String pathToFile, String permissions, String data){
-
-	//Add data to database
-
-	@Atomic
-	public static void addData(){
-		MyDrive md = MyDrive.getInstance();
-
-		//new PlainFile(md.getCnt(), owner, name, pathToFile, date, "rwxdr-test", "Hello World!");
-		//Directory f = (Directory)md.getFileByPath(pathToFile);
-
-
-
-
-
-
-	}*/
-
-
 
 	//Not sure if needed
 	@Atomic
@@ -418,77 +353,6 @@ public class MyDriveApplication {
 		} catch (JDOMException | IOException | ImportXmlException e) { System.err.println(e); }
 
 	}
-
-/*	@Atomic
-	public static void removeDirectory() {
-		System.out.println("Insert path of directory you want to remove");
-		String path = input.next();
-		MyDrive md = MyDrive.getInstance();
-		String dirname = "";
-		Directory dir = md.getRootdir() ;
-		Integer c = 0;
-		for(char ch : path.toCharArray()){
-			if(c.equals(0)){
-				c++;
-			}
-			else if(ch == '/'){
-				try{
-					dir = (Directory) (dir.getDirByName(dirname));
-					dirname="";
-				}catch (DirectoryDoesNotExistException | FileIsPlainFileException e) { System.err.println(e); }
-			}
-			else{
-				dirname += ch;
-			}
-		}	
-		try{
-			dir = (Directory) (dir.getDirByName(dirname));
-			if(dir.DirectoryEmpty(dir));{
-				(md.getCurrentuser()).removeFile(dir);
-				(md.getCurrentdir()).removeFile(dir);
-				//dir.removeDir();
-				System.out.println("remove sucessfull");
-			}
-		}catch(DirectoryDoesNotExistException | FileIsPlainFileException | DirectoryIsNotEmptyException e) { 
-			System.err.println(e); }
-	}
-
-*/
-
-
-/*
-	@Atomic
-	public static void removePlainFile(){ //Remove PlainFile
-		System.out.println("Insert path of plainfile you want to remove");
-		String path = input.next();
-		MyDrive md = MyDrive.getInstance();
-		String dirname = "";
-		Directory dir = md.getRootdir() ;
-		Integer c = 0;
-		for(char ch : path.toCharArray()){
-			if(c.equals(0)){
-				c++;
-			}
-			else if(ch == '/'){
-				try{
-					dir = (Directory) (dir.getFileByName(dirname));
-					dirname="";
-				}catch (FileDoesNotExistException e) { System.err.println(e); }
-			}
-			else{
-				dirname += ch;
-			}
-		}	
-		try{
-			PlainFile plfile = (PlainFile) (dir.getPlainfileByName(dirname));
-			(md.getCurrentuser()).removeFile(plfile);
-			(md.getCurrentdir()).removeFile(plfile);
-			plfile.removePlainFile();
-			System.out.println("remove sucessfull");
-		}catch(FileDoesNotExistException | FileIsDirectoryException e) { 
-			System.err.println(e); }
-	}
-*/
 
 	public static String checkPath(String path, Directory dir){
 
@@ -628,66 +492,43 @@ public static void createFile(long token, String name, String type, String conte
 
 		try{
 			checkPermissionsWrite(user,dir.getUser(),dir.getPermissions());
-
-
-
 			for(char namecheck : name.toCharArray()){
-
 				if(namecheck== '/' || namecheck=='.'){
-
 					throw new InvalidStringException(name);
 				}
-
-
 			}
-
-
 		if(type.equals("Directory")){
-
 			Directory d = new Directory(md.getCnt(), name, perm);
 			dir.addFile(d);
-
 			user.addFile(d);
-
 		}
-
 			else if(type.equals("PlainFile")){
-
 				PlainFile f = new PlainFile(md.getCnt(), name, perm, content);
 				dir.addFile(f);
 				user.addFile(f);
-
 			}
 			else{
 				throw new InvalidTypeException(); //Erro porque a excepcao ainda nao foi criada
 			}
-					
 		}catch(InvalidTypeException | UserDoesNotHavePermissionsException | InvalidStringException e){ System.err.println(e);}
-
-
 }
 
 
-
-
 @Atomic
-public static void DeleteFile(String name, long tok) {
+public static void deleteFile(String name, long tok) {
 
-	MyDrive md = MyDrive.getInstance();
 	Session session = getSessionByToken(tok);
 	Directory dir = session.getCurrentdir() ;
-
+	System.out.println(dir.getName());
 
 	try{
 		pt.tecnico.MyDrive.domain.File file = dir.getFileByName(name);
+		checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
 		if (file instanceof Directory) {
-			checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
-
-			((Directory) file).removeDir(dir);				
+			System.out.println("ola");
+			((Directory) file).removeDir();				
 		}
 		else if (file instanceof PlainFile) {
-			checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
-
 			((PlainFile) file).removePlainFile();
 		}
 	}catch(FileDoesNotExistException | FileIsDirectoryException | UserDoesNotHavePermissionsException e) { System.err.println(e); }

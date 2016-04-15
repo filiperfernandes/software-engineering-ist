@@ -26,12 +26,8 @@ public class SuperUser extends SuperUser_Base {
 		setPassword("***");
 		setName("Super User");
 		setMask("rwxdr-x-");
-		//this.addFile(rd);
-		System.out.println("oi" + rd.getName() + " \n");
 		this.setHomedir(rd);
-		System.out.println("oi" + (this.getHomedir()).getName() + " \n");
 		rd.setUser(this);
-		//home.setUser(this);
 		md.addUser(this);
 	}
 
