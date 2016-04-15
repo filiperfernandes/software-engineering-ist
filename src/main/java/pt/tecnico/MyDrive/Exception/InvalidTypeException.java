@@ -6,12 +6,11 @@ public class InvalidTypeException extends MyDriveException {
 
 
     public InvalidTypeException() {
+	
+	
+		
+        super("Invalid Type\n");
 
-    }
-
-
-    @Override
-    public String getMessage() {
-        return "The file type is invalid \n";
-    }
+	}
+    
 }
