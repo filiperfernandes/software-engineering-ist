@@ -6,7 +6,7 @@ pasta com os dml's de toda a gente —> Feito
 
 String app e String app data strings a mais
 
-Dimension no directory é de evitar- Calcular na altura que for para mostrar —> (falta 2 parte)
+Dimension no directory é de evitar- Calcular na altura que for para mostrar —> (falta 2 parte)->Feito
 
 Mudar o root e rootroot para mydrive —> Feito
 
@@ -18,7 +18,7 @@ CheckvalidString meter com o nome setUsername para ter de passar nesta função 
 
 Não verificamos que os ficheiros nao podem ter nem 1 barra nem 1 ponto->Feito	
 
-Imports e exports meio manhasos, Vai buscar e manda fazer imediatamente os users
+Imports e exports meio manhasos, Vai buscar e manda fazer imediatamente os users->Feito
 
 ID não é para ser aproveitado
 
