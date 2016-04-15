@@ -24,13 +24,14 @@ public class Directory extends Directory_Base {
 	public void remove(){
 		for (File f : this.getFileSet()){
 			//this.remove();
-			setUser(null);
-			setUser1(null);
-			setMydrive(null);
-			setMydrive1(null);
-			setDirectory(null);
-			setSession(null);
-			deleteDomainObject();
+			//			setUser(null);
+			//			setUser1(null);
+			//			setMydrive(null);
+			//			setMydrive1(null);
+			//			setDirectory(null);
+			//			setSession(null);
+			//			deleteDomainObject();
+
 		}
 	}
 
@@ -77,11 +78,17 @@ public class Directory extends Directory_Base {
 		}
 		throw new FileDoesNotExistException(name);
 	}
-	
+
 	public void removeDir(){
+
+		if (this.getName().equals("/")){
+
+		}
 		if (this.DirectoryEmpty()) {
 			(this.getUser()).removeFile(this);
 			(this.getDirectory()).removeFile(this);
+			this.setUser1(null);
+			
 			this.deleteDomainObject();
 		}
 		else{
@@ -93,9 +100,13 @@ public class Directory extends Directory_Base {
 					((Directory) f).removeDir();
 				}
 			}
-		(this.getUser()).removeFile(this);
-		(this.getDirectory()).removeFile(this);
-		this.deleteDomainObject();
+			(this.getUser()).removeFile(this);
+
+			if (!this.getName().equals("/")){
+
+				(this.getDirectory()).removeFile(this);
+			}
+			this.deleteDomainObject();
 		}
 	}
 
