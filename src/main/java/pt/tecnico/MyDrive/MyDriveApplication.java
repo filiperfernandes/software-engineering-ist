@@ -511,15 +511,15 @@ public class MyDriveApplication {
 		String userPermissions = user.getMask();
 		char ch2[] = userPermissions.toCharArray();
 
-		if(owner.equals(user)){
-			return true;	
-		}
-		else if (ch1[6]==ch2[6] && ch1[6]=='w'){
-			return true;
-		}
-		else{
-			throw new UserDoesNotHavePermissionsException();
-		}
+	if(owner.equals(user)){
+		return true;	
+	}
+	else if (ch1[7]==ch2[7] && ch1[7]=='x'){
+		return true;
+	}
+	else{
+		throw new UserDoesNotHavePermissionsException();}
+
 	}
 
 	public static boolean checkPermissionsExecute(User user, User owner, String permissions){
@@ -537,6 +537,7 @@ public class MyDriveApplication {
 			throw new UserDoesNotHavePermissionsException();
 		}
 	}
+
 	public static boolean checkPermissionsDelete(User user, User owner, String permissions){
 		char ch1[] = permissions.toCharArray();
 		String userPermissions = user.getMask();
@@ -551,6 +552,7 @@ public class MyDriveApplication {
 		else{
 			throw new UserDoesNotHavePermissionsException();
 		}
+
 	}
 
 
