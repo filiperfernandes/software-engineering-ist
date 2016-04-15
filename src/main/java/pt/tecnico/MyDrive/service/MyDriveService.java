@@ -8,21 +8,21 @@ import pt.ist.fenixframework.Atomic;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.User;
 
-	public abstract class MyDriveService {
-	    protected static final Logger log = LogManager.getRootLogger();
+public abstract class MyDriveService {
+	protected static final Logger log = LogManager.getRootLogger();
 
-	    @Atomic
-	    public final void execute() throws MyDriveException {
-	        dispatch();
-	    }
+	@Atomic
+	public final void execute() throws MyDriveException {
+		dispatch();
+	}
 
-	    static MyDrive getMyDrive() {
-	        return MyDrive.getInstance();
-	    }
+	static MyDrive getMyDrive() {
+		return MyDrive.getInstance();
+	}
 
-	    protected abstract void dispatch() throws MyDriveException;
-	
-			public static boolean checkPermissionsRead(User user, User owner, String permissions){
+	protected abstract void dispatch() throws MyDriveException;
+
+	public static boolean checkPermissionsRead(User user, User owner, String permissions){
 		char ch1[] = permissions.toCharArray();
 		String userPermissions = user.getMask();
 		char ch2[] = userPermissions.toCharArray();
@@ -85,6 +85,6 @@ import pt.tecnico.MyDrive.domain.User;
 			throw new UserDoesNotHavePermissionsException();
 		}
 	}
-	}
+}
 
 

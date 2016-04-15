@@ -23,9 +23,9 @@ public class LoginUserService extends MyDriveService{
 		Session s = new Session(md, username, password);
 		token = s.getToken();
 	}
-	
-	
-	 public final long result() {
-	        return token;
-	    }
+
+
+	public final long result() {
+		return token;
+	}
 }

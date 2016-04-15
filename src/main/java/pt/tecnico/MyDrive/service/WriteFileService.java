@@ -30,10 +30,10 @@ public class WriteFileService extends MyDriveService{
 		PlainFile file = ((PlainFile) (dir.getPlainfileByName(name)));
 		checkPermissionsWrite(session.getUser(), file.getUser(), file.getPermissions());
 		file.setData(content);
-		
+
 		ficheiro = file;
 	}
-	
+
 	public PlainFile result(){
 		return ficheiro;
 	}

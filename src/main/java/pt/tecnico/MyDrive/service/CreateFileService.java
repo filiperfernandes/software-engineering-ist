@@ -57,7 +57,7 @@ public class CreateFileService extends MyDriveService{
 	public String result(){
 		return file;
 	}
-	
+
 	public static Session getSessionByToken(long token){
 		MyDrive md = MyDrive.getInstance();
 

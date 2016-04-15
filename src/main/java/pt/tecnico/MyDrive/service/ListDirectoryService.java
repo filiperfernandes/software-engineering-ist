@@ -15,7 +15,7 @@ public class ListDirectoryService extends MyDriveService{
 
 	private long token;
 	private List<FileInfoDto> listfiles;
-	
+
 
 	public ListDirectoryService(long token){
 

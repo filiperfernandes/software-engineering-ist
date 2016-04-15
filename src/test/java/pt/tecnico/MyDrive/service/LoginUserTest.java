@@ -12,13 +12,13 @@ import pt.tecnico.MyDrive.domain.User;
 public class LoginUserTest extends AbstractServiceTest {
 
 	MyDrive md;
-	
+
 	@Override
 	protected void populate() {
 		md = MyDrive.getInstance();
 		new User( "joao", "12345", "Joao", "lskdjgnfdkj");
-//		
-//		System.out.println(u.getUserByUsername("joao").getName());
+		//		
+		//		System.out.println(u.getUserByUsername("joao").getName());
 	}
 
 	@Test(expected=InvalidPasswordException.class)
@@ -27,7 +27,7 @@ public class LoginUserTest extends AbstractServiceTest {
 		log.execute();
 
 	}
-	
+
 	@Test(expected=InvalidPasswordException.class)
 	public void invalidPasswordLoginUser(){
 		LoginUserService log =  new LoginUserService(md, "joao", "99999");
@@ -43,14 +43,14 @@ public class LoginUserTest extends AbstractServiceTest {
 
 	@Test
 	public void rootLogin(){
-		
+
 		LoginUserService log =  new LoginUserService(md, "root", "***");
 		log.execute();
 		long a = log.result();
-		
+
 		assertNotNull(a);
 	}
-	
+
 	@Test
 	public void userLogin(){
 		LoginUserService log =  new LoginUserService(md, "joao", "12345");

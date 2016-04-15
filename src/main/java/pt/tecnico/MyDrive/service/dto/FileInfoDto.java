@@ -27,7 +27,7 @@ public class FileInfoDto implements Comparable<FileInfoDto>  {
 	public final String getOwner() {
 		return this.owner;
 	}
-	
+
 	public final int getId(){
 		return this.id;
 	}

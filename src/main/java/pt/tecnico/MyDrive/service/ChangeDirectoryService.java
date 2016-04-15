@@ -29,11 +29,11 @@ public class ChangeDirectoryService extends MyDriveService{
 		Session session = getSessionByToken(token);
 		Directory dir = session.getCurrentdir();
 		Directory rd = md.getRootdir();
-		
+
 		if(name.length()> 1024){
 			throw new PathToBigException();
 		}
-		
+
 		else if (name.equals("/")){
 			session.setCurrentdir(rd);
 			path = "/";
@@ -108,7 +108,7 @@ public class ChangeDirectoryService extends MyDriveService{
 				dirname += ch;
 			}
 		}
-		
+
 		return "";
 	}
 
@@ -146,7 +146,7 @@ public class ChangeDirectoryService extends MyDriveService{
 		}
 		throw new SessionDoesNotExistException(token);
 	}
-	
+
 }
 
 

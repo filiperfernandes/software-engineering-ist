@@ -14,7 +14,7 @@ public class DeleteFileService extends MyDriveService {
 
 	private String fileName;
 	private long token;
-	
+
 	public DeleteFileService (long token, String name) {
 		this.fileName = name;
 		this.token=token;
@@ -24,17 +24,17 @@ public class DeleteFileService extends MyDriveService {
 	public final void dispatch() throws FileDoesNotExistException {
 		Session session = getSessionByToken(token);
 		Directory dir = session.getCurrentdir() ;
-			pt.tecnico.MyDrive.domain.File file = dir.getFileByName(fileName);
-			checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
-			
-			if (file instanceof Directory) {
-				((Directory) file).removeDir();	
-				
-			}
-			else if (file instanceof PlainFile) {
-				((PlainFile) file).removePlainFile();
-				
-			}
+		pt.tecnico.MyDrive.domain.File file = dir.getFileByName(fileName);
+		checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
+
+		if (file instanceof Directory) {
+			((Directory) file).removeDir();	
+
+		}
+		else if (file instanceof PlainFile) {
+			((PlainFile) file).removePlainFile();
+
+		}
 
 	}
 
@@ -50,7 +50,7 @@ public class DeleteFileService extends MyDriveService {
 		}
 		throw new SessionDoesNotExistException(token);
 	}
- 
+
 
 
 

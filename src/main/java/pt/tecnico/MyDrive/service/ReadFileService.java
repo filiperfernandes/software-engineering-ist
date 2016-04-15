@@ -24,16 +24,16 @@ public class ReadFileService extends MyDriveService{
 		MyDrive md = MyDrive.getInstance();
 		Session session = getSessionByToken(token);
 		Directory dir = session.getCurrentdir() ;
-		
+
 		PlainFile file = ((PlainFile) (dir.getPlainfileByName(name)));
 		checkPermissionsRead(session.getUser(), file.getUser(), file.getPermissions());
 		fileData = file.getData();
 	}
-	
+
 	public String result(){
 		return fileData;
 	}
-	
+
 	public static Session getSessionByToken(long token){
 		MyDrive md = MyDrive.getInstance();
 
