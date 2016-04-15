@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.domain.MyDrive;
-import pt.tecnico.MyDrive.service.dto.FileInfoDto;
+import pt.tecnico.Mydrive.service.dto.FileInfoDto;
 
 public class ListDirectoryTest extends AbstractServiceTest {
 

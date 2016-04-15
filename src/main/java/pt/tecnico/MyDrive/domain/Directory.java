@@ -87,7 +87,7 @@ public class Directory extends Directory_Base {
 		if (this.DirectoryEmpty()) {
 			(this.getUser()).removeFile(this);
 			(this.getDirectory()).removeFile(this);
-			this.setUser1(null);
+			this.setUser(null);
 			
 			this.deleteDomainObject();
 		}
