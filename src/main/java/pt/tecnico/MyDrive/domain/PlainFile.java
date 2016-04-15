@@ -24,7 +24,6 @@ public class PlainFile extends PlainFile_Base {
 		this.deleteDomainObject();
 	}
 	
-
 /*	public void readPlainFile(String path) {
 		MyDrive md = MyDrive.getInstance();
 		String dirname = "";
