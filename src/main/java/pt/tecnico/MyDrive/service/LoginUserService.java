@@ -8,16 +8,18 @@ public class LoginUserService extends MyDriveService{
 
 	private String username;
 	private String password;
+	private MyDrive md;
 	private long token;
 
-	public LoginUserService(String username, String password) {
+	public LoginUserService(MyDrive md, String username, String password) {
 		this.username=username;
 		this.password=password;
+		this.md=md;
 	}
 
 	@Override
 	protected void dispatch() throws MyDriveException {
-		MyDrive md = MyDrive.getInstance();	
+		//MyDrive md = MyDrive.getInstance();	
 		Session s = new Session(md, username, password);
 		token = s.getToken();
 	}

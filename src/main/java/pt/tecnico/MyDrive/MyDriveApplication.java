@@ -58,11 +58,11 @@ public class MyDriveApplication {
 		} finally { FenixFramework.shutdown(); }
 	}
 
-//    @Atomic
-//    public static void init() { // empty phonebook
-//	log.trace("Init: " + FenixFramework.getDomainRoot());
-//	MyDrive.getInstance().cleanup();
-//    }
+    @Atomic
+    public static void init() { // empty phonebook
+	log.trace("Init: " + FenixFramework.getDomainRoot());
+	MyDrive.getInstance().cleanup();
+    }
 
 	@Atomic
 	public static long login(String username, String pass){
@@ -293,12 +293,13 @@ public class MyDriveApplication {
 
 		MyDrive md = MyDrive.getInstance();
 
+		//Session s = new Session(md, "root", "***");
 
-		long p =login("root","***");
-		Session s = getSessionByToken(p);
-		Directory d = s.getCurrentdir();
-
-		User u = s.getUser();
+//		long p =login("root","***");
+//		Session s = getSessionByToken(p);
+//		Directory d = s.getCurrentdir();
+//
+//		User u = s.getUser();
 
 
 
@@ -311,9 +312,11 @@ public class MyDriveApplication {
 		ReadFile("test",p);
 		WriteFile("test",p,"HI !!!!!!!");
 		ReadFile("test",p);*/
-		createFile(p, "jojo", "Directory", null);
-
-		listDirectory(p);
+		
+		
+//		createFile(p, "jojo", "Directory", null);
+//
+//		listDirectory(p);
 
 
 //		long p =login("root","***");

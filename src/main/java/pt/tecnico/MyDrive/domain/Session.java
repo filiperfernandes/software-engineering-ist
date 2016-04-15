@@ -11,8 +11,8 @@ public class Session extends Session_Base {
 	public Session(MyDrive md, String username, String password) {
 		super();
 		setToken(new BigInteger(64, new Random()).longValue());
-
-		User user = md.getUserByUsername(username);
+		MyDrive muuu = MyDrive.getInstance();
+		User user = muuu.getUserByUsername(username);
 		if(user.checkPassword(password)){
 			//criar timer de 2 horas
 			//updateSessions();
@@ -20,7 +20,7 @@ public class Session extends Session_Base {
 			setCurrentdir(user.getHomedir());
 			DateTime time = new DateTime();
 			setState(time);
-			md.addSession(this);
+			muuu.addSession(this);
 		}
 
 
