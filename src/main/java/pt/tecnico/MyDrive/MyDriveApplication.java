@@ -497,7 +497,7 @@ public class MyDriveApplication {
 		if(owner.equals(user)){
 			return true;	
 		}
-		else if (ch1[5]==ch2[5] && ch1[5]=='r'){
+		else if (ch1[4]==ch2[4] && ch1[4]=='r'){
 			return true;
 		}
 		else{
@@ -514,7 +514,7 @@ public class MyDriveApplication {
 	if(owner.equals(user)){
 		return true;	
 	}
-	else if (ch1[7]==ch2[7] && ch1[7]=='x'){
+	else if (ch1[5]==ch2[5] && ch1[5]=='w'){
 		return true;
 	}
 	else{
@@ -530,7 +530,7 @@ public class MyDriveApplication {
 		if(owner.equals(user)){
 			return true;	
 		}
-		else if (ch1[7]==ch2[7] && ch1[7]=='x'){
+		else if (ch1[6]==ch2[6] && ch1[6]=='x'){
 			return true;
 		}
 		else{
@@ -546,7 +546,7 @@ public class MyDriveApplication {
 		if(owner.equals(user)){
 			return true;	
 		}
-		else if (ch1[8]==ch2[8] && ch1[8]=='d'){
+		else if (ch1[7]==ch2[7] && ch1[7]=='d'){
 			return true;
 		}
 		else{
