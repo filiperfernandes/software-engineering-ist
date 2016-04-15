@@ -23,7 +23,7 @@ import pt.tecnico.MyDrive.Exception.MyDriveException;
 	        return MyDrive.getInstance();
 	    }
 
-	    static File getPerson(String fileName) throws FileDoesNotExistException {
+	    static File getFile(String fileName) throws FileDoesNotExistException {
 	    	File f = null;
 	    	//File f = getMyDrive().getFileByName(fileName);
 

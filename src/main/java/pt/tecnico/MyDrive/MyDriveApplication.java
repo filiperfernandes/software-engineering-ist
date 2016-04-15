@@ -285,7 +285,16 @@ public class MyDriveApplication {
 		}catch(FileDoesNotExistException | FileIsDirectoryException | UserDoesNotHavePermissionsException e) { System.err.println(e); }
 	}
 
-
+	public static String getPathBig(){
+		Integer c = 0;
+		String path = "";
+		while(c<1025){
+			path = path + "/";
+			c++;
+		}
+		return path;
+	}
+	
 	//Initialize MyDrive
 	@Atomic
 	public static void setup() {

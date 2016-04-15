@@ -4,6 +4,7 @@ import pt.ist.fenixframework.Atomic;
 import pt.tecnico.MyDrive.Exception.DirectoryDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.FileIsPlainFileException;
 import pt.tecnico.MyDrive.Exception.MyDriveException;
+import pt.tecnico.MyDrive.Exception.PathDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.domain.Directory;
 import pt.tecnico.MyDrive.domain.MyDrive;
@@ -64,32 +65,40 @@ public class ChangeDirectoryService extends MyDriveService{
 		Session session = getSessionByToken(token);
 		Directory dir = session.getCurrentdir();
 		Directory rd = md.getRootdir();
-
-		if(name.equals(".")){
+		if(name.equals("/")){
+			session.setCurrentdir(rd);
+			path = "/";
+		}
+		else if(name.equals(".")){
 			path = dir.getPath();
 		}
 
 		else if(name.equals("..")){
-			dir = dir.getDirectory();
-			session.setCurrentdir(dir);
-			path = dir.getPath();
+			if(dir.equals(rd)){
+				path = "/";
+			}
+			else{
+				dir = dir.getDirectory();
+				session.setCurrentdir(dir);
+				path = dir.getPath();
+			}
 		}
 
 		else {
 			
-			if(checkPath(name, dir).equals("absolute")|| checkPath(name, dir).equals("")){
+			if(checkPath(name, dir).equals("absolute")){
 				Directory directory = getDirByPath(name, rd);
 				session.setCurrentdir(directory);
 				System.out.println("absolute");
 				path = directory.getPath();
 			}
-			else if(checkPath(name, dir).equals("relative") || checkPath(name, dir).equals("")){
+			else if(checkPath(name, dir).equals("relative")){
 				Directory directory = getDirByPath(name, dir);
 				session.setCurrentdir(directory);
 				path = directory.getPath();
 			}
 			else{
-				path = "null";
+				throw new PathDoesNotExistException(name);
 			}
 		}
 	}
@@ -128,6 +137,7 @@ public class ChangeDirectoryService extends MyDriveService{
 				dirname += ch;
 			}
 		}
+		
 		return "";
 	}
 	
