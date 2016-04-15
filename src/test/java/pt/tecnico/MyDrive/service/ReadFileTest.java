@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import pt.tecnico.MyDrive.Exception.FileDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.FileIsDirectoryException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.UserDoesNotHavePermissionsException;
 import pt.tecnico.MyDrive.domain.MyDrive;
@@ -77,6 +78,17 @@ public class ReadFileTest extends AbstractServiceTest{
 		file1.execute();
 	}
 
-	
+	@Test(expected=FileIsDirectoryException.class)
+	public void fileIsDirectoryReadFile(){
+		LoginUserService log =  new LoginUserService(md, "root", "***");
+		log.execute();
+		long token = log.result();
+		
+		CreateFileService dir = new CreateFileService(token, "DIR", "Directory", null);
+		dir.execute();
+		
+		ReadFileService file = new ReadFileService("DIR",log.result());
+		file.execute();
+	}
 	
 }

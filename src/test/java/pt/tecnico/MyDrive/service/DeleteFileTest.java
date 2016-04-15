@@ -8,7 +8,9 @@ import org.junit.Test;
 
 import pt.tecnico.MyDrive.Exception.FileDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.UserDoesNotHavePermissionsException;
 import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.User;
 import pt.tecnico.MyDrive.service.dto.FileInfoDto;
 
 public class DeleteFileTest extends AbstractServiceTest{
@@ -17,7 +19,8 @@ public class DeleteFileTest extends AbstractServiceTest{
 	
 	@Override
 	protected void populate() {
-		// TODO Auto-generated method stub
+		md = MyDrive.getInstance();
+		new User( "joao", "123", "Joao", "whatever");
 		
 	}
 
@@ -112,5 +115,42 @@ public class DeleteFileTest extends AbstractServiceTest{
 		assertEquals("..", cs.get(1).getName());
 	}
 	
+	@Test(expected=UserDoesNotHavePermissionsException.class)
+	public void DoNotHavePermissionsDeleteFile(){
+		
+		LoginUserService log = new LoginUserService(md, "root","***");
+		log.execute();
+				
+		CreateFileService file = new CreateFileService(log.result(),"test", "Directory", null);
+		file.execute();
+					
+		LoginUserService log1 = new LoginUserService(md, "joao","123");
+		log1.execute();
+		
+		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());
+		dir.execute();
+								
+		DeleteFileService del = new DeleteFileService(log1.result(), "test");
+		del.execute();
+	}
+	
+	@Test(expected=UserDoesNotHavePermissionsException.class)
+	public void DoNotHavePermissionsDeleteFile1(){
+		
+		LoginUserService log = new LoginUserService(md, "root","***");
+		log.execute();
+				
+		CreateFileService file = new CreateFileService(log.result(), "test", "PlainFile", "HII");
+		file.execute();
+					
+		LoginUserService log1 = new LoginUserService(md, "joao","123");
+		log1.execute();
+		
+		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());
+		dir.execute();
+								
+		DeleteFileService del = new DeleteFileService(log1.result(), "test");
+		del.execute();
+	}
 	
 }
