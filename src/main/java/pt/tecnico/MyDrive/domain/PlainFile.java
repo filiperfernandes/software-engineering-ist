@@ -19,7 +19,8 @@ public class PlainFile extends PlainFile_Base {
 		setData(data);
 	}	
 	public void removePlainFile(){
-		this.setData(null);
+		(this.getUser()).removeFile(this);
+		(this.getDirectory()).removeFile(this);
 		this.deleteDomainObject();
 	}
 	

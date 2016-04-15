@@ -90,7 +90,6 @@ public class ChangeDirectoryService extends MyDriveService{
 		}
 
 		else {
-
 			if(checkPath(name, dir).equals("absolute")){
 				Directory directory = getDirByPath(name, rd);
 				session.setCurrentdir(directory);
@@ -145,6 +144,7 @@ public class ChangeDirectoryService extends MyDriveService{
 				dirname += ch;
 			}
 		}
+		
 		return "";
 	}
 
