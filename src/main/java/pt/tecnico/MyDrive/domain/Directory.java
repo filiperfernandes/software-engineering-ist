@@ -11,6 +11,7 @@ import pt.tecnico.MyDrive.MyDriveApplication;
 
 public class Directory extends Directory_Base {
 
+
 	public Directory( Integer id, String name,  String permissions) {
 		super();
 		setId(id);
@@ -20,10 +21,25 @@ public class Directory extends Directory_Base {
 
 	}
 
-	public boolean DirectoryEmpty(Directory dir){
-		for(pt.tecnico.MyDrive.domain.File f : dir.getFileSet()){
+	public void remove(){
+		for (File f : this.getFileSet()){
+			//this.remove();
+			//			setUser(null);
+			//			setUser1(null);
+			//			setMydrive(null);
+			//			setMydrive1(null);
+			//			setDirectory(null);
+			//			setSession(null);
+			//			deleteDomainObject();
+
+		}
+	}
+
+	public boolean DirectoryEmpty(){
+		for(pt.tecnico.MyDrive.domain.File f : this.getFileSet()){
 			if(f != null){
-				throw new DirectoryIsNotEmptyException();
+				System.out.println("ola2");
+				return false;
 			}
 		}
 		return true;
@@ -64,8 +80,34 @@ public class Directory extends Directory_Base {
 	}
 
 	public void removeDir(){
-		setDirectory(null);
-		deleteDomainObject();
+
+		if (this.getName().equals("/")){
+
+		}
+		if (this.DirectoryEmpty()) {
+			(this.getUser()).removeFile(this);
+			(this.getDirectory()).removeFile(this);
+			this.setUser1(null);
+			
+			this.deleteDomainObject();
+		}
+		else{
+			for(pt.tecnico.MyDrive.domain.File f : (this).getFileSet()){
+				if (f instanceof PlainFile){
+					((PlainFile) f).removePlainFile();
+				}
+				else{
+					((Directory) f).removeDir();
+				}
+			}
+			(this.getUser()).removeFile(this);
+
+			if (!this.getName().equals("/")){
+
+				(this.getDirectory()).removeFile(this);
+			}
+			this.deleteDomainObject();
+		}
 	}
 
 
@@ -193,19 +235,5 @@ public class Directory extends Directory_Base {
 
 
 		return dirElement;
-	}
-
-	public void remove() {
-		for (File dire: this.getFileSet()){
-			if (dire instanceof Directory) {
-				((Directory) dire).remove();				
-			}
-			else if (dire instanceof PlainFile) {
-				((PlainFile) dire).removePlainFile();
-			}
-			setDirectory(null);
-			deleteDomainObject();
-		}
-
 	}
 }

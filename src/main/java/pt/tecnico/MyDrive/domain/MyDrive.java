@@ -2,14 +2,12 @@ package pt.tecnico.MyDrive.domain;
 
 
 import org.jdom2.Document;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import pt.tecnico.MyDrive.domain.*;
-import pt.tecnico.MyDrive.Exception.*;
 import org.jdom2.Element;
 
 import pt.ist.fenixframework.FenixFramework;
+import pt.tecnico.MyDrive.Exception.ExportXmlException;
+import pt.tecnico.MyDrive.Exception.ImportXmlException;
+import pt.tecnico.MyDrive.Exception.UsernameDoesNotExistException;
 
 public class MyDrive extends MyDrive_Base {
 
@@ -24,6 +22,8 @@ public class MyDrive extends MyDrive_Base {
 		setRoot(FenixFramework.getDomainRoot());
 		setCounter(0);
 		new SuperUser();
+		/////////APAGAR LINHA DE BAIXO, APENAS PARA TESTE
+		//new User("joao", "12345", "Joao", "joao");
 	}
 
 	public Integer getCnt(){
@@ -40,6 +40,12 @@ public class MyDrive extends MyDrive_Base {
 		}
 		throw new UsernameDoesNotExistException(username);
 	}
+	
+	public void cleanup() {
+        for (User u: getUserSet()){
+        	u.remove();
+	    }
+    }
 
 	public void xmlImport(Element element) throws ImportXmlException {
 
