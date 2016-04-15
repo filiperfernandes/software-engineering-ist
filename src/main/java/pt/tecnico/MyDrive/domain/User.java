@@ -309,9 +309,12 @@ public class User extends User_Base {
 		MyDrive md = MyDrive.getInstance();
 		for (User u :md.getUserSet()){
 			for (File d :  u.getFileSet()){
-				d.remove();
-				((Directory) d).remove();
-				u.removeFile(d);
+				if (d instanceof PlainFile){
+					((PlainFile) d).removePlainFile();
+				}else{
+				//d.remove();
+				((Directory) d).removeDir();}
+				//u.removeFile(d);
 				//setMydrive(null);
 				//deleteDomainObject();
 			}
@@ -323,5 +326,8 @@ public class User extends User_Base {
 			setMydrive(null);
 			deleteDomainObject();
 		}
+		
 	}
+	
+	
 }

@@ -6,6 +6,7 @@ import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.Session;
 import pt.tecnico.MyDrive.domain.PlainFile;
 import pt.tecnico.MyDrive.domain.Directory;
+import pt.tecnico.MyDrive.domain.File;
 import pt.tecnico.MyDrive.domain.User;
 
 public class CreateFileService extends MyDriveService{
@@ -14,6 +15,7 @@ public class CreateFileService extends MyDriveService{
 	private String content;
 	private String type;
 	private long token;
+	private String file;
 
 	public CreateFileService(long token, String name, String type, String content) {
 		this.name=name;
@@ -29,29 +31,34 @@ public class CreateFileService extends MyDriveService{
 		User user = s.getUser();
 		Directory dir = s.getCurrentdir();
 		String perm = user.getMask();
-			checkPermissionsWrite(user,dir.getUser(),dir.getPermissions());
-			for(char namecheck : name.toCharArray()){
-				if(namecheck== '/' || namecheck=='.'){
-					throw new InvalidStringException(name);
-				}
+		checkPermissionsWrite(user,dir.getUser(),dir.getPermissions());
+		for(char namecheck : name.toCharArray()){
+			if(namecheck== '/' || namecheck=='.'){
+				throw new InvalidStringException(name);
 			}
+		}
 		if(type.equals("Directory")){
 			Directory d = new Directory(md.getCnt(), name, perm);
 			dir.addFile(d);
 			user.addFile(d);
+			file = d.getName();
 		}
-			else if(type.equals("PlainFile")){
-				PlainFile f = new PlainFile(md.getCnt(), name, perm, content);
-				dir.addFile(f);
-				user.addFile(f);
-			}
-			else{
-				throw new InvalidTypeException(); //Erro porque a excepcao ainda nao foi criada
-			}
+		else if(type.equals("PlainFile")){
+			PlainFile f = new PlainFile(md.getCnt(), name, perm, content);
+			dir.addFile(f);
+			user.addFile(f);
+			file = f.getName();
+		}
+		else{
+			throw new InvalidTypeException(); 
+		}
 	}
 
-
-public static Session getSessionByToken(long token){
+	public String result(){
+		return file;
+	}
+	
+	public static Session getSessionByToken(long token){
 		MyDrive md = MyDrive.getInstance();
 
 		for(Session s : md.getSessionSet()){

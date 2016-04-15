@@ -23,7 +23,7 @@ public class MyDrive extends MyDrive_Base {
 		setCounter(0);
 		new SuperUser();
 		/////////APAGAR LINHA DE BAIXO, APENAS PARA TESTE
-		new User("joao", "12345", "Joao", "joao");
+		//new User("joao", "12345", "Joao", "joao");
 	}
 
 	public Integer getCnt(){

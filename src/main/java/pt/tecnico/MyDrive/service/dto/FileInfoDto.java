@@ -1,4 +1,4 @@
-package pt.tecnico.Mydrive.service.dto;
+package pt.tecnico.MyDrive.service.dto;
 
 
 public class FileInfoDto implements Comparable<FileInfoDto>  {

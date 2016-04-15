@@ -301,31 +301,32 @@ public class MyDriveApplication {
 
 		MyDrive md = MyDrive.getInstance();
 		//init();
+		
 		//new User( "joao", "12345", "Joao", "fsdgfsdgjoao");
 		//Session s = new Session(md, "root", "***");
 
-		long p =login("root","***");
-		Session s = getSessionByToken(p);
-		Directory d = s.getCurrentdir();
+//		long p =login("root","***");
+//		Session s = getSessionByToken(p);
+//		Directory d = s.getCurrentdir();
 
-		User u = s.getUser();
+//		User u = s.getUser();
 
-		createFile(p, "jojo", "Directory", null);
-		listDirectory(p);
-		changeCurrentDirectory("/jojo", p);
-		createFile(p,"test","Directory", null);
-		createFile(p,"filetest","PlainFile", null);
-		listDirectory(p);
-		changeCurrentDirectory("/test", p);
-		createFile(p,"filetest1","PlainFile", null);
-		listDirectory(p);
-		changeCurrentDirectory("..", p);
-		listDirectory(p);
-		deleteFile("test", p);
-		listDirectory(p);
-		changeCurrentDirectory("..", p);
-		listDirectory(p);
-		deleteFile("jojo", p);
+//		createFile(p, "jojo", "Directory", null);
+//		listDirectory(p);
+//		changeCurrentDirectory("/jojo", p);
+//		createFile(p,"test","Directory", null);
+//		createFile(p,"filetest","PlainFile", null);
+//		listDirectory(p);
+//		changeCurrentDirectory("/test", p);
+//		createFile(p,"filetest1","PlainFile", null);
+//		listDirectory(p);
+//		changeCurrentDirectory("..", p);
+//		listDirectory(p);
+//		deleteFile("test", p);
+//		listDirectory(p);
+//		changeCurrentDirectory("..", p);
+//		listDirectory(p);
+//		deleteFile("jojo", p);
 
 
 		//String path = changeCurrentDirectory("/home", p);
@@ -510,15 +511,15 @@ public class MyDriveApplication {
 		String userPermissions = user.getMask();
 		char ch2[] = userPermissions.toCharArray();
 
-		if(owner.equals(user)){
-			return true;	
-		}
-		else if (ch1[6]==ch2[6] && ch1[6]=='w'){
-			return true;
-		}
-		else{
-			throw new UserDoesNotHavePermissionsException();
-		}
+	if(owner.equals(user)){
+		return true;	
+	}
+	else if (ch1[7]==ch2[7] && ch1[7]=='x'){
+		return true;
+	}
+	else{
+		throw new UserDoesNotHavePermissionsException();}
+
 	}
 
 	public static boolean checkPermissionsExecute(User user, User owner, String permissions){
@@ -536,6 +537,7 @@ public class MyDriveApplication {
 			throw new UserDoesNotHavePermissionsException();
 		}
 	}
+
 	public static boolean checkPermissionsDelete(User user, User owner, String permissions){
 		char ch1[] = permissions.toCharArray();
 		String userPermissions = user.getMask();
@@ -550,6 +552,7 @@ public class MyDriveApplication {
 		else{
 			throw new UserDoesNotHavePermissionsException();
 		}
+
 	}
 
 
@@ -598,7 +601,6 @@ public static void deleteFile(String name, long tok) {
 		pt.tecnico.MyDrive.domain.File file = dir.getFileByName(name);
 		checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
 		if (file instanceof Directory) {
-			System.out.println("ola");
 			((Directory) file).removeDir();				
 		}
 		else if (file instanceof PlainFile) {
