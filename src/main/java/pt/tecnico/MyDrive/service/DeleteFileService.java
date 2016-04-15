@@ -7,13 +7,14 @@ import pt.tecnico.MyDrive.service.MyDriveService;
 import pt.tecnico.MyDrive.domain.Session;
 import pt.tecnico.MyDrive.domain.PlainFile;
 import pt.tecnico.MyDrive.domain.Directory;
+import pt.tecnico.MyDrive.domain.File;
 import pt.tecnico.MyDrive.domain.MyDrive;
 
 public class DeleteFileService extends MyDriveService {
 
 	private String fileName;
 	private long token;
-
+	private String content;
 	public DeleteFileService (long token, String name) {
 		this.fileName = name;
 		this.token=token;
@@ -27,10 +28,12 @@ public class DeleteFileService extends MyDriveService {
 			pt.tecnico.MyDrive.domain.File file = dir.getFileByName(fileName);
 			checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
 			if (file instanceof Directory) {
-				((Directory) file).removeDir();				
+				((Directory) file).removeDir();	
+				
 			}
 			else if (file instanceof PlainFile) {
 				((PlainFile) file).removePlainFile();
+				
 			}
 
 	}
