@@ -66,7 +66,6 @@ public class Directory extends Directory_Base {
 	
 	public void removeDir(){
 		if (this.DirectoryEmpty()) {
-			System.out.println("ola3 aqui e que da merda");
 			(this.getUser()).removeFile(this);
 			(this.getDirectory()).removeFile(this);
 			this.deleteDomainObject();
