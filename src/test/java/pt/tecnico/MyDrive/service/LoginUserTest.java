@@ -7,6 +7,7 @@ import org.junit.Test;
 import pt.tecnico.MyDrive.Exception.InvalidPasswordException;
 import pt.tecnico.MyDrive.Exception.UsernameDoesNotExistException;
 import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.User;
 
 public class LoginUserTest extends AbstractServiceTest {
 
@@ -14,10 +15,8 @@ public class LoginUserTest extends AbstractServiceTest {
 
 	@Override
 	protected void populate() {
-		//md = MyDrive.getInstance();
-//		md=MyDriveService.getMyDrive();
-//		User u = new User(md, "joao", "12345", "Joao", "lskdjgnfdkj");
-//		new User(md, "joao", "12345", "Joao", "lskdjgnfdkj");
+		md = MyDrive.getInstance();
+		User u = new User( "joao", "12345", "Joao", "lskdjgnfdkj");
 //		
 //		System.out.println(u.getUserByUsername("joao").getName());
 	}
