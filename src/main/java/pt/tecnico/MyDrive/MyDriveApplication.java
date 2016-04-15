@@ -598,7 +598,6 @@ public static void deleteFile(String name, long tok) {
 		pt.tecnico.MyDrive.domain.File file = dir.getFileByName(name);
 		checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
 		if (file instanceof Directory) {
-			System.out.println("ola");
 			((Directory) file).removeDir();				
 		}
 		else if (file instanceof PlainFile) {
