@@ -1,6 +1,7 @@
 package pt.tecnico.MyDrive.service;
 
 import pt.tecnico.MyDrive.Exception.MyDriveException;
+import pt.tecnico.MyDrive.service.MyDriveService;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.Session;
 
