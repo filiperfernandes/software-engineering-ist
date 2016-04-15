@@ -537,7 +537,7 @@ public static boolean checkPermissionsExecute(User user, User owner, String perm
 		return true;
 	}
 	else{
-		return false;
+		throw new UserDoesNotHavePermissionsException();
 	}
 }
 public static boolean checkPermissionsDelete(User user, User owner, String permissions){
@@ -552,7 +552,7 @@ public static boolean checkPermissionsDelete(User user, User owner, String permi
 		return true;
 	}
 	else{
-		return false;
+		throw new UserDoesNotHavePermissionsException();
 	}
 }
 
