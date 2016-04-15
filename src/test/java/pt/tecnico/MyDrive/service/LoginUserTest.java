@@ -38,7 +38,6 @@ public class LoginUserTest extends AbstractServiceTest {
 	@Test
 	public void rootLogin(){
 		
-		//MyDrive md = MyDrive.getInstance();
 		LoginUserService log =  new LoginUserService(md, "root", "***");
 		log.execute();
 		long a = log.result();

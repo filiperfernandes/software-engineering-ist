@@ -4,12 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import pt.ist.fenixframework.Atomic;
-import pt.tecnico.MyDrive.domain.File;
-import pt.tecnico.MyDrive.domain.MyDrive;
-import pt.tecnico.MyDrive.domain.PlainFile;
-import pt.tecnico.MyDrive.domain.Directory;
-import pt.tecnico.MyDrive.Exception.FileDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.MyDriveException;
+import pt.tecnico.MyDrive.domain.MyDrive;
 
 	public abstract class MyDriveService {
 	    protected static final Logger log = LogManager.getRootLogger();
@@ -21,16 +17,6 @@ import pt.tecnico.MyDrive.Exception.MyDriveException;
 
 	    static MyDrive getMyDrive() {
 	        return MyDrive.getInstance();
-	    }
-
-	    static File getPerson(String fileName) throws FileDoesNotExistException {
-	    	File f = null;
-	    	//File f = getMyDrive().getFileByName(fileName);
-
-	        if (f == null)
-	            throw new FileDoesNotExistException(fileName);
-
-	        return f;
 	    }
 
 	    protected abstract void dispatch() throws MyDriveException;
