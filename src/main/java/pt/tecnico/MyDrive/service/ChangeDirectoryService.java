@@ -93,7 +93,6 @@ public class ChangeDirectoryService extends MyDriveService{
 			if(checkPath(name, dir).equals("absolute")){
 				Directory directory = getDirByPath(name, rd);
 				session.setCurrentdir(directory);
-				System.out.println("absolute");
 				path = directory.getPath();
 			}
 			else if(checkPath(name, dir).equals("relative")){

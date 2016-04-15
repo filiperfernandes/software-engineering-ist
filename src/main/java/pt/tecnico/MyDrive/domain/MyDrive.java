@@ -22,6 +22,9 @@ public class MyDrive extends MyDrive_Base {
 		setRoot(FenixFramework.getDomainRoot());
 		setCounter(0);
 		new SuperUser();
+		///GSDgzdgsdgdsgfdsgfdgsfdgs
+		new User("joao", "12345", "Joao", "joao");//Nao esquecer de apagar
+
 	}
 
 	public Integer getCnt(){

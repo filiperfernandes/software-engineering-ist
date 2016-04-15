@@ -1,6 +1,5 @@
 package pt.tecnico.MyDrive.service;
 
-import javax.annotation.Generated;
 
 import pt.tecnico.MyDrive.Exception.*;
 import pt.tecnico.MyDrive.Exception.FileDoesNotExistException;
@@ -24,12 +23,10 @@ public class DeleteFileService extends MyDriveService {
 	public final void dispatch() throws FileDoesNotExistException {
 		Session session = getSessionByToken(token);
 		Directory dir = session.getCurrentdir() ;
-		System.out.println(dir.getName());
 
 			pt.tecnico.MyDrive.domain.File file = dir.getFileByName(fileName);
 			checkPermissionsDelete(session.getUser(), file.getUser(), file.getPermissions());
 			if (file instanceof Directory) {
-				System.out.println("ola");
 				((Directory) file).removeDir();				
 			}
 			else if (file instanceof PlainFile) {

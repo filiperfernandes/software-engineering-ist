@@ -44,12 +44,13 @@ public class LoginUserTest extends AbstractServiceTest {
 		assertNotNull(a);
 	}
 	
-//	@Test
-//	public void userLogin(){
-//		LoginUserService log =  new LoginUserService(md, "joao", "12345");
-//		log.execute();
-//		long a = log.result();
-//
-//		assertNotNull(a);
-//	}
+	@Test
+	public void userLogin(){
+		
+		LoginUserService log =  new LoginUserService(md, "joao", "12345");
+		log.execute();
+		long a = log.result();
+
+		assertNotNull(a);
+	}
 }
