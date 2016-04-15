@@ -8,7 +8,7 @@ import java.util.List;
 import pt.tecnico.MyDrive.Exception.*;
 import pt.tecnico.MyDrive.domain.*;
 import pt.tecnico.MyDrive.service.MyDriveService;
-import pt.tecnico.Mydrive.service.dto.FileInfoDto;
+import pt.tecnico.MyDrive.service.dto.FileInfoDto;
 
 
 public class ListDirectoryService extends MyDriveService{
