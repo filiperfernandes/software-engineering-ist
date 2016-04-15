@@ -8,6 +8,7 @@ import pt.tecnico.MyDrive.Exception.FileDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.UserDoesNotHavePermissionsException;
 import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.User;
 
 public class ReadFileTest extends AbstractServiceTest{
 
@@ -15,6 +16,8 @@ public class ReadFileTest extends AbstractServiceTest{
 
 	@Override
 	protected void populate() {
+		md = MyDrive.getInstance();
+		new User( "joao", "123", "Joao", "whatever");
 				
 	}
 

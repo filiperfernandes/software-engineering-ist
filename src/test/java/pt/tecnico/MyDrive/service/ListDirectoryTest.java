@@ -7,8 +7,9 @@ import java.util.List;
 import org.junit.Test;
 
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.UserDoesNotHavePermissionsException;
 import pt.tecnico.MyDrive.domain.MyDrive;
-
+import pt.tecnico.MyDrive.domain.User;
 import pt.tecnico.MyDrive.service.dto.FileInfoDto;
 
 
@@ -19,7 +20,8 @@ public class ListDirectoryTest extends AbstractServiceTest {
 
 	@Override
 	protected void populate() {
-		// TODO Auto-generated method stub
+		md = MyDrive.getInstance();
+		new User( "joao", "123", "Joao", "whatever");
 		
 	}
 
@@ -53,6 +55,24 @@ public class ListDirectoryTest extends AbstractServiceTest {
 		
 	}
 	
+	@Test(expected=UserDoesNotHavePermissionsException.class)
+	public void DoNotHavePermissionsListDirectory(){
+		
+		LoginUserService log = new LoginUserService(md, "root","***");
+		log.execute();
+				
+		CreateFileService file = new CreateFileService(log.result(), "test", "Directory", null);
+		file.execute();
+					
+		LoginUserService log1 = new LoginUserService(md, "joao","123");
+		log1.execute();
+		
+		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root/test", log1.result());
+		dir.execute();
+								
+		ListDirectoryService file1 = new ListDirectoryService(log1.result());
+		file1.execute();
+	}
 	
 	
 	
