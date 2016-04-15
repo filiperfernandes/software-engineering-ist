@@ -25,13 +25,34 @@ public class ReadFileTest extends AbstractServiceTest{
 		ReadFileService file = new ReadFileService("nomeFicheiro", 45656456);
 		file.execute();
 	}
-//	
-//	@Test(expected=FileDoesNotExistException.class)
-//	public void fileDoesNotExistReadFile(){
-//		ReadFileService file = new ReadFile(toke, "nomeFicheiro");
-//		file.execute();
-//		//Ficheiro nao existe
-//	}
+	
+	@Test(expected=FileDoesNotExistException.class)
+	public void fileDoesNotExistReadFile(){
+		LoginUserService log =  new LoginUserService(md, "root", "***");
+		log.execute();
+		long token = log.result();
+		
+		CreateFileService plain = new CreateFileService(token, "File", "PlainFile", "Ola test");
+		plain.execute();
+		
+		ReadFileService file = new ReadFileService("Name",log.result());
+		file.execute();
+	}
+	
+	@Test
+	public void ReadFile(){
+		LoginUserService log =  new LoginUserService(md, "root", "***");
+		log.execute();
+		long token = log.result();
+		
+		CreateFileService plain = new CreateFileService(token, "NewFile", "PlainFile", "Oi test");
+		plain.execute();
+		
+		ReadFileService file = new ReadFileService("NewFile",log.result());
+		file.execute();
+		
+		assertEquals("Oi test", file.result());
+	}
 	
 	
 }
