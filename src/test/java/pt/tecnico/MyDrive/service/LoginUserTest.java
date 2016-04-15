@@ -7,7 +7,6 @@ import org.junit.Test;
 import pt.tecnico.MyDrive.Exception.InvalidPasswordException;
 import pt.tecnico.MyDrive.Exception.UsernameDoesNotExistException;
 import pt.tecnico.MyDrive.domain.MyDrive;
-import pt.tecnico.MyDrive.domain.User;
 
 public class LoginUserTest extends AbstractServiceTest {
 
@@ -15,15 +14,24 @@ public class LoginUserTest extends AbstractServiceTest {
 
 	@Override
 	protected void populate() {
-		md = MyDrive.getInstance();
-		
-		new User(md, "joao", "12345", "Joao", "/home/joao");
-
+		//md = MyDrive.getInstance();
+//		md=MyDriveService.getMyDrive();
+//		User u = new User(md, "joao", "12345", "Joao", "lskdjgnfdkj");
+//		new User(md, "joao", "12345", "Joao", "lskdjgnfdkj");
+//		
+//		System.out.println(u.getUserByUsername("joao").getName());
 	}
 
 	@Test(expected=InvalidPasswordException.class)
-	public void invalidPasswordLoginUser(){
+	public void invalidPasswordLoginRoot(){
 		LoginUserService log =  new LoginUserService(md, "root", "99999");
+		log.execute();
+
+	}
+	
+	@Test(expected=InvalidPasswordException.class)
+	public void invalidPasswordLoginUser(){
+		LoginUserService log =  new LoginUserService(md, "joao", "99999");
 		log.execute();
 
 	}
@@ -37,7 +45,6 @@ public class LoginUserTest extends AbstractServiceTest {
 	@Test
 	public void rootLogin(){
 		
-		//MyDrive md = MyDrive.getInstance();
 		LoginUserService log =  new LoginUserService(md, "root", "***");
 		log.execute();
 		long a = log.result();
@@ -45,12 +52,12 @@ public class LoginUserTest extends AbstractServiceTest {
 		assertNotNull(a);
 	}
 	
-//	@Test
-//	public void userLogin(){
-//		LoginUserService log =  new LoginUserService(md, "joao", "12345");
-//		log.execute();
-//		long a = log.result();
-//
-//		assertNotNull(a);
-//	}
+	@Test
+	public void userLogin(){
+		LoginUserService log =  new LoginUserService(md, "joao", "12345");
+		log.execute();
+		long a = log.result();
+
+		assertNotNull(a);
+	}
 }

@@ -59,7 +59,7 @@ public class MyDriveApplication {
 	}
 
     @Atomic
-    public static void init() { // empty phonebook
+    public static void init() { // empty MyDrive
 	log.trace("Init: " + FenixFramework.getDomainRoot());
 	MyDrive.getInstance().cleanup();
     }
@@ -300,7 +300,8 @@ public class MyDriveApplication {
 	public static void setup() {
 
 		MyDrive md = MyDrive.getInstance();
-
+		//init();
+		//new User( "joao", "12345", "Joao", "fsdgfsdgjoao");
 		//Session s = new Session(md, "root", "***");
 
 		long p =login("root","***");

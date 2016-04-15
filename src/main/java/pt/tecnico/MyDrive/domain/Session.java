@@ -35,6 +35,14 @@ public class Session extends Session_Base {
 		}
 	}
 
+	public void remove() {
+		this.setUser(null);
+		this.setCurrentdir(null);
+		this.setMydrive(null);
+		deleteDomainObject();
+	}
+
+
 }
 
 
