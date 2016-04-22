@@ -1,12 +1,11 @@
 package pt.tecnico.MyDrive.service;
 
-import pt.tecnico.MyDrive.Exception.*;
-import pt.tecnico.MyDrive.service.MyDriveService;
 import pt.tecnico.MyDrive.Exception.MyDriveException;
-import pt.tecnico.MyDrive.domain.MyDrive;
-import pt.tecnico.MyDrive.domain.Session;
-import pt.tecnico.MyDrive.domain.PlainFile;
+import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.domain.Directory;
+import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.PlainFile;
+import pt.tecnico.MyDrive.domain.Session;
 
 public class ReadFileService extends MyDriveService{
 
@@ -21,7 +20,6 @@ public class ReadFileService extends MyDriveService{
 
 	@Override
 	protected void dispatch() throws MyDriveException {
-		MyDrive md = MyDrive.getInstance();
 		Session session = getSessionByToken(token);
 		Directory dir = session.getCurrentdir() ;
 

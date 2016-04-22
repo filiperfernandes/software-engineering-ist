@@ -6,6 +6,8 @@ import java.util.Random;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 
+import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
+
 public class Session extends Session_Base {
 
 	public Session(MyDrive md, String username, String password) {
@@ -42,6 +44,17 @@ public class Session extends Session_Base {
 		deleteDomainObject();
 	}
 
+	
+	public static Session getSessionByToken(long token){
+		MyDrive md = MyDrive.getInstance();
+
+		for(Session s : md.getSessionSet()){
+			if(s.getToken()==token){
+				return s;
+			}
+		}
+		throw new SessionDoesNotExistException(token);
+	}
 
 }
 

@@ -1,12 +1,13 @@
 package pt.tecnico.MyDrive.service;
 
-import pt.tecnico.MyDrive.Exception.*;
-import pt.tecnico.MyDrive.service.MyDriveService;
-import pt.tecnico.MyDrive.domain.MyDrive;
-import pt.tecnico.MyDrive.domain.Session;
-import pt.tecnico.MyDrive.domain.PlainFile;
+import pt.tecnico.MyDrive.Exception.InvalidStringException;
+import pt.tecnico.MyDrive.Exception.InvalidTypeException;
+import pt.tecnico.MyDrive.Exception.MyDriveException;
+import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.domain.Directory;
-import pt.tecnico.MyDrive.domain.File;
+import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.PlainFile;
+import pt.tecnico.MyDrive.domain.Session;
 import pt.tecnico.MyDrive.domain.User;
 
 public class CreateFileService extends MyDriveService{

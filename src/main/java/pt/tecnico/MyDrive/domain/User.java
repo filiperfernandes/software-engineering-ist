@@ -1,11 +1,13 @@
 package pt.tecnico.MyDrive.domain;
 
-import java.lang.String;
-import org.joda.time.DateTime;
-import pt.tecnico.MyDrive.domain.*;
-import pt.tecnico.MyDrive.Exception.*;
-
 import org.jdom2.Element;
+
+import pt.tecnico.MyDrive.Exception.ExportXmlException;
+import pt.tecnico.MyDrive.Exception.ImportXmlException;
+import pt.tecnico.MyDrive.Exception.InvalidPasswordException;
+import pt.tecnico.MyDrive.Exception.InvalidStringException;
+import pt.tecnico.MyDrive.Exception.UsernameAlreadyExistsException;
+import pt.tecnico.MyDrive.Exception.UsernameDoesNotExistException;
 
 
 public class User extends User_Base {
@@ -327,6 +329,13 @@ public class User extends User_Base {
 			deleteDomainObject();
 		}
 		
+	}
+	
+	public static void listUsers(){
+		MyDrive md = MyDrive.getInstance();
+		for(User u : md.getUserSet()){
+			System.out.println(u.getUsername());
+		}
 	}
 	
 	

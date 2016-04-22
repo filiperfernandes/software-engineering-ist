@@ -1,13 +1,14 @@
 package pt.tecnico.MyDrive.domain;
 
-import java.io.IOException;
-
 import org.jdom2.Element;
 import org.joda.time.DateTime;
-import pt.tecnico.MyDrive.domain.*;
-import pt.tecnico.MyDrive.Exception.*;
 
-import pt.tecnico.MyDrive.MyDriveApplication;
+import pt.tecnico.MyDrive.Exception.DirectoryDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.ExportXmlException;
+import pt.tecnico.MyDrive.Exception.FileDoesNotExistException;
+import pt.tecnico.MyDrive.Exception.FileIsDirectoryException;
+import pt.tecnico.MyDrive.Exception.FileIsPlainFileException;
+import pt.tecnico.MyDrive.Exception.ImportXmlException;
 
 public class Directory extends Directory_Base {
 
@@ -147,7 +148,6 @@ public class Directory extends Directory_Base {
 	//Return File by ID
 	public File getFileByID(String id){
 
-		MyDrive md = MyDrive.getInstance();
 		for (File file: this.getFileSet()){
 			String x = String.valueOf(file.getId());
 			if(x.equals(id)){
@@ -235,5 +235,29 @@ public class Directory extends Directory_Base {
 
 
 		return dirElement;
+	}
+	
+	public static Directory getDirByPath(String path, Directory dir){
+		String dirname = "";
+		Integer c = 0;
+		for(char ch : path.toCharArray()){
+			if(c.equals(0)){
+				c++;
+			}
+			else if(ch == '/'){
+				try{
+					dir = (Directory) (dir.getDirByName(dirname));
+					dirname="";
+				}catch (DirectoryDoesNotExistException | FileIsPlainFileException e) { System.err.println(e); }
+			}
+			else{
+				dirname += ch;
+			}
+		}
+		try{
+			dir = (Directory) (dir.getDirByName(dirname));
+		}catch (DirectoryDoesNotExistException | FileIsPlainFileException e) { System.err.println(e); }
+		return dir;
+
 	}
 }
