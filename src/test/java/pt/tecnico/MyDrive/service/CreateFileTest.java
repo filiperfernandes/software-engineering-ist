@@ -18,7 +18,7 @@ public class CreateFileTest extends AbstractServiceTest{
 	@Override
 	protected void populate() {
 		md = MyDrive.getInstance();
-		new User( "joao", "123", "Joao", "whatever");
+		new User( "joao", "123", "Joao", "whatever","");
 
 	}
 

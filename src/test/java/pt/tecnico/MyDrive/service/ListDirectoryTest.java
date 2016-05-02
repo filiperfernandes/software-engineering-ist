@@ -21,8 +21,8 @@ public class ListDirectoryTest extends AbstractServiceTest {
 	@Override
 	protected void populate() {
 		md = MyDrive.getInstance();
-		new User( "joao", "123", "Joao", "whatever");
-		User u = new User( "ricardo", "321", "Ricardo", "chamas");
+		new User( "joao", "123", "Joao", "whatever","");
+		User u = new User( "ricardo", "321", "Ricardo", "chamas","");
 		u.setMask("rwxdr-x-");
 	}
 

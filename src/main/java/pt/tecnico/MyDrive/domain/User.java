@@ -14,7 +14,7 @@ public class User extends User_Base {
 
 	protected User(){}
 	//public int check = 0;
-	public User(String username, String password, String name, String homedir ) {
+	public User(String username, String password, String name, String homedir, String mask ) {
 		super();
 		MyDrive md = MyDrive.getInstance();
 
@@ -52,7 +52,13 @@ public class User extends User_Base {
 			setName(name);
 		}   
 
-		setMask("rwxd----");
+		if(mask.equals("")){
+			setMask("rwxd----");
+		}
+		
+		else if(!mask.equals("")){
+			setMask(mask);
+		}
 
 		Directory dir;
 
@@ -78,13 +84,6 @@ public class User extends User_Base {
 
 	}
 	
-//	public void setMyDrive(MyDrive md) {
-//		if (md == null)
-//			super.setMydrive1(null);
-//		else{
-//			md.addUser(this);
-//		}
-//	}
 	
 	public User(MyDrive md, String username, String password, String name, String homedir ) {
 		super();
@@ -274,7 +273,7 @@ public class User extends User_Base {
 
 		String name = personElement.getChildText("name");
 
-		new User(username, password, name, null);
+		new User(username, password, name, null,"");
 
 
 	}

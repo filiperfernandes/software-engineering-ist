@@ -39,6 +39,9 @@ public class Session extends Session_Base {
 			setState(time);
 			muuu.addSession(this);
 		}
+		if(user.getUsername().equals("Guest")){
+			setState(null);
+		}
 
 
 	}
@@ -47,8 +50,17 @@ public class Session extends Session_Base {
 		Period period ;
 		DateTime now = new DateTime();
 		for(Session s : md.getSessionSet()){
-			period= new Period(s.getState(), now);
-			if(period.getHours()>=2){md.removeSession(s);}
+			if(s.getState().equals(null)){
+				break;
+			}
+			else if(s.getUser().getUsername().equals("root")){
+				period= new Period(s.getState(), now);
+				if(period.getMinutes()>=10){md.removeSession(s);}
+			}
+			else{
+				period= new Period(s.getState(), now);
+				if(period.getHours()>=2){md.removeSession(s);}
+			}
 		}
 	}
 
