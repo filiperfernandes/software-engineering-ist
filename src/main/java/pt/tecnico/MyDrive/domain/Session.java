@@ -12,8 +12,23 @@ public class Session extends Session_Base {
 
 	public Session(MyDrive md, String username, String password) {
 		super();
-		setToken(new BigInteger(64, new Random()).longValue());
 		MyDrive muuu = MyDrive.getInstance();
+		boolean t = true;
+		Long i = null ;
+		while(t){
+			i = new BigInteger(64, new Random()).longValue();
+			boolean exists = false;
+			for(Session s : muuu.getSessionSet()){
+				if(s.getToken() == i){
+					exists = true;
+					break;
+				}
+			}
+			if(!exists){
+				t=false;
+			}
+		}
+		setToken(i);
 		User user = muuu.getUserByUsername(username);
 		if(user.checkPassword(password)){
 			//criar timer de 2 horas
@@ -44,7 +59,7 @@ public class Session extends Session_Base {
 		deleteDomainObject();
 	}
 
-	
+
 	public static Session getSessionByToken(long token){
 		MyDrive md = MyDrive.getInstance();
 

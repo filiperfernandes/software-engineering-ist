@@ -52,7 +52,7 @@ public class File extends File_Base {
 	public static void deleteFile(String name, long tok) {
 
 		Session session = Session.getSessionByToken(tok);
-		Directory dir = session.getCurrentdir() ;
+		Directory dir = session.getCurrentdir();
 		System.out.println(dir.getName());
 
 		try{
