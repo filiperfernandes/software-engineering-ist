@@ -29,15 +29,12 @@ public class MyDriveApplication {
 	static final Logger log = LogManager.getRootLogger();
 	private static Scanner input = new Scanner(System.in);
 
-	//static MyDrive md;
 
 	public static void main(String[] args) throws IOException {
 		System.out.println("*** Welcome to the MyDrive application! ***");
 		try {
-			//System.out.println("VOufazer setup");
 
 			setup();
-			//display();
 			/*			for (String s: args) xmlScan(new java.io.File(s));
 
 
@@ -129,24 +126,12 @@ public class MyDriveApplication {
 
 	}
 
-
-
-
 	//Initialize MyDrive
 	@Atomic
 	public static void setup() {
 
 		MyDrive md = MyDrive.getInstance();
 		
-		//Teste
-		LoginUserService ls = new LoginUserService(md, "root", "***");
-		ls.execute();
-		long t = ls.result();
-		Session s = Session.getSessionByToken(t);
-		CreateFileService f = new CreateFileService(t, "ola", "PlainFile", "content");
-		f.execute();
-		Link l = new Link(md.getCnt(), "tumae", "/home/root/ola", t);
-		System.out.println(l.getPermissions());
 	}
 
 
@@ -172,6 +157,5 @@ public class MyDriveApplication {
 		} catch (JDOMException | IOException | ImportXmlException e) { System.err.println(e); }
 
 	}
-
 }
 
