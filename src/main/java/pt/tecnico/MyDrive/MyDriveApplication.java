@@ -17,8 +17,12 @@ import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 import pt.tecnico.MyDrive.Exception.ExportXmlException;
 import pt.tecnico.MyDrive.Exception.ImportXmlException;
+import pt.tecnico.MyDrive.domain.Link;
 import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.Session;
 import pt.tecnico.MyDrive.domain.PlainFile;
+import pt.tecnico.MyDrive.service.CreateFileService;
+import pt.tecnico.MyDrive.service.LoginUserService;
 
 
 public class MyDriveApplication {
@@ -133,7 +137,16 @@ public class MyDriveApplication {
 	public static void setup() {
 
 		MyDrive md = MyDrive.getInstance();
-
+		
+		//Teste
+		LoginUserService ls = new LoginUserService(md, "root", "***");
+		ls.execute();
+		long t = ls.result();
+		Session s = Session.getSessionByToken(t);
+		CreateFileService f = new CreateFileService(t, "ola", "PlainFile", "content");
+		f.execute();
+		Link l = new Link(md.getCnt(), "tumae", "/home/root/ola", t);
+		System.out.println(l.getPermissions());
 	}
 
 
