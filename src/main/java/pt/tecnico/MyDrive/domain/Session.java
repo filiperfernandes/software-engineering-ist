@@ -6,6 +6,7 @@ import java.util.Random;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 
+import pt.tecnico.MyDrive.Exception.InvalidPasswordException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 
 public class Session extends Session_Base {
@@ -30,7 +31,9 @@ public class Session extends Session_Base {
 		}
 		setToken(i);
 		User user = muuu.getUserByUsername(username);
-		if(user.checkPassword(password)){
+		
+		//All users except root and guest with valid password
+		if(user.checkPassword(password)&user.getPassword().length()>=8){
 			//criar timer de 2 horas
 			updateSessions(muuu);
 			user.addSession(this);
@@ -38,10 +41,32 @@ public class Session extends Session_Base {
 			DateTime time = new DateTime();
 			setState(time);
 			muuu.addSession(this);
+			return;
 		}
-		if(user.getUsername().equals("Guest")){
+		//if user is Guest
+		else if(user.getUsername().equals("Guest")&user.checkPassword(password)){
+			updateSessions(muuu);
+			user.addSession(this);
+			setCurrentdir(user.getHomedir());
 			setState(null);
+			muuu.addSession(this);
+			return;
 		}
+		//if user is root
+		else if(user.getUsername().equals("root")&user.checkPassword(password)){
+			updateSessions(muuu);
+			user.addSession(this);
+			setCurrentdir(user.getHomedir());
+			DateTime time = new DateTime();
+			setState(time);
+			muuu.addSession(this);
+			return;
+		}
+		
+		else{
+			throw new InvalidPasswordException("Password must be at least 8 characters long");
+		}
+		
 
 
 	}

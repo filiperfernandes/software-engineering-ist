@@ -16,7 +16,7 @@ public class LoginUserTest extends AbstractServiceTest {
 	@Override
 	protected void populate() {
 		md = MyDrive.getInstance();
-		new User( "joao", "12345", "Joao", "lskdjgnfdkj","");
+		new User( "joao", "12345423534564356", "Joao", "lskdjgnfdkj","");
 		//		
 		//		System.out.println(u.getUserByUsername("joao").getName());
 	}
@@ -37,7 +37,7 @@ public class LoginUserTest extends AbstractServiceTest {
 
 	@Test(expected=UsernameDoesNotExistException.class)
 	public void userNameDoesNotExistLoginUser(){
-		LoginUserService log =  new LoginUserService(md, "Carvalho", "12345");
+		LoginUserService log =  new LoginUserService(md, "Carvalho", "12345432543253245");
 		log.execute();
 	}
 
@@ -53,7 +53,7 @@ public class LoginUserTest extends AbstractServiceTest {
 
 	@Test
 	public void userLogin(){
-		LoginUserService log =  new LoginUserService(md, "joao", "12345");
+		LoginUserService log =  new LoginUserService(md, "joao", "12345423534564356");
 		log.execute();
 		long a = log.result();
 

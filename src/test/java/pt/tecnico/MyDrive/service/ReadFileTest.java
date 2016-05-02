@@ -18,7 +18,7 @@ public class ReadFileTest extends AbstractServiceTest{
 	@Override
 	protected void populate() {
 		md = MyDrive.getInstance();
-		new User( "joao", "123", "Joao", "whatever","");
+		new User( "joao", "123423534253245235", "Joao", "whatever","");
 
 	}
 
@@ -68,7 +68,7 @@ public class ReadFileTest extends AbstractServiceTest{
 		CreateFileService file = new CreateFileService(log.result(), "test", "PlainFile", "ii");
 		file.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "joao","123");
+		LoginUserService log1 = new LoginUserService(md, "joao","123423534253245235");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());

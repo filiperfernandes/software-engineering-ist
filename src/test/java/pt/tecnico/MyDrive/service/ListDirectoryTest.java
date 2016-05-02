@@ -21,8 +21,8 @@ public class ListDirectoryTest extends AbstractServiceTest {
 	@Override
 	protected void populate() {
 		md = MyDrive.getInstance();
-		new User( "joao", "123", "Joao", "whatever","");
-		User u = new User( "ricardo", "321", "Ricardo", "chamas","");
+		new User( "joao", "123456789", "Joao", "whatever","");
+		User u = new User( "ricardo", "321435243543253245", "Ricardo", "chamas","");
 		u.setMask("rwxdr-x-");
 	}
 
@@ -65,7 +65,7 @@ public class ListDirectoryTest extends AbstractServiceTest {
 		CreateFileService file = new CreateFileService(log.result(), "test", "Directory", null);
 		file.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "joao","123");
+		LoginUserService log1 = new LoginUserService(md, "joao","123456789");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root/test", log1.result());
@@ -87,7 +87,7 @@ public class ListDirectoryTest extends AbstractServiceTest {
 		CreateFileService file2 = new CreateFileService(log.result(), "jjj", "Directory", null);
 		file2.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "ricardo","321");
+		LoginUserService log1 = new LoginUserService(md, "ricardo","321435243543253245");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());

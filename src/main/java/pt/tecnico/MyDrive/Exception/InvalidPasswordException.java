@@ -8,4 +8,8 @@ public class InvalidPasswordException extends MyDriveException {
 	public InvalidPasswordException() {
 		super("Invalid Password");
 	}
+	
+	public InvalidPasswordException(String msg){
+		super(msg);
+	}
 }

@@ -20,7 +20,7 @@ public class DeleteFileTest extends AbstractServiceTest{
 	@Override
 	protected void populate() {
 		md = MyDrive.getInstance();
-		new User( "joao", "123", "Joao", "whatever","");
+		new User( "joao", "123456789", "Joao", "whatever","");
 
 	}
 
@@ -124,7 +124,7 @@ public class DeleteFileTest extends AbstractServiceTest{
 		CreateFileService file = new CreateFileService(log.result(),"test", "Directory", null);
 		file.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "joao","123");
+		LoginUserService log1 = new LoginUserService(md, "joao","123456789");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());
@@ -143,7 +143,7 @@ public class DeleteFileTest extends AbstractServiceTest{
 		CreateFileService file = new CreateFileService(log.result(), "test", "PlainFile", "HII");
 		file.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "joao","123");
+		LoginUserService log1 = new LoginUserService(md, "joao","123456789");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());
