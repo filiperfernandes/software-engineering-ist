@@ -45,7 +45,6 @@ public class App extends App_Base {
     
     public void Run() {
     	
-    	//Object obj = null;
     	Method method;
     	
     	Class<?> c;
@@ -54,22 +53,16 @@ public class App extends App_Base {
 			method = c.getDeclaredMethod ("Hello");
 			method.invoke(this);
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
