@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Period;
 
 import pt.tecnico.MyDrive.Exception.InvalidPasswordException;
+import pt.tecnico.MyDrive.Exception.PermissionDeniedException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 
 public class Session extends Session_Base {
@@ -66,10 +67,13 @@ public class Session extends Session_Base {
 		else{
 			throw new InvalidPasswordException("Password must be at least 8 characters long");
 		}
-		
-
-
 	}
+	
+	@Override
+	public void setUser(User u) { throw new PermissionDeniedException(); }
+	
+	@Override
+	public void setMydrive(MyDrive m) { throw new PermissionDeniedException(); }
 
 	public void updateSessions(MyDrive md){
 		Period period ;
