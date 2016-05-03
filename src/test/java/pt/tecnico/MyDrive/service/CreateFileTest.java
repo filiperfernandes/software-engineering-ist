@@ -10,6 +10,8 @@ import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.UserDoesNotHavePermissionsException;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.User;
+import pt.tecnico.MyDrive.domain.Directory;
+import pt.tecnico.MyDrive.domain.File;
 
 public class CreateFileTest extends AbstractServiceTest{
 
@@ -80,6 +82,26 @@ public class CreateFileTest extends AbstractServiceTest{
 		assertEquals("nomePlainFile", actual);
 
 	}
+	
+//	@Test
+//	public void createFileLink(){
+//
+//		LoginUserService log = new LoginUserService(md, "root","***");
+//		log.execute();
+//		
+//		CreateFileService file = new CreateFileService(log.result(), "testPlainFile", "PlainFile", "Teste ola");
+//		file.execute();
+//
+//		CreateFileService file1 = new CreateFileService(log.result(), "newLink", "Link", "/home/root/testPlainFile");
+//		file1.execute();
+//		String actual = file1.result();
+//		
+//		File a = Directory.getFileByName(actual);
+//
+//		assertEquals("newLink", actual);
+//		assertEquals("/home/root/testPlainFile", a);
+//		
+//	}
 
 	@Test(expected=UserDoesNotHavePermissionsException.class)
 	public void DoNotHavePermissionsCreateFile(){

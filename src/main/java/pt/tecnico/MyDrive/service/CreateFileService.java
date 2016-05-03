@@ -5,6 +5,7 @@ import pt.tecnico.MyDrive.Exception.InvalidTypeException;
 import pt.tecnico.MyDrive.Exception.MyDriveException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.domain.Directory;
+import pt.tecnico.MyDrive.domain.Link;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.PlainFile;
 import pt.tecnico.MyDrive.domain.Session;
@@ -50,6 +51,14 @@ public class CreateFileService extends MyDriveService{
 			user.addFile(f);
 			file = f.getName();
 		}
+		
+		else if(type.equals("Link")){
+			Link l = new Link(md.getCnt(), name, content, token);
+			dir.addFile(l);
+			user.addFile(l);
+			file = l.getName();
+		}
+		
 		else{
 			throw new InvalidTypeException(); 
 		}

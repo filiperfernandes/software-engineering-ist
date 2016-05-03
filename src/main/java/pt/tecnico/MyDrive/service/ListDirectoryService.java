@@ -38,8 +38,14 @@ public class ListDirectoryService extends MyDriveService{
 		listfiles.add(new FileInfoDto("..", (dir.getDirectory()).getPermissions(),((dir.getDirectory()).getUser()).getUsername() , (dir.getDirectory()).getId()));
 
 		for(pt.tecnico.MyDrive.domain.File f : dir.getFileSet()){
+			if(f instanceof Link){
+				listfiles.add(new FileInfoDto(f.getName() + " ->" , f.getPermissions(), (f.getUser()).getUsername() ,f.getId()));
 
-			listfiles.add(new FileInfoDto(f.getName() , f.getPermissions(), (f.getUser()).getUsername() ,f.getId()));
+			}
+
+			else{
+				listfiles.add(new FileInfoDto(f.getName() , f.getPermissions(), (f.getUser()).getUsername() ,f.getId()));
+			}
 		}
 		Collections.sort(listfiles);
 	}
