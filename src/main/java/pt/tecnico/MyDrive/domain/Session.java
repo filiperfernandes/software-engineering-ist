@@ -32,7 +32,7 @@ public class Session extends Session_Base {
 		}
 		setToken(i);
 		User user = muuu.getUserByUsername(username);
-		
+
 		//All users except root and guest with valid password
 		if(user.checkPassword(password)&user.getPassword().length()>=8){
 			//criar timer de 2 horas
@@ -63,17 +63,21 @@ public class Session extends Session_Base {
 			muuu.addSession(this);
 			return;
 		}
-		
+
 		else{
 			throw new InvalidPasswordException("Password must be at least 8 characters long");
 		}
 	}
-	
+
 	@Override
-	public void setUser(User u) { throw new PermissionDeniedException(); }
-	
+	public void setUser(User u) { 
+		throw new PermissionDeniedException(); 
+	}
+
 	@Override
-	public void setMydrive(MyDrive m) { throw new PermissionDeniedException(); }
+	public void setMydrive(MyDrive m) { 
+		throw new PermissionDeniedException(); 
+	}
 
 	public void updateSessions(MyDrive md){
 		Period period ;
