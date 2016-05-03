@@ -3,6 +3,7 @@ package pt.tecnico.MyDrive;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +18,7 @@ import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 import pt.tecnico.MyDrive.Exception.ExportXmlException;
 import pt.tecnico.MyDrive.Exception.ImportXmlException;
+import pt.tecnico.MyDrive.domain.App;
 import pt.tecnico.MyDrive.domain.Link;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.Session;
@@ -131,6 +133,10 @@ public class MyDriveApplication {
 	public static void setup() {
 
 		MyDrive md = MyDrive.getInstance();
+		
+		App a = new App(md.getCnt(), "try", "pt.tecnico.MyDrive.domain.App.Hello", "rwxd-x-");
+		
+		a.Run();
 		
 	}
 

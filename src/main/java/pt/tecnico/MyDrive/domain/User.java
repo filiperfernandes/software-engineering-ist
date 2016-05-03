@@ -165,8 +165,9 @@ public class User extends User_Base {
 	}
 
 
-	public User getUserByUsername(String username){
-		for (User user : getMydrive().getUserSet()){
+	public static User getUserByUsername(String username){
+		MyDrive md = MyDrive.getInstance();
+		for (User user : md.getUserSet()){
 			if(user.getName().equals(username)){
 				return user;
 

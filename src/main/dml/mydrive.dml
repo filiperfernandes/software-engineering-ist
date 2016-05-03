@@ -35,8 +35,8 @@ class Directory extends File{}
 class Link extends PlainFile;
 
 class App extends PlainFile{
-    String appData;
 }
+
 class AmbientVariable{
     String name;
     String value;
