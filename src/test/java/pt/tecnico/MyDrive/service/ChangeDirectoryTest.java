@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import pt.tecnico.MyDrive.Exception.PathToBigException;
-import pt.tecnico.MyDrive.Exception.DirectoryDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.PathDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.domain.MyDrive;

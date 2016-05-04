@@ -1,5 +1,6 @@
 package pt.tecnico.MyDrive.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pt.tecnico.MyDrive.Exception.MyDriveException;
@@ -30,19 +31,24 @@ public class AddAmbientVariableService extends MyDriveService{
 			throw new NullArgumentException();
 		}
 
+		list = new ArrayList<AmbientVariable>();
 		Session s = Session.getSessionByToken(token);
+		Boolean b = true;
 
 		for(AmbientVariable a : s.getAmbientvariableSet()){
 			if(a.getName().equals(name)){
+				b=false;
 				a.setValue(value);
 			}
 		}	
 		
-		AmbientVariable amb = new AmbientVariable(name, value);
-		s.addAmbientvariable(amb);
-
+		if(b){
+			AmbientVariable amb = new AmbientVariable(name, value);
+			s.addAmbientvariable(amb);
+		}
+		
 		for(AmbientVariable a :s.getAmbientvariableSet()){
-				list.add(a);
+			list.add(a);
 		}
 	}
 

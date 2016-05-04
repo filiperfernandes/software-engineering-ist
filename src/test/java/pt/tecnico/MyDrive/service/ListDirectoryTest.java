@@ -10,7 +10,6 @@ import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.UserDoesNotHavePermissionsException;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.User;
-import pt.tecnico.MyDrive.domain.*;
 import pt.tecnico.MyDrive.service.dto.FileInfoDto;
 
 

@@ -10,8 +10,6 @@ import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.UserDoesNotHavePermissionsException;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.User;
-import pt.tecnico.MyDrive.domain.Directory;
-import pt.tecnico.MyDrive.domain.File;
 
 public class CreateFileTest extends AbstractServiceTest{
 
