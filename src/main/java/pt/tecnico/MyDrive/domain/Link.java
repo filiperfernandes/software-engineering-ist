@@ -58,7 +58,7 @@ public class Link extends Link_Base {
 		}
     }
     
-    private String checkPath(String path, Directory dir){
+    public static String checkPath(String path, Directory dir){
 
 		MyDrive md = MyDrive.getInstance();
 		Directory rd = md.getRootdir();
