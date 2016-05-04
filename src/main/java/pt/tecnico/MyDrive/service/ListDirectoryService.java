@@ -39,7 +39,7 @@ public class ListDirectoryService extends MyDriveService{
 
 		for(pt.tecnico.MyDrive.domain.File f : dir.getFileSet()){
 			if(f instanceof Link){
-				listfiles.add(new FileInfoDto(f.getName() + " ->" , f.getPermissions(), (f.getUser()).getUsername() ,f.getId()));
+				listfiles.add(new FileInfoDto(f.getName() + " -> " + ((Link) f).getData(), f.getPermissions(), (f.getUser()).getUsername() ,f.getId()));
 
 			}
 
