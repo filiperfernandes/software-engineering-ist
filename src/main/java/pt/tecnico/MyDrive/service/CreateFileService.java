@@ -3,7 +3,7 @@ package pt.tecnico.MyDrive.service;
 import pt.tecnico.MyDrive.Exception.InvalidStringException;
 import pt.tecnico.MyDrive.Exception.InvalidTypeException;
 import pt.tecnico.MyDrive.Exception.MyDriveException;
-import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
+import pt.tecnico.MyDrive.domain.App;
 import pt.tecnico.MyDrive.domain.Directory;
 import pt.tecnico.MyDrive.domain.Link;
 import pt.tecnico.MyDrive.domain.MyDrive;
@@ -29,7 +29,7 @@ public class CreateFileService extends MyDriveService{
 	@Override
 	protected void dispatch() throws MyDriveException {
 		MyDrive md = MyDrive.getInstance();
-		Session s = getSessionByToken(token);
+		Session s = Session.getSessionByToken(token);
 		User user = s.getUser();
 		Directory dir = s.getCurrentdir();
 		String perm = user.getMask();
@@ -57,6 +57,12 @@ public class CreateFileService extends MyDriveService{
 			dir.addFile(l);
 			user.addFile(l);
 			file = l.getName();
+		}	
+		else if(type.equals("App")){
+			App a = new App(md.getCnt(), name, content, perm);
+			dir.addFile(a);
+			user.addFile(a);
+			file = a.getName();
 		}
 		
 		else{
@@ -68,15 +74,6 @@ public class CreateFileService extends MyDriveService{
 		return file;
 	}
 
-	public static Session getSessionByToken(long token){
-		MyDrive md = MyDrive.getInstance();
 
-		for(Session s : md.getSessionSet()){
-			if(s.getToken()==token){
-				return s;
-			}
-		}
-		throw new SessionDoesNotExistException(token);
-	}
 }
 

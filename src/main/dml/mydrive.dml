@@ -30,12 +30,12 @@ class PlainFile extends File{
     String data;
 }
 
-class Directory extends File{}
+class Directory extends File;
 
 class Link extends PlainFile;
 
-class App extends PlainFile{
-}
+class App extends PlainFile;
+
 
 class AmbientVariable{
     String name;
@@ -62,7 +62,7 @@ relation MyDriveContainsSession{
 relation SessionContainsAmbientVariable{
     Session playsRole session;
     AmbientVariable playsRole ambientvariable{
-    multiplicity 0..1;}
+    multiplicity *;}
 }
 
 relation UserOwnsSession{
