@@ -138,6 +138,10 @@ public class MyDriveApplication {
 		String[] asdf = {"ola", "adeus"};
 		a.Run(asdf);
 		
+		
+		App b = new App(md.getCnt(), "t2", "pt.tecnico.MyDrive.TestApp", "rwxd-x-");
+		
+		b.Run(asdf);
 	}
 
 

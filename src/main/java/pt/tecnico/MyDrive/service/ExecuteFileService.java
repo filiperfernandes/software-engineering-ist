@@ -1,7 +1,5 @@
 package pt.tecnico.MyDrive.service;
 
-import java.util.List;
-
 import pt.tecnico.MyDrive.Exception.MyDriveException;
 import pt.tecnico.MyDrive.Exception.NullArgumentException;
 import pt.tecnico.MyDrive.domain.App;
@@ -32,9 +30,9 @@ public class ExecuteFileService extends MyDriveService{
 		MyDrive md = MyDrive.getInstance();
 		
 		Session s = Session.getSessionByToken(token);
-		App a = new App(md.getCnt(), "NewAppService", path, "rwxdr---");
 		
-		a.Run(args);
+//		Sabendo o path ir buscar a App e fazer o .Run(args);
+
 		
 	}
 

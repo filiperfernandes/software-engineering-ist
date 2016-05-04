@@ -2,11 +2,8 @@ package pt.tecnico.MyDrive.domain;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 
 import org.joda.time.DateTime;
-
-import pt.tecnico.MyDrive.domain.User;
 
 public class App extends App_Base {
 
@@ -45,11 +42,11 @@ public class App extends App_Base {
 	}
 
 	public void Run(String[] args ) {
-		
+
 		String m="";
 		String data = this.getData();
 		String cl="";
-		
+
 		for(char ch : data.toCharArray()){
 			if (ch=='.'){
 				cl += m +".";
@@ -61,16 +58,36 @@ public class App extends App_Base {
 		}
 
 		String ncl=cl.substring(0,cl.length()-1);
-		
+
+
+
 		Method method;
 
 		Class<?> c;
 		try {
+
 			c = Class.forName(ncl);
+
 			method = c.getDeclaredMethod (m, String[].class);
 			method.invoke(this, (Object)args);
+
+
+
 		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
+
+			try {
+				
+				c = Class.forName(data);
+				method = c.getDeclaredMethod ("main", String[].class);
+				method.invoke(this, (Object)args);
+				
+			} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+
+
+
+
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
