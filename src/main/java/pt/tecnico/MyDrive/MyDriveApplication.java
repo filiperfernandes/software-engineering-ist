@@ -135,8 +135,8 @@ public class MyDriveApplication {
 		MyDrive md = MyDrive.getInstance();
 		
 		App a = new App(md.getCnt(), "try", "pt.tecnico.MyDrive.domain.App.Hello", "rwxd-x-");
-		
-		a.Run();
+		String[] asdf = {"ola", "adeus"};
+		a.Run(asdf);
 		
 	}
 
