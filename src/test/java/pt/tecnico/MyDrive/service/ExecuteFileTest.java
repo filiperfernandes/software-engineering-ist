@@ -19,7 +19,7 @@ public class ExecuteFileTest extends AbstractServiceTest{
 	@Test(expected=NullArgumentException.class)
 	public void nullArgumentTest01(){
 		
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		String[] a = {"a","ola"};
@@ -33,7 +33,7 @@ public class ExecuteFileTest extends AbstractServiceTest{
 	@Test(expected=NullArgumentException.class)
 	public void nullArgumentTest02(){
 		
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		ExecuteFileService ex = new ExecuteFileService(log.result(), "/home/root" , null);
@@ -44,7 +44,7 @@ public class ExecuteFileTest extends AbstractServiceTest{
 	@Test(expected=SessionDoesNotExistException.class)
 	public void nullArgumentTest03(){
 		
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		String[] a = {"a","ola"};
@@ -57,7 +57,7 @@ public class ExecuteFileTest extends AbstractServiceTest{
 	@Test(expected=FileDoesNotExistException.class)
 	public void nullArgumentTest04(){
 		
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		String[] a = {"a","ola"};

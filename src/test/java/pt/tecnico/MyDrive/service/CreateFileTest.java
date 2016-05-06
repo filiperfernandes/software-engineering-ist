@@ -88,24 +88,16 @@ public class CreateFileTest extends AbstractServiceTest{
 	
 	@Test(expected=UserDoesNotHavePermissionsException.class)
 	public void DoNotHavePermissionsCreateFile(){
-<<<<<<< HEAD
 
 		LoginUserService log = new LoginUserService("root","***");
-=======
-		
-		LoginUserService log = new LoginUserService(md, "root","***");
->>>>>>> origin/master
+
 		log.execute();
 		
 		CreateFileService file = new CreateFileService(log.result(), "test", "Directory", null);
 		file.execute();
-<<<<<<< HEAD
 
 		LoginUserService log1 = new LoginUserService("joao","123456789");
-=======
-		
-		LoginUserService log1 = new LoginUserService(md, "joao","123456789");
->>>>>>> origin/master
+
 		log1.execute();
 		
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root/test", log1.result());
@@ -118,7 +110,7 @@ public class CreateFileTest extends AbstractServiceTest{
 	@Test
 	public void createFileLink(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		CreateFileService file = new CreateFileService(log.result(), "testPlainFile", "PlainFile", "Teste ola");
