@@ -5,6 +5,7 @@ import pt.tecnico.MyDrive.Exception.InvalidTypeException;
 import pt.tecnico.MyDrive.Exception.MyDriveException;
 import pt.tecnico.MyDrive.domain.App;
 import pt.tecnico.MyDrive.domain.Directory;
+import pt.tecnico.MyDrive.domain.File;
 import pt.tecnico.MyDrive.domain.Link;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.PlainFile;
@@ -17,7 +18,7 @@ public class CreateFileService extends MyDriveService{
 	private String content;
 	private String type;
 	private long token;
-	private String file;
+	private File file;
 
 	public CreateFileService(long token, String name, String type, String content) {
 		this.name=name;
@@ -43,26 +44,26 @@ public class CreateFileService extends MyDriveService{
 			Directory d = new Directory(md.getCnt(), name, perm);
 			dir.addFile(d);
 			user.addFile(d);
-			file = d.getName();
+			file = d;
 		}
 		else if(type.equals("PlainFile")){
 			PlainFile f = new PlainFile(md.getCnt(), name, perm, content);
 			dir.addFile(f);
 			user.addFile(f);
-			file = f.getName();
+			file = f;
 		}
 		
 		else if(type.equals("Link")){
 			Link l = new Link(md.getCnt(), name, content, token);
 			dir.addFile(l);
 			user.addFile(l);
-			file = l.getName();
+			file = l;
 		}	
 		else if(type.equals("App")){
 			App a = new App(md.getCnt(), name, content, perm);
 			dir.addFile(a);
 			user.addFile(a);
-			file = a.getName();
+			file = a;
 		}
 		
 		else{
@@ -70,7 +71,7 @@ public class CreateFileService extends MyDriveService{
 		}
 	}
 
-	public String result(){
+	public File result(){
 		return file;
 	}
 

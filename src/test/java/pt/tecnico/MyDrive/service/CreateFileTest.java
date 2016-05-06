@@ -8,7 +8,10 @@ import pt.tecnico.MyDrive.Exception.InvalidStringException;
 import pt.tecnico.MyDrive.Exception.InvalidTypeException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.UserDoesNotHavePermissionsException;
+import pt.tecnico.MyDrive.domain.Directory;
+import pt.tecnico.MyDrive.domain.Link;
 import pt.tecnico.MyDrive.domain.MyDrive;
+import pt.tecnico.MyDrive.domain.PlainFile;
 import pt.tecnico.MyDrive.domain.User;
 
 public class CreateFileTest extends AbstractServiceTest{
@@ -61,9 +64,11 @@ public class CreateFileTest extends AbstractServiceTest{
 
 		CreateFileService file = new CreateFileService(log.result(), "nomeFicheiro", "Directory", null);
 		file.execute();
-		String actual = file.result();
+		
+		Directory actual = (Directory) file.result();
 
-		assertEquals("nomeFicheiro", actual);
+
+		assertEquals("nomeFicheiro", actual.getName());
 
 	}
 
@@ -75,49 +80,59 @@ public class CreateFileTest extends AbstractServiceTest{
 
 		CreateFileService file = new CreateFileService(log.result(), "nomePlainFile", "PlainFile", "Teste ola");
 		file.execute();
-		String actual = file.result();
+		PlainFile actual = (PlainFile) file.result();
 
-		assertEquals("nomePlainFile", actual);
+		assertEquals("nomePlainFile", actual.getName());
 
 	}
 	
-//	@Test
-//	public void createFileLink(){
-//
-//		LoginUserService log = new LoginUserService(md, "root","***");
-//		log.execute();
-//		
-//		CreateFileService file = new CreateFileService(log.result(), "testPlainFile", "PlainFile", "Teste ola");
-//		file.execute();
-//
-//		CreateFileService file1 = new CreateFileService(log.result(), "newLink", "Link", "/home/root/testPlainFile");
-//		file1.execute();
-//		String actual = file1.result();
-//		
-//		File a = Directory.getFileByName(actual);
-//
-//		assertEquals("newLink", actual);
-//		assertEquals("/home/root/testPlainFile", a);
-//		
-//	}
-
 	@Test(expected=UserDoesNotHavePermissionsException.class)
 	public void DoNotHavePermissionsCreateFile(){
+<<<<<<< HEAD
 
 		LoginUserService log = new LoginUserService("root","***");
+=======
+		
+		LoginUserService log = new LoginUserService(md, "root","***");
+>>>>>>> origin/master
 		log.execute();
-
+		
 		CreateFileService file = new CreateFileService(log.result(), "test", "Directory", null);
 		file.execute();
+<<<<<<< HEAD
 
 		LoginUserService log1 = new LoginUserService("joao","123456789");
+=======
+		
+		LoginUserService log1 = new LoginUserService(md, "joao","123456789");
+>>>>>>> origin/master
 		log1.execute();
-
+		
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root/test", log1.result());
 		dir.execute();
-
+		
 		CreateFileService file1 = new CreateFileService(log1.result(), "test1", "PlainFile", "iiii");
 		file1.execute();
 	}
+	
+	@Test
+	public void createFileLink(){
+
+		LoginUserService log = new LoginUserService(md, "root","***");
+		log.execute();
+		
+		CreateFileService file = new CreateFileService(log.result(), "testPlainFile", "PlainFile", "Teste ola");
+		file.execute();
+
+		CreateFileService file1 = new CreateFileService(log.result(), "newLink", "Link", "/home/root/testPlainFile");
+		file1.execute();
+		Link actual = (Link) file1.result();
+		
+
+		assertEquals("newLink", actual.getName());
+		assertEquals("/home/root/testPlainFile", actual.getData());
+		
+	}
+
 
 }
