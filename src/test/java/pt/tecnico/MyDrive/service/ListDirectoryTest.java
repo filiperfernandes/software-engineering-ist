@@ -29,7 +29,7 @@ public class ListDirectoryTest extends AbstractServiceTest {
 	@Test(expected=SessionDoesNotExistException.class)
 	public void sessionDoesNotExistListDirectory(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		ListDirectoryService dir = new ListDirectoryService(345234324);
@@ -39,7 +39,7 @@ public class ListDirectoryTest extends AbstractServiceTest {
 	@Test
 	public void listDirectory(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		ListDirectoryService dir = new ListDirectoryService(log.result());
@@ -59,13 +59,13 @@ public class ListDirectoryTest extends AbstractServiceTest {
 	@Test(expected=UserDoesNotHavePermissionsException.class)
 	public void DoNotHavePermissionsListDirectory(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result(), "test", "Directory", null);
 		file.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "joao","123456789");
+		LoginUserService log1 = new LoginUserService("joao","123456789");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root/test", log1.result());
@@ -78,7 +78,7 @@ public class ListDirectoryTest extends AbstractServiceTest {
 	@Test
 	public void listDirectory1(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result(), "test", "Directory", null);
@@ -87,7 +87,7 @@ public class ListDirectoryTest extends AbstractServiceTest {
 		CreateFileService file2 = new CreateFileService(log.result(), "jjj", "Directory", null);
 		file2.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "ricardo","321435243543253245");
+		LoginUserService log1 = new LoginUserService("ricardo","321435243543253245");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());

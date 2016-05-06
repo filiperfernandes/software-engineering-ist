@@ -12,7 +12,7 @@ import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 
 public class Session extends Session_Base {
 
-	public Session(MyDrive md, String username, String password) {
+	public Session(String username, String password) {
 		super();
 		MyDrive muuu = MyDrive.getInstance();
 		boolean t = true;

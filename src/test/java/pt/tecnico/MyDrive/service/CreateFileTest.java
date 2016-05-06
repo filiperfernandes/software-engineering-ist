@@ -25,7 +25,7 @@ public class CreateFileTest extends AbstractServiceTest{
 	@Test(expected=SessionDoesNotExistException.class)
 	public void sessionDoesNotExistCreateFile(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(2354235 , "nomeFicheiro", "PlainFile", "Conteudo null se for um dir");
@@ -35,7 +35,7 @@ public class CreateFileTest extends AbstractServiceTest{
 	@Test(expected=InvalidStringException.class)
 	public void invalidStringCreateFile(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result(), "nomeFicheiro/.", "Directory", null);
@@ -45,7 +45,7 @@ public class CreateFileTest extends AbstractServiceTest{
 	@Test(expected=InvalidTypeException.class)
 	public void invalidTypeCreateFile(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result(), "nomeFicheiro", "tipoFicheiro", null);
@@ -56,7 +56,7 @@ public class CreateFileTest extends AbstractServiceTest{
 	@Test
 	public void createFileDirectory(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result(), "nomeFicheiro", "Directory", null);
@@ -70,7 +70,7 @@ public class CreateFileTest extends AbstractServiceTest{
 	@Test
 	public void createFilePlainFile(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result(), "nomePlainFile", "PlainFile", "Teste ola");
@@ -104,13 +104,13 @@ public class CreateFileTest extends AbstractServiceTest{
 	@Test(expected=UserDoesNotHavePermissionsException.class)
 	public void DoNotHavePermissionsCreateFile(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result(), "test", "Directory", null);
 		file.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "joao","123456789");
+		LoginUserService log1 = new LoginUserService("joao","123456789");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root/test", log1.result());

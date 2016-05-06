@@ -26,7 +26,7 @@ public class WriteFileTest extends AbstractServiceTest{
 
 	@Test(expected=SessionDoesNotExistException.class)
 	public void sessionDoesNotExistWriteFile(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		//long token = log.result();
 		WriteFileService file = new WriteFileService("nomeFicheiro", 54546,"Conteudo");
@@ -36,7 +36,7 @@ public class WriteFileTest extends AbstractServiceTest{
 
 	@Test(expected=FileDoesNotExistException.class)
 	public void fileDoesNotExistWriteFile(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 		WriteFileService file = new WriteFileService("nomeFicheiro", token,"Conteudo");
@@ -46,7 +46,7 @@ public class WriteFileTest extends AbstractServiceTest{
 
 	@Test(expected=FileIsDirectoryException.class)
 	public void fileIsDirectoryWriteFile(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 		ChangeDirectoryService dir = new ChangeDirectoryService("..", token);
@@ -58,7 +58,7 @@ public class WriteFileTest extends AbstractServiceTest{
 
 	@Test
 	public void WriteFile(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -74,13 +74,13 @@ public class WriteFileTest extends AbstractServiceTest{
 	@Test(expected=UserDoesNotHavePermissionsException.class)
 	public void DoNotHavePermissionsWriteFile(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result(), "test", "PlainFile", "ii");
 		file.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "joao","123456789");
+		LoginUserService log1 = new LoginUserService("joao","123456789");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());

@@ -12,7 +12,7 @@ public class LoginUserService extends MyDriveService{
 	private MyDrive md;
 	private long token;
 
-	public LoginUserService(MyDrive md, String username, String password) {
+	public LoginUserService(String username, String password) {
 		this.username=username;
 		this.password=password;
 		this.md=md;
@@ -20,7 +20,7 @@ public class LoginUserService extends MyDriveService{
 
 	@Override
 	protected void dispatch() throws MyDriveException {
-		Session s = new Session(md, username, password);
+		Session s = new Session(username, password);
 		token = s.getToken();
 	}
 

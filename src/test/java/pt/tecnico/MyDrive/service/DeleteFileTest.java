@@ -27,7 +27,7 @@ public class DeleteFileTest extends AbstractServiceTest{
 	@Test(expected=SessionDoesNotExistException.class)
 	public void sessionDoesNotExistDeleteFile(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result() , "nomeFicheiro", "PlainFile", "Conteudo null se for um dir");
@@ -42,7 +42,7 @@ public class DeleteFileTest extends AbstractServiceTest{
 	@Test(expected=FileDoesNotExistException.class)
 	public void fileDoesNotExistDeleteFile(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -57,7 +57,7 @@ public class DeleteFileTest extends AbstractServiceTest{
 	@Test(expected=FileDoesNotExistException.class)
 	public void fileDoesNotExistDeleteFile1(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -72,7 +72,7 @@ public class DeleteFileTest extends AbstractServiceTest{
 	@Test
 	public void DeleteFile(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -95,7 +95,7 @@ public class DeleteFileTest extends AbstractServiceTest{
 	@Test
 	public void DeleteFile1(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -118,13 +118,13 @@ public class DeleteFileTest extends AbstractServiceTest{
 	@Test(expected=UserDoesNotHavePermissionsException.class)
 	public void DoNotHavePermissionsDeleteFile(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result(),"test", "Directory", null);
 		file.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "joao","123456789");
+		LoginUserService log1 = new LoginUserService("joao","123456789");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());
@@ -137,13 +137,13 @@ public class DeleteFileTest extends AbstractServiceTest{
 	@Test(expected=UserDoesNotHavePermissionsException.class)
 	public void DoNotHavePermissionsDeleteFile1(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result(), "test", "PlainFile", "HII");
 		file.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "joao","123456789");
+		LoginUserService log1 = new LoginUserService("joao","123456789");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());

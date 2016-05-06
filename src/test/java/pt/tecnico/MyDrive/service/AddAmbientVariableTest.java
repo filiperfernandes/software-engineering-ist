@@ -23,7 +23,7 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 	@Test(expected=NullArgumentException.class)
 	public void nullArgumentsTest01(){
 		
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		AddAmbientVariableService test = new AddAmbientVariableService(log.result(), null, "2");
@@ -33,7 +33,7 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 	@Test(expected=NullArgumentException.class)
 	public void nullArgumentsTest02(){
 		
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		AddAmbientVariableService test = new AddAmbientVariableService(log.result(), "variavel", null);
@@ -43,7 +43,7 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 	@Test(expected=SessionDoesNotExistException.class)
 	public void sessionDoesNotExistTest(){
 		
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		AddAmbientVariableService test = new AddAmbientVariableService(54546545, "variavel", "2");
@@ -53,7 +53,7 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 	@Test
 	public void test01(){
 		
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		AddAmbientVariableService test = new AddAmbientVariableService(log.result(), "variavel", "2");
@@ -69,7 +69,7 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 	@Test
 	public void test02(){
 		
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		AddAmbientVariableService test = new AddAmbientVariableService(log.result(), "variavel", "2");
@@ -87,7 +87,7 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 	@Test
 	public void test03(){
 		
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		AddAmbientVariableService test = new AddAmbientVariableService(log.result(), "v1", "2");
@@ -119,7 +119,7 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 	@Test
 	public void test04(){
 		
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		
 		AddAmbientVariableService test = new AddAmbientVariableService(log.result(), "v1", "2");

@@ -24,7 +24,7 @@ public class ReadFileTest extends AbstractServiceTest{
 
 	@Test(expected=SessionDoesNotExistException.class)
 	public void sessionDoesNotExistReadFile(){
-		LoginUserService log =  new LoginUserService(md, "root", "***");
+		LoginUserService log =  new LoginUserService("root", "***");
 		log.execute();
 
 		ReadFileService file = new ReadFileService("nomeFicheiro", 45656456);
@@ -33,7 +33,7 @@ public class ReadFileTest extends AbstractServiceTest{
 
 	@Test(expected=FileDoesNotExistException.class)
 	public void fileDoesNotExistReadFile(){
-		LoginUserService log =  new LoginUserService(md, "root", "***");
+		LoginUserService log =  new LoginUserService("root", "***");
 		log.execute();
 		long token = log.result();
 
@@ -46,7 +46,7 @@ public class ReadFileTest extends AbstractServiceTest{
 
 	@Test
 	public void ReadFile(){
-		LoginUserService log =  new LoginUserService(md, "root", "***");
+		LoginUserService log =  new LoginUserService("root", "***");
 		log.execute();
 		long token = log.result();
 
@@ -62,13 +62,13 @@ public class ReadFileTest extends AbstractServiceTest{
 	@Test(expected=UserDoesNotHavePermissionsException.class)
 	public void DoNotHavePermissionsReadFile(){
 
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		CreateFileService file = new CreateFileService(log.result(), "test", "PlainFile", "ii");
 		file.execute();
 
-		LoginUserService log1 = new LoginUserService(md, "joao","123423534253245235");
+		LoginUserService log1 = new LoginUserService("joao","123423534253245235");
 		log1.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());
@@ -80,7 +80,7 @@ public class ReadFileTest extends AbstractServiceTest{
 
 	@Test(expected=FileIsDirectoryException.class)
 	public void fileIsDirectoryReadFile(){
-		LoginUserService log =  new LoginUserService(md, "root", "***");
+		LoginUserService log =  new LoginUserService("root", "***");
 		log.execute();
 		long token = log.result();
 

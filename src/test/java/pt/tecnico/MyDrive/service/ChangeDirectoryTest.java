@@ -30,7 +30,7 @@ public class ChangeDirectoryTest extends AbstractServiceTest {
 
 	@Test(expected=PathDoesNotExistException.class)
 	public void pathDoesNotExistChangeDirectory(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -40,7 +40,7 @@ public class ChangeDirectoryTest extends AbstractServiceTest {
 
 	@Test(expected=PathToBigException.class)
 	public void pathToBigChangeDirectory(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -50,7 +50,7 @@ public class ChangeDirectoryTest extends AbstractServiceTest {
 
 	@Test(expected=SessionDoesNotExistException.class)
 	public void sessionDoesNotExistChangeDirectory(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home", 587432);
@@ -59,7 +59,7 @@ public class ChangeDirectoryTest extends AbstractServiceTest {
 
 	@Test
 	public void pathDoesNotExistChangeDirecto(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -73,7 +73,7 @@ public class ChangeDirectoryTest extends AbstractServiceTest {
 
 	@Test
 	public void pontoChangeDirectory(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -86,7 +86,7 @@ public class ChangeDirectoryTest extends AbstractServiceTest {
 
 	@Test
 	public void doispontosChangeDirectory(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -99,7 +99,7 @@ public class ChangeDirectoryTest extends AbstractServiceTest {
 
 	@Test
 	public void relativoChangeDirectory(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -115,7 +115,7 @@ public class ChangeDirectoryTest extends AbstractServiceTest {
 
 	@Test
 	public void absoluteChangeDirectory(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 
@@ -131,7 +131,7 @@ public class ChangeDirectoryTest extends AbstractServiceTest {
 
 	@Test
 	public void barraChangeDirectory(){
-		LoginUserService log = new LoginUserService(md, "root","***");
+		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 		long token = log.result();
 

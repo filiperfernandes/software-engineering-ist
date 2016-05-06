@@ -23,28 +23,28 @@ public class LoginUserTest extends AbstractServiceTest {
 
 	@Test(expected=InvalidPasswordException.class)
 	public void invalidPasswordLoginRoot(){
-		LoginUserService log =  new LoginUserService(md, "root", "99999");
+		LoginUserService log =  new LoginUserService("root", "99999");
 		log.execute();
 
 	}
 
 	@Test(expected=InvalidPasswordException.class)
 	public void invalidPasswordLoginUser(){
-		LoginUserService log =  new LoginUserService(md, "joao", "99999");
+		LoginUserService log =  new LoginUserService("joao", "99999");
 		log.execute();
 
 	}
 
 	@Test(expected=UsernameDoesNotExistException.class)
 	public void userNameDoesNotExistLoginUser(){
-		LoginUserService log =  new LoginUserService(md, "Carvalho", "12345432543253245");
+		LoginUserService log =  new LoginUserService("Carvalho", "12345432543253245");
 		log.execute();
 	}
 
 	@Test
 	public void rootLogin(){
 
-		LoginUserService log =  new LoginUserService(md, "root", "***");
+		LoginUserService log =  new LoginUserService("root", "***");
 		log.execute();
 		long a = log.result();
 
@@ -53,7 +53,7 @@ public class LoginUserTest extends AbstractServiceTest {
 
 	@Test
 	public void userLogin(){
-		LoginUserService log =  new LoginUserService(md, "joao", "12345423534564356");
+		LoginUserService log =  new LoginUserService("joao", "12345423534564356");
 		log.execute();
 		long a = log.result();
 
