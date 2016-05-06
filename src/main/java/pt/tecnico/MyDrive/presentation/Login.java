@@ -9,7 +9,7 @@ public class Login extends MdCommand{
 	@Override
 	void execute(String[] args) {
 
-		new LoginUserService(args[0], args[1]);
+		new LoginUserService(args[0], args[1]).execute();
 	}
 
 }
