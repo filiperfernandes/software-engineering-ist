@@ -8,8 +8,18 @@ public class Login extends MdCommand{
 
 	@Override
 	void execute(String[] args) {
+		if (args.length < 1){
+		    throw new RuntimeException("USAGE: "+name()+" <username> [password]");
+		}
+		
+		if (args.length >1){
+			new LoginUserService(args[0], args[1]).execute();
+		}
+		
+		else{
+			new LoginUserService(args[0],"").execute();
+		}
 
-		new LoginUserService(args[0], args[1]).execute();
 	}
 
 }
