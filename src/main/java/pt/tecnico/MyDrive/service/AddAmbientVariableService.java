@@ -2,6 +2,7 @@ package pt.tecnico.MyDrive.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import pt.tecnico.MyDrive.Exception.MyDriveException;
 import pt.tecnico.MyDrive.Exception.NullArgumentException;
@@ -13,7 +14,7 @@ public class AddAmbientVariableService extends MyDriveService{
 	private String name;
 	private String value;
 	private long token;
-	private List<AmbientVariable> list;
+	private TreeMap<String,String> map;
 
 	public AddAmbientVariableService(long token, String name, String value) {
 		this.name=name;
@@ -31,7 +32,7 @@ public class AddAmbientVariableService extends MyDriveService{
 			throw new NullArgumentException();
 		}
 
-		list = new ArrayList<AmbientVariable>();
+		map = new TreeMap<String,String>();
 		Session s = Session.getSessionByToken(token);
 		Boolean b = true;
 
@@ -48,12 +49,12 @@ public class AddAmbientVariableService extends MyDriveService{
 		}
 		
 		for(AmbientVariable a :s.getAmbientvariableSet()){
-			list.add(a);
+			map.put(a.getName(), a.getValue());
 		}
 	}
 
-	public final List<AmbientVariable> result(){
-		return list;
+	public final TreeMap<String,String> result(){
+		return map;
 	}
 
 

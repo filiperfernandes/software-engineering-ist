@@ -76,11 +76,11 @@ public class App extends App_Base {
 		} catch (ClassNotFoundException e1) {
 
 			try {
-				
+
 				c = Class.forName(data);
 				method = c.getDeclaredMethod ("main", String[].class);
 				method.invoke(this, (Object)args);
-				
+
 			} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
@@ -102,8 +102,11 @@ public class App extends App_Base {
 
 	}
 
-	public static void Hello(String[] a){
-		String y = a[0];
-		System.out.println("hello"+y);
+	public static String Hello(String[] a){
+		String r = "hello ";
+		for(String s : a){
+			r += " " + a;
+		}
+		return r;
 	}
 }

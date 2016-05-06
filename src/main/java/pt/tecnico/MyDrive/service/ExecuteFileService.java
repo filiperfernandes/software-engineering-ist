@@ -1,11 +1,13 @@
 package pt.tecnico.MyDrive.service;
 
+import pt.tecnico.MyDrive.Exception.FileIsNotAppException;
 import pt.tecnico.MyDrive.Exception.MyDriveException;
 import pt.tecnico.MyDrive.Exception.NullArgumentException;
 import pt.tecnico.MyDrive.Exception.PathDoesNotExistException;
 import pt.tecnico.MyDrive.Exception.PermissionDeniedException;
 import pt.tecnico.MyDrive.domain.App;
 import pt.tecnico.MyDrive.domain.Directory;
+import pt.tecnico.MyDrive.domain.File;
 import pt.tecnico.MyDrive.domain.Link;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.Session;
@@ -61,12 +63,24 @@ public class ExecuteFileService extends MyDriveService{
 
 		if(Link.checkPath(path, dir).equals("absolute")){
 			Directory directory = Directory.getDirByPath(p, rd);
-			app =(App) directory.getFileByName(name);
+			File f = directory.getFileByName(name);
+			if(f instanceof App){
+				app =(App) f;
+			}
+			else{
+				throw new FileIsNotAppException();
+			}
 
 		}
 		else if(Link.checkPath(path, dir).equals("relative")){
 			Directory directory = Directory.getDirByPath(p, dir);
-			app =(App) directory.getFileByName(name);
+			File f = directory.getFileByName(name);
+			if(f instanceof App){
+				app =(App) f;
+			}
+			else{
+				throw new FileIsNotAppException();
+			}
 
 		}
 		else{
@@ -81,5 +95,6 @@ public class ExecuteFileService extends MyDriveService{
 		}
 
 	}
+
 
 }
