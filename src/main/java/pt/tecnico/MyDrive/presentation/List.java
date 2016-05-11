@@ -9,11 +9,11 @@ public class List extends MdCommand{
 	@Override
 	void execute(String[] args) {
 		if (args.length < 1){
-			throw new RuntimeException("USAGE: "+name()+" <username> [password]");
+			throw new RuntimeException("USAGE: "+name()+" <ls> [path]");
 		}
 
 		if (args.length >1){
-			new ListDirectoryService(Integer.parseInt(args[0])).execute();
+			new ListDirectoryService(Long.valueOf(args[0])).execute();
 		}
 	}
 
