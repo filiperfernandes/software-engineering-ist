@@ -20,7 +20,7 @@ public class ExecuteFileService extends MyDriveService{
 	private String path;
 	private String[] args;
 
-	public ExecuteFileService(long token, String path, String[] args){
+	public ExecuteFileService(long token, String path, String... args){
 		this.token=token;
 		this.path=path;
 		this.args=args;
