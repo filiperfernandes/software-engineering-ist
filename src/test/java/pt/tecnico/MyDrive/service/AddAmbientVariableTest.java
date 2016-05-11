@@ -3,12 +3,14 @@ package pt.tecnico.MyDrive.service;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
+import java.util.TreeMap;
 
 import org.junit.Test;
 
 import pt.tecnico.MyDrive.Exception.NullArgumentException;
 import pt.tecnico.MyDrive.Exception.SessionDoesNotExistException;
 import pt.tecnico.MyDrive.domain.AmbientVariable;
+import pt.tecnico.MyDrive.domain.AmbientVariable_Base;
 import pt.tecnico.MyDrive.domain.MyDrive;
 
 public class AddAmbientVariableTest extends AbstractServiceTest{
@@ -30,15 +32,6 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 		test.execute();
 	}
 	
-	@Test(expected=NullArgumentException.class)
-	public void nullArgumentsTest02(){
-		
-		LoginUserService log = new LoginUserService("root","***");
-		log.execute();
-		
-		AddAmbientVariableService test = new AddAmbientVariableService(log.result(), "variavel", null);
-		test.execute();
-	}
 	
 	@Test(expected=SessionDoesNotExistException.class)
 	public void sessionDoesNotExistTest(){
@@ -59,11 +52,11 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 		AddAmbientVariableService test = new AddAmbientVariableService(log.result(), "variavel", "2");
 		test.execute();
 		
-		List<AmbientVariable>  list = test.result();
+		TreeMap<String,String>  map = test.result();
 		
-		assertEquals(log.result(), list.get(0).getSession().getToken());
-		assertEquals("variavel", list.get(0).getName());
-		assertEquals("2", list.get(0).getValue());
+		//assertEquals(log.result(), (AmbientVariable test).getSession().getToken());
+		assertEquals(true, map.containsKey("variavel"));
+		assertEquals("2", map.get("variavel"));
 	}
 	
 	@Test
@@ -77,11 +70,11 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 		
 		test = new AddAmbientVariableService(log.result(), "variavel", "2456");
 		test.execute();
-		List<AmbientVariable>  list = test.result();
+		TreeMap<String,String>  map = test.result();
 		
-		assertEquals(log.result(), list.get(0).getSession().getToken());
-		assertEquals("variavel", list.get(0).getName());
-		assertEquals("2456", list.get(0).getValue());
+		//assertEquals(log.result(), list.get(0).getSession().getToken());
+		assertEquals(true, map.containsKey("variavel"));
+		assertEquals("2456", map.get("variavel"));
 	}
 	
 	@Test
@@ -98,22 +91,22 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 		
 		test = new AddAmbientVariableService(log.result(), "v3", "4");
 		test.execute();
-		List<AmbientVariable>  list = test.result();
+		TreeMap<String,String>  map = test.result();
 		
 		//A lista fica ordenada ao contrario, o ultimo a ser criado
 		//fica na primeira posicao (get(0))
 		
-		assertEquals(log.result(), list.get(0).getSession().getToken());
-		assertEquals("v3", list.get(0).getName());
-		assertEquals("4", list.get(0).getValue());
+		//assertEquals(log.result(), list.get(0).getSession().getToken());
+		assertEquals(true, map.containsKey("v3"));
+		assertEquals("4", map.get("v3"));
 		
-		assertEquals(log.result(), list.get(1).getSession().getToken());
-		assertEquals("v2", list.get(1).getName());
-		assertEquals("3", list.get(1).getValue());
+		//assertEquals(log.result(), list.get(1).getSession().getToken());
+		assertEquals(true, map.containsKey("v2"));
+		assertEquals("3", map.get("v2"));
 		
-		assertEquals(log.result(), list.get(2).getSession().getToken());
-		assertEquals("v1", list.get(2).getName());
-		assertEquals("2", list.get(2).getValue());
+		//assertEquals(log.result(), list.get(2).getSession().getToken());
+		assertEquals(true, map.containsKey("v1"));
+		assertEquals("2", map.get("v1"));
 	}
 	
 	@Test
@@ -133,22 +126,22 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 		
 		test = new AddAmbientVariableService(log.result(), "v3", "4");
 		test.execute();
-		List<AmbientVariable>  list = test.result();
+		TreeMap<String,String>  map = test.result();
 		
 		//A lista fica ordenada ao contrario, o ultimo a ser criado
 		//fica na primeira posicao (get(0))
 		
-		assertEquals(log.result(), list.get(0).getSession().getToken());
-		assertEquals("v3", list.get(0).getName());
-		assertEquals("4", list.get(0).getValue());
+		//assertEquals(log.result(), list.get(0).getSession().getToken());
+		assertEquals(true, map.containsKey("v3"));
+		assertEquals("4", map.get("v3"));
 		
-		assertEquals(log.result(), list.get(1).getSession().getToken());
-		assertEquals("v2", list.get(1).getName());
-		assertEquals("6666", list.get(1).getValue());
+		//assertEquals(log.result(), list.get(1).getSession().getToken());
+		assertEquals(true, map.containsKey("v2"));
+		assertEquals("6666", map.get("v2"));
 		
-		assertEquals(log.result(), list.get(2).getSession().getToken());
-		assertEquals("v1", list.get(2).getName());
-		assertEquals("2", list.get(2).getValue());
+		//assertEquals(log.result(), list.get(2).getSession().getToken());
+		assertEquals(true, map.containsKey("v1"));
+		assertEquals("2", map.get("v1"));
 	}
 	
 }

@@ -24,32 +24,43 @@ public class AddAmbientVariableService extends MyDriveService{
 
 	@Override
 	protected void dispatch() throws MyDriveException {
-
-		if(name==null){
-			throw new NullArgumentException();
-		}
-		else if(value==null){
-			throw new NullArgumentException();
-		}
-
+		
 		map = new TreeMap<String,String>();
 		Session s = Session.getSessionByToken(token);
 		Boolean b = true;
 
-		for(AmbientVariable a : s.getAmbientvariableSet()){
-			if(a.getName().equals(name)){
-				b=false;
-				a.setValue(value);
+		
+		if(name == null && value == null){
+			for(AmbientVariable a :s.getAmbientvariableSet()){
+				map.put(a.getName(), a.getValue());
 			}
-		}	
-		
-		if(b){
-			AmbientVariable amb = new AmbientVariable(name, value);
-			s.addAmbientvariable(amb);
 		}
-		
-		for(AmbientVariable a :s.getAmbientvariableSet()){
-			map.put(a.getName(), a.getValue());
+			
+		if(name==null){
+			throw new NullArgumentException();
+		}
+		else if(value==null){
+			for(AmbientVariable a :s.getAmbientvariableSet()){
+				map.put(a.getName(), a.getValue());
+			}
+		}
+		else{
+			for(AmbientVariable a : s.getAmbientvariableSet()){
+				if(a.getName().equals(name)){
+					b=false;
+					a.setValue(value);
+				}
+				
+			}	
+				
+			if(b){
+				AmbientVariable amb = new AmbientVariable(name, value);
+				s.addAmbientvariable(amb);
+			}
+				
+			for(AmbientVariable a :s.getAmbientvariableSet()){
+				map.put(a.getName(), a.getValue());
+			}
 		}
 	}
 
