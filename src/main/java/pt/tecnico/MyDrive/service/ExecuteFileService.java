@@ -12,6 +12,7 @@ import pt.tecnico.MyDrive.domain.Link;
 import pt.tecnico.MyDrive.domain.MyDrive;
 import pt.tecnico.MyDrive.domain.Session;
 import pt.tecnico.MyDrive.domain.User;
+import java.util.*;
 
 public class ExecuteFileService extends MyDriveService{
 
@@ -20,7 +21,15 @@ public class ExecuteFileService extends MyDriveService{
 	private String path;
 	private String[] args;
 
-	public ExecuteFileService(long token, String path, String[] args){
+	public ExecuteFileService(long token, String path, String... arg){
+		String[] args = new String[10];
+		int i=0;
+		for(String v : arg){
+			
+			args[i]=v;
+			i++;
+		}
+
 		this.token=token;
 		this.path=path;
 		this.args=args;

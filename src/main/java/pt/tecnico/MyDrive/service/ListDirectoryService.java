@@ -14,22 +14,31 @@ import pt.tecnico.MyDrive.service.dto.FileInfoDto;
 public class ListDirectoryService extends MyDriveService{
 
 	private long token;
+	private String path;
 	private List<FileInfoDto> listfiles;
 
 
-	public ListDirectoryService(long token){
+	public ListDirectoryService(long token, String p){
 
 		this.token=token;
-
-
+		this.path=p;
 
 	}
+	
+	
 	@Override
 	protected void dispatch() throws MyDriveException {
-		MyDrive.getInstance();	
+		MyDrive md = MyDrive.getInstance();	
 		Session s = getSessionByToken(token);
 		token = s.getToken();
-		Directory dir = s.getCurrentdir();
+		Directory dir;
+		if(path.equals("")){
+			dir = s.getCurrentdir();
+		}
+		else{
+			Directory rd = md.getRootdir();
+			dir = Directory.getDirByPath(path, rd);
+		}
 
 		listfiles = new ArrayList<FileInfoDto>();
 

@@ -30,16 +30,16 @@ public class ExecuteFileTest extends AbstractServiceTest{
 	}
 	
 	
-	@Test(expected=NullArgumentException.class)
-	public void nullArgumentTest02(){
-		
-		LoginUserService log = new LoginUserService("root","***");
-		log.execute();
-		
-		ExecuteFileService ex = new ExecuteFileService(log.result(), "/home/root" , null);
-		ex.execute();
-		
-	}
+//	@Test(expected=NullArgumentException.class)
+//	public void nullArgumentTest02(){
+//		
+//		LoginUserService log = new LoginUserService("root","***");
+//		log.execute();
+//		
+//		ExecuteFileService ex = new ExecuteFileService(log.result(), "/home/root" , null);
+//		ex.execute();
+//		
+//	}
 	
 	@Test(expected=SessionDoesNotExistException.class)
 	public void nullArgumentTest03(){

@@ -67,6 +67,6 @@ public class AddAmbientVariableService extends MyDriveService{
 	public final TreeMap<String,String> result(){
 		return map;
 	}
-
+	
 
 }

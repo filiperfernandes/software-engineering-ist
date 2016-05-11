@@ -32,7 +32,7 @@ public class ListDirectoryTest extends AbstractServiceTest {
 		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
-		ListDirectoryService dir = new ListDirectoryService(345234324);
+		ListDirectoryService dir = new ListDirectoryService(345234324, "");
 		dir.execute();
 	}
 
@@ -42,7 +42,7 @@ public class ListDirectoryTest extends AbstractServiceTest {
 		LoginUserService log = new LoginUserService("root","***");
 		log.execute();
 
-		ListDirectoryService dir = new ListDirectoryService(log.result());
+		ListDirectoryService dir = new ListDirectoryService(log.result(),"");
 		dir.execute();
 		List<FileInfoDto> cs = dir.result();
 
@@ -71,7 +71,7 @@ public class ListDirectoryTest extends AbstractServiceTest {
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root/test", log1.result());
 		dir.execute();
 
-		ListDirectoryService file1 = new ListDirectoryService(log1.result());
+		ListDirectoryService file1 = new ListDirectoryService(log1.result(), "");
 		file1.execute();
 	}
 
@@ -93,7 +93,7 @@ public class ListDirectoryTest extends AbstractServiceTest {
 		ChangeDirectoryService dir = new ChangeDirectoryService("/home/root", log1.result());
 		dir.execute();
 
-		ListDirectoryService file1 = new ListDirectoryService(log1.result());
+		ListDirectoryService file1 = new ListDirectoryService(log1.result(), "");
 		file1.execute();
 		List<FileInfoDto> cs = file1.result();
 

@@ -54,9 +54,9 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 		
 		TreeMap<String,String>  map = test.result();
 		
-		//assertEquals(log.result(), (AmbientVariable test).getSession().getToken());
 		assertEquals(true, map.containsKey("variavel"));
 		assertEquals("2", map.get("variavel"));
+
 	}
 	
 	@Test
@@ -70,11 +70,12 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 		
 		test = new AddAmbientVariableService(log.result(), "variavel", "2456");
 		test.execute();
+
 		TreeMap<String,String>  map = test.result();
 		
-		//assertEquals(log.result(), list.get(0).getSession().getToken());
 		assertEquals(true, map.containsKey("variavel"));
 		assertEquals("2456", map.get("variavel"));
+
 	}
 	
 	@Test
@@ -91,20 +92,15 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 		
 		test = new AddAmbientVariableService(log.result(), "v3", "4");
 		test.execute();
+
 		TreeMap<String,String>  map = test.result();
-		
-		//A lista fica ordenada ao contrario, o ultimo a ser criado
-		//fica na primeira posicao (get(0))
-		
-		//assertEquals(log.result(), list.get(0).getSession().getToken());
+
 		assertEquals(true, map.containsKey("v3"));
 		assertEquals("4", map.get("v3"));
-		
-		//assertEquals(log.result(), list.get(1).getSession().getToken());
+
 		assertEquals(true, map.containsKey("v2"));
 		assertEquals("3", map.get("v2"));
-		
-		//assertEquals(log.result(), list.get(2).getSession().getToken());
+
 		assertEquals(true, map.containsKey("v1"));
 		assertEquals("2", map.get("v1"));
 	}
@@ -126,22 +122,19 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 		
 		test = new AddAmbientVariableService(log.result(), "v3", "4");
 		test.execute();
+
 		TreeMap<String,String>  map = test.result();
-		
-		//A lista fica ordenada ao contrario, o ultimo a ser criado
-		//fica na primeira posicao (get(0))
-		
-		//assertEquals(log.result(), list.get(0).getSession().getToken());
+
 		assertEquals(true, map.containsKey("v3"));
 		assertEquals("4", map.get("v3"));
-		
-		//assertEquals(log.result(), list.get(1).getSession().getToken());
+
 		assertEquals(true, map.containsKey("v2"));
 		assertEquals("6666", map.get("v2"));
-		
-		//assertEquals(log.result(), list.get(2).getSession().getToken());
+
 		assertEquals(true, map.containsKey("v1"));
 		assertEquals("2", map.get("v1"));
+
 	}
 	
 }
+
