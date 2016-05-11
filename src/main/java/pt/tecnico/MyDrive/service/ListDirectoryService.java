@@ -21,8 +21,6 @@ public class ListDirectoryService extends MyDriveService{
 
 		this.token=token;
 
-
-
 	}
 	@Override
 	protected void dispatch() throws MyDriveException {
