@@ -13,7 +13,7 @@ public class List extends MdCommand{
 		}
 
 		if (args.length >1){
-			new ListDirectoryService(Long.valueOf(args[0])).execute();
+			//new ListDirectoryService(Long.valueOf(args[0])).execute();
 		}
 	}
 

@@ -13,7 +13,7 @@ public class MdShell extends Shell {
 		super("MyDrive");
 		new Login(this);
 		new ChangeWorkingDirectory(this);
-		//	    new List(this);
+	    new List(this);
 		//	    new Execute(this);
 		//	    new Write(this);
 		//	    new Environment(this);
