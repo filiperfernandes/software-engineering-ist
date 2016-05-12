@@ -8,19 +8,19 @@ public class Write extends MdCommand{
 	private MdShell s;
 
 	public Write(Shell sh) {
-		super(sh, "update", "'write <text>' to change text of path"); 
+		super(sh, "update", "update contents of file"); 
 		s= ((MdShell) sh);
 	}
 	
 	@Override
 	void execute(String[] args) {
 		PlainFile text=null;
-		if (args.length < 1){
-			throw new RuntimeException("USAGE: "+name()+" <update path text>");
+		if (args.length < 2){
+			throw new RuntimeException("USAGE: "+name()+" <path> <text>");
 		}
 
-		if (args.length >1){
-			WriteFileService w = new WriteFileService(args[0], s.getSessionToken(), args[2]);
+		else{
+			WriteFileService w = new WriteFileService(args[0], s.getSessionToken(), args[1]);
 			w.execute();	
 			text = w.result();
 		}
