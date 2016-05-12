@@ -12,8 +12,6 @@ public class ChangeWorkingDirectory extends MdCommand{
 		s= ((MdShell) sh);
 	}
 	
-	
-	
 	@Override
 	void execute(String[] args) {
 		String path;
