@@ -14,7 +14,7 @@ public class Write extends MdCommand{
 	
 	@Override
 	void execute(String[] args) {
-		PlainFile text = null;
+		PlainFile text=null;
 		if (args.length < 1){
 			throw new RuntimeException("USAGE: "+name()+" <update path text>");
 		}
@@ -25,7 +25,6 @@ public class Write extends MdCommand{
 			text = w.result();
 		}
 		System.out.println(text);
-
 	}
 
 }

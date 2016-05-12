@@ -15,9 +15,9 @@ public class MdShell extends Shell {
 		new ChangeWorkingDirectory(this);
 	    new List(this);
 	    new Write(this);
-	    //	    new Execute(this);
-		//	    new Environment(this);
-		//	    new Key(this);
+	    new Execute(this);
+		new Environment(this);
+	    new Key(this);
 	}
 	
 	public long getSessionToken(){
