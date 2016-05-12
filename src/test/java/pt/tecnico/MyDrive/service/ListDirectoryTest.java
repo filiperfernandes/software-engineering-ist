@@ -17,7 +17,6 @@ public class ListDirectoryTest extends AbstractServiceTest {
 
 	MyDrive md;
 
-
 	@Override
 	protected void populate() {
 		md = MyDrive.getInstance();
