@@ -3,8 +3,13 @@ package pt.tecnico.MyDrive.presentation;
 import pt.tecnico.MyDrive.service.LoginUserService;
 
 public class Login extends MdCommand{
+	
+	private MdShell s;
 
-	public Login(Shell sh) { super(sh, "login", "create a session for the user"); }
+	public Login(Shell sh) { 
+		super(sh, "login", "create a session for the user");
+		s = (MdShell) sh;
+	}
 
 	@Override
 	void execute(String[] args) {
@@ -13,13 +18,16 @@ public class Login extends MdCommand{
 		}
 		
 		if (args.length >1){
-			new LoginUserService(args[0], args[1]).execute();
+			LoginUserService l = new LoginUserService(args[0], args[1]);
+			l.execute();
+			s.setSessionToken(l.result());
 		}
 		
 		else{
-			new LoginUserService(args[0],"").execute();
+			LoginUserService l = new LoginUserService(args[0],"");
+			l.execute();
+			s.setSessionToken(l.result());
 		}
 
 	}
-
 }
