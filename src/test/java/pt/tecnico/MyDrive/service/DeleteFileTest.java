@@ -83,7 +83,7 @@ public class DeleteFileTest extends AbstractServiceTest{
 		DeleteFileService del = new DeleteFileService(token , "FicheiroApaga");
 		del.execute();
 
-		ListDirectoryService dir = new ListDirectoryService(log.result());
+		ListDirectoryService dir = new ListDirectoryService(log.result(), "");
 		dir.execute();
 		List<FileInfoDto> cs = dir.result();
 
@@ -106,7 +106,7 @@ public class DeleteFileTest extends AbstractServiceTest{
 		DeleteFileService del = new DeleteFileService(token , "DirectoryApaga");
 		del.execute();
 
-		ListDirectoryService dir = new ListDirectoryService(log.result());
+		ListDirectoryService dir = new ListDirectoryService(log.result(), "" );
 		dir.execute();
 		List<FileInfoDto> cs = dir.result();
 
