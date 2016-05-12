@@ -39,7 +39,6 @@ public class MyDriveApplication {
 			setup();
 			/*			for (String s: args) xmlScan(new java.io.File(s));
 
-
 			xmlPrint();
 			 */
 		} finally { FenixFramework.shutdown(); }

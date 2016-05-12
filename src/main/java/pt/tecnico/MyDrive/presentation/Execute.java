@@ -12,7 +12,7 @@ public class Execute extends MdCommand{
 	}
 	public void execute(String [] args){
 		if(args.length < 1){
-			throw new RuntimeException("USAGE: "+ name()+"");
+			throw new RuntimeException("USAGE: "+ name()+" <path> [args]");
 		}
 		else{
 			ExecuteFileService e = new ExecuteFileService (s.getSessionToken(),args[0],args[1]);

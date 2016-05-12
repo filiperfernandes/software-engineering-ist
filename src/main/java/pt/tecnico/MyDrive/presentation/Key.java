@@ -13,7 +13,7 @@ public class Key extends MdCommand{
 	
 	@Override
 	void execute(String[] args) {
-		long key=0;
+		long key = 0;
 		if (args.length < 1){
 			throw new RuntimeException("USAGE: "+name()+" <token> [username]");
 		}

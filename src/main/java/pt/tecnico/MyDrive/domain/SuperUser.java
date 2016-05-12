@@ -16,9 +16,13 @@ public class SuperUser extends SuperUser_Base {
 		rootDir.addFile(home);
 
 		Directory rd = new Directory(md.getCnt(), "root", "rwxdr-x-");
+		//PlainFile pf = new PlainFile(10, "Casa", "rwxdr-x-", "Olá");
 		
 		home.addFile(rd);
-
+		
+		//rd.addFile(pf);
+		//this.addFile(pf);
+		
 		setUsername("root");
 		setPassword("***");
 		setName("Super User");
