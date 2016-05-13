@@ -23,7 +23,6 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 	}
 
 	
-	
 	@Test(expected=SessionDoesNotExistException.class)
 	public void sessionDoesNotExistTest(){
 		
