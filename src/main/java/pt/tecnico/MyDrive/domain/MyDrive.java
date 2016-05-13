@@ -24,8 +24,8 @@ public class MyDrive extends MyDrive_Base {
 		new SuperUser();
 		//3Parte
 		new User("Guest", "", "nobody", "", "rxwdr-x-");
-		
-		
+
+
 	}
 
 	public Integer getCnt(){
@@ -42,29 +42,34 @@ public class MyDrive extends MyDrive_Base {
 		}
 		throw new UsernameDoesNotExistException(username);
 	}
-	
+
 	public void cleanup() {
-        for (User u: getUserSet()){
-        	u.remove();
-	    }
-    }
+		for (User u: getUserSet()){
+			u.remove();
+		}
+	}
 
 	public void xmlImport(Element element) throws ImportXmlException {
 
 		MyDrive md = MyDrive.getInstance();
 
 		//Import users
+		User user;
 		for (Element node: element.getChildren("user")) {
 			String username = node.getAttribute("username").getValue();
-			User user = getUserByUsername(username);
 
-			if (user == null){ // Does not exist
+			try{
+				user = getUserByUsername(username);
+			}catch(Exception e){
+
+				//if (user == null){ // Does not exist
 				user = new User(this, username);
 				System.out.println("adicionou "+user);
 			}
-
 			user.xmlImport(node);
 		}
+
+
 
 		//Import directories
 		for (Element node: element.getChildren("dir")) {

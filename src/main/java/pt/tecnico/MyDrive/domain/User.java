@@ -274,7 +274,7 @@ public class User extends User_Base {
 
 		String name = personElement.getChildText("name");
 
-		new User(username, password, name, null,"");
+		new User(username, password, name, "null","");
 
 
 	}
