@@ -22,15 +22,6 @@ public class AddAmbientVariableTest extends AbstractServiceTest{
 		
 	}
 
-	@Test(expected=NullArgumentException.class)
-	public void nullArgumentsTest01(){
-		
-		LoginUserService log = new LoginUserService("root","***");
-		log.execute();
-		
-		AddAmbientVariableService test = new AddAmbientVariableService(log.result(), null, "2");
-		test.execute();
-	}
 	
 	
 	@Test(expected=SessionDoesNotExistException.class)
