@@ -12,7 +12,7 @@ public class Key extends MdCommand{
 	}
 	
 	@Override
-	void execute(String[] args) {
+	public void execute(String[] args) {
 		if (args.length < 1){
 			System.out.println(s.getSessionToken() +" "+ s.getSessionUser());
 		}

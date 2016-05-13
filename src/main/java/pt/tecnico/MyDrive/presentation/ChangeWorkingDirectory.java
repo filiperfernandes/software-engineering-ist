@@ -13,7 +13,7 @@ public class ChangeWorkingDirectory extends MdCommand{
 	}
 	
 	@Override
-	void execute(String[] args) {
+	public void execute(String[] args) {
 		String path;
 		if (args.length < 1){
 		    throw new RuntimeException("USAGE: "+name()+" <path>");

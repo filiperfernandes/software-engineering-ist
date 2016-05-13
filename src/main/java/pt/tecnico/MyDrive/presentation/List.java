@@ -13,7 +13,7 @@ public class List extends MdCommand{
 	}
 
 	@Override
-	void execute(String[] args) {
+	public void execute(String[] args) {
 		if (args.length < 1){
 			ListDirectoryService l = new ListDirectoryService(s.getSessionToken(), "");
 			l.execute();

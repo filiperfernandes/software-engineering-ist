@@ -11,12 +11,13 @@ public class SystemTest extends AbstractServiceTest {
 
 	protected void populate() {
 		sh = new MdShell();
-
 	}
-
+	
 	@Test
 	public void success() {
-
 		
-		}
+		new Login(sh).execute(new String[] { "root", "***" } );
+		new List(sh).execute(new String[] {} );
+		new ChangeWorkingDirectory(sh).execute(new String[] { ".." } );							
+	}
 }

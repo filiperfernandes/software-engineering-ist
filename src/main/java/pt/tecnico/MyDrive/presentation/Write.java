@@ -13,7 +13,7 @@ public class Write extends MdCommand{
 	}
 	
 	@Override
-	void execute(String[] args) {
+	public void execute(String[] args) {
 		PlainFile text=null;
 		if (args.length < 2){
 			throw new RuntimeException("USAGE: "+name()+" <path> <text>");

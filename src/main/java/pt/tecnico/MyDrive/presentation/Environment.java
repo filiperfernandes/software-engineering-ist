@@ -19,7 +19,7 @@ public class Environment extends MdCommand{
 	}
 
 	@Override
-	void execute(String[] args) {
+	public void execute(String[] args) {
 		
 		if (args.length > 2) {
 			throw new RuntimeException("USAGE: "+name()+" <name> [value]");
