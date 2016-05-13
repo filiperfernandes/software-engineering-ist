@@ -24,7 +24,7 @@ public abstract class Shell {
         System.exit(0);
       }
     };
-    new Command(this, "exec", "execute an external command") {
+    new Command(this, "do path", "execute an external command") {
       void execute(String[] args) { 
 	try { Sys.output(out); Sys.main(args);
 	} catch (Exception e) { throw new RuntimeException(""+e); }
