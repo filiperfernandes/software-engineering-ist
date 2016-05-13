@@ -33,11 +33,6 @@ public class SuperUser extends SuperUser_Base {
 		home.setUser(this);
 		md.addUser(this);
 		
-		
-		PlainFile a = new PlainFile(md.getCnt(), "teste", "rwxdr-x-", "123");
-		rd.addFile(a);
-		
-		this.addFile(a);
 	}
 
 

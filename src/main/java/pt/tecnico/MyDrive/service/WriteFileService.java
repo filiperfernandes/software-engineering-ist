@@ -47,7 +47,6 @@ public class WriteFileService extends MyDriveService{
 				dir=(Directory) dir.getDirByName(parts[i]);
 				i++;
 			}
-			System.out.println(parts[parts.length-1]);
 			PlainFile file = ((PlainFile) (dir.getPlainfileByName(parts[parts.length-1])));
 			checkPermissionsWrite(session.getUser(), file.getUser(), file.getPermissions());
 			file.setData(content);

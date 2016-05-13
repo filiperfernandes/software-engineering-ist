@@ -35,10 +35,10 @@ public class AddAmbientVariableService extends MyDriveService{
 				map.put(a.getName(), a.getValue());
 			}
 		}
-			
-		if(name==null){
-			throw new NullArgumentException();
-		}
+//			
+//		if(name==null){
+//			throw new NullArgumentException();
+//		}
 		else if(value==null){
 			for(AmbientVariable a :s.getAmbientvariableSet()){
 				map.put(a.getName(), a.getValue());

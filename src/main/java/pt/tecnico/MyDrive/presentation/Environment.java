@@ -32,7 +32,7 @@ public class Environment extends MdCommand{
 			TreeMap<String,String> map = lst.result();			
 			
 			for(Entry<String, String> entry: map.entrySet()){
-				System.out.println(entry.getKey() + "=" + entry.getValue() + "/n");
+				System.out.println(entry.getKey() + "=" + entry.getValue());
 				
 			}
 		}
@@ -42,7 +42,7 @@ public class Environment extends MdCommand{
 			lst.execute();
 			TreeMap<String,String> map = lst.result();
 			
-			System.out.println(map.get(args[1]));
+			System.out.println(map.get(args[0]));
 			
 		}
 		
