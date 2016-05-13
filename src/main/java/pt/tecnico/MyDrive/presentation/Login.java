@@ -20,13 +20,17 @@ public class Login extends MdCommand{
 		if (args.length >1){
 			LoginUserService l = new LoginUserService(args[0], args[1]);
 			l.execute();
+			s.addSessionToMap(args[0], l.result());
 			s.setSessionToken(l.result());
+			s.setSessionUser(args[0]);
 		}
 		
 		else{
 			LoginUserService l = new LoginUserService(args[0],"");
 			l.execute();
+			s.addSessionToMap(args[0], l.result());
 			s.setSessionToken(l.result());
+			s.setSessionUser(args[0]);
 		}
 
 	}

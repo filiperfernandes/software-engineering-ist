@@ -13,19 +13,15 @@ public class Key extends MdCommand{
 	
 	@Override
 	void execute(String[] args) {
-		long key = 0;
 		if (args.length < 1){
-			throw new RuntimeException("USAGE: "+name()+" <token> [username]");
+			System.out.println(s.getSessionToken() +" "+ s.getSessionUser());
 		}
 
-		if (args.length >1){
-			LoginUserService l = new LoginUserService(args[0], args[1]);
-			l.execute();	
-			key = l.result();
-			
+		else{
+			s.setSessionToken(s.getTokenByUsername(args[0]));
+			s.setSessionUser(args[0]);
+			System.out.println(s.getSessionToken() +" "+ s.getSessionUser());
 		}
-		System.out.println(s);
-		System.out.println(key);
 	}
 
 }
