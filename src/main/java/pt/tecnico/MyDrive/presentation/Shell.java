@@ -24,21 +24,21 @@ public abstract class Shell {
         System.exit(0);
       }
     };
-    new Command(this, "do path", "execute an external command") {
+    new Command(this, "do", "execute an external command") {
       void execute(String[] args) { 
 	try { Sys.output(out); Sys.main(args);
 	} catch (Exception e) { throw new RuntimeException(""+e); }
       }
     };
-    new Command(this, "run", "run a class method") {
-      void execute(String[] args) { 
-	try {
-	  if (args.length > 0)
-	    shell().run(args[0], Arrays.copyOfRange(args, 1, args.length));
-	  else throw new Exception("Nothing to run!");
-	} catch (Exception e) { throw new RuntimeException(""+e); }
-      }
-    };
+//    new Command(this, "run", "run a class method") {
+//      void execute(String[] args) { 
+//	try {
+//	  if (args.length > 0)
+//	    shell().run(args[0], Arrays.copyOfRange(args, 1, args.length));
+//	  else throw new Exception("Nothing to run!");
+//	} catch (Exception e) { throw new RuntimeException(""+e); }
+//      }
+//    };
     new Command(this, "help", "this command help") {
       void execute(String[] args) { 
 	if (args.length == 0) {

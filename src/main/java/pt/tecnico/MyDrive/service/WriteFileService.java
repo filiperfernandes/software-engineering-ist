@@ -41,14 +41,14 @@ public class WriteFileService extends MyDriveService{
 			ficheiro = file;
 		}
 		else{
-			int i=0;
+			int i=1;
 			dir=rd;
 			while(i<(parts.length-1)){
 				dir=(Directory) dir.getDirByName(parts[i]);
 				i++;
 			}
-			dir.getPlainfileByName(parts[parts.length-1]); 
-			PlainFile file = ((PlainFile) (dir.getPlainfileByName(path)));
+			System.out.println(parts[parts.length-1]);
+			PlainFile file = ((PlainFile) (dir.getPlainfileByName(parts[parts.length-1])));
 			checkPermissionsWrite(session.getUser(), file.getUser(), file.getPermissions());
 			file.setData(content);
 			ficheiro = file;

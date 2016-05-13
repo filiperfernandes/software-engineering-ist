@@ -3,10 +3,10 @@ import pt.tecnico.MyDrive.service.ExecuteFileService;
 
 
 public class Execute extends MdCommand{
-	
+
 	private MdShell s;
 	public Execute(Shell sh){
-		super(sh,"path","args to execute");
+		super(sh,"do","args to execute");
 		s=((MdShell) sh);
 
 	}
@@ -19,7 +19,6 @@ public class Execute extends MdCommand{
 			e.execute();
 
 		}
-		System.out.println("got it");
-		}
+	}
 
 }

@@ -24,6 +24,8 @@ public class MyDrive extends MyDrive_Base {
 		new SuperUser();
 		//3Parte
 		new User("Guest", "", "nobody", "", "rxwdr-x-");
+		
+		
 	}
 
 	public Integer getCnt(){

@@ -16,6 +16,7 @@ public class App extends App_Base {
 		Directory dir = (Directory) Directory.getDirByPath(path, md.getRootdir());
 
 		setId(id);
+		setName(name);
 		setData(method);
 		setLastModif(new DateTime());
 		setDirectory(dir);
@@ -27,6 +28,7 @@ public class App extends App_Base {
 	public App(Integer id,  String name, String method, String perm){
 		super();
 
+		setName(name);
 		setId(id);
 		setData(method);
 		setLastModif(new DateTime());
@@ -102,11 +104,4 @@ public class App extends App_Base {
 
 	}
 
-	public static String Hello(String[] a){
-		String r = "hello ";
-		for(String s : a){
-			r += " " + a;
-		}
-		return r;
-	}
 }
